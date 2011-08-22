@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:rim="http://www.blackberry.com/ns/widgets" version="1.0.0.16" rim:header="RIM-Widget:rim/widget">
+	<name>Lemma for PlayBook</name>
+	<description>A Twitter app optimized for browsing lists.</description>
+	<author rim:copyright="2011">Sully Syed</author>
+	<icon rim:hover="false" src="icon.png"/>
+  	<icon rim:hover="true" src="icon.png"/>
+	<rim:orientation mode="landscape" />
+	<access subdomains="true" uri="*" />
+	<content src="index.html" />
+	<feature id="blackberry.invoke" />
+	<feature id="blackberry.invoke.BrowserArguments" />
+	<feature id="blackberry.identity" />
+</widget>

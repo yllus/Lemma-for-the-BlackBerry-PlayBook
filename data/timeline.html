@@ -1,0 +1,14 @@
+<tablecell ui-usage="image" ui-implements="celltitle-with-button" class="ui-no-hover">
+	<img onclick="viewUser('${screen_name}');" src="${profile_image_url}" class="fullprofileimgheight" />
+	<cellsubtitle>
+		<div style="height: 73px;" id="tweet_${id}">
+			<div style="height: 49px;">${text}</div>
+			<div id="user_tweet_${id}" style="font-size: 12px; float: left; color: #666;" onclick="viewUser('${screen_name}');">${screen_name}</div>
+			<div style="font-size: 12px; float: right; color: #666;">${created_at}</div>
+		</div>
+		<div id="raw_tweet_${id}" style="display: none;">${raw_text}</div> 
+	</cellsubtitle>
+	<uibutton ui-kind="icon" class="fullbuttonheight" onclick="doAction('tweet_${id}');" ontouchend="doAction('tweet_${id}');">
+    	<img src="images/actions.png" />
+	</uibutton>
+</tablecell>
