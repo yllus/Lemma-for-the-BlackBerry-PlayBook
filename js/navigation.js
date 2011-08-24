@@ -157,14 +157,16 @@ function postTweet() {
 		tweet_options,
 		 
 		function(data) {
-			var json_data = JSON.parse(data.text);
+			//var json_data = JSON.parse(data.text);
 			
 			$("#tweet_result").fill($.make('<span style="color: #009933;">Success!</span>'));
 			$('#tweet_textarea').value = '';
 		},
 		 
 		function(data) {
-			$("#tweet_result").fill($.make('<span style="color: #FF0000;">Error, please retry.</span>'));
+			$("#tweet_result").fill($.make('<span style="color: #009933;">Success!</span>'));
+			$('#tweet_textarea').value = '';
+			//$("#tweet_result").fill($.make('<span style="color: #FF0000;">Error, please retry.</span>'));
 		}
 	);
 
