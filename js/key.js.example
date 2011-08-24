@@ -1,0 +1,6 @@
+// OAuth variables. The consumerKey and consumerSecret must be requested from @sullysyed ( http://twitter.com/#!/sullysyed ).
+var oauth, requestParams, accessParams;
+var options = {
+    consumerKey: '123',
+    consumerSecret: '456789'
+};

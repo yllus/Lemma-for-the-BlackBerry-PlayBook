@@ -1,0 +1,26 @@
+<p>
+	A Twitter account has not been set up for use with Lemma. To set up an account, follow the instructions found below:
+	<ol>
+		<li>
+			Click the <b>Launch Browser</b> button found below to launch a browser session.<br />
+			<uibutton class="qnx" style="width: 200px; margin-top: 10px;" onclick="doAuthGetPIN();"> 
+				<label>Launch Browser</label> 
+			</uibutton>
+		</li>
+		<li style="margin-top: 20px;">Log in to your Twitter account and authorize the Lemma application.</li>
+		<li style="margin-top: 20px;">
+			Make note of the PIN code displayed and enter it below.
+			<div style="margin: 10px 0 0 5px; height: 50px; width: 600px;">
+				<div style="float: left;">
+					<input id="accessPIN" class="qnx" type="text" />
+				</div>
+				<div style="float: left;">
+					<uibutton class="qnx" style="width: 125px;" onclick="doAuthStepTwo();"> 
+						<label>Authorize!</label> 
+					</uibutton>
+				</div>
+			</div>
+		</li>
+		<li style="margin-top: 20px;">Start using Lemma!</li>
+	</ol>
+</p>

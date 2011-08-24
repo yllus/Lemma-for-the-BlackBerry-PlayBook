@@ -1,0 +1,334 @@
+html, body {
+	font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
+}
+
+*[ui-background-style=slanted-right] {
+	background-color: #909090;
+}
+
+tablecell[ui-usage=image] > img {
+	float: left !important;
+    height: 73px;
+    width: 73px;
+}
+
+tableview[ui-tablecell-order=stacked] > tablecell[ui-usage=image] > cellsubtitle {
+    display: inline-block;
+    margin-top: 0;
+    margin-left: 0;
+}
+
+view tableview[ui-tablecell-order="stacked"] > tablecell.ui-no-hover:hover > cellsubtitle {
+	color: #484848 !important;
+}
+
+tableview[ui-tablecell-order=stacked] > tablecell > cellsubtitle {
+	color: #484848 !important;
+}
+
+tablecell > cellsubtitle {
+    color: #484848;
+    position: absolute;
+    right: 10px;
+    margin-top: 4px;
+    white-space: normal;
+    display: inline-block;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+tablecell > celldetail.ui-custom-tint {
+    color: #484848 !important;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+tableview > tablecell.ui-no-hover:hover > celldetail.ui-custom-tint,
+tableview > tablecell.ui-no-hover.touched > celldetail.ui-custom-tint {
+    color: #484848 !important;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+tableview > tablecell.ui-no-hover > *, tableview.ui-no-hover > tablecell > * {
+    color: #484848 !important;
+}
+
+subview > scrollpanel {
+	height: auto;
+	min-height: 100%;
+	overflow: hidden;
+	padding-bottom: 0;
+}
+
+subview[ui-associations=withBottomToolBar] {
+	top: 0px;
+	bottom: 60px;
+}
+
+navbar, toolbar {
+	height: 60px;
+	background-image: 
+    -webkit-gradient(linear, left top, left bottom, 
+        from(rgba(74,74,74,0.7)), 
+        color-stop(0.5, rgba(20,20,20,0.7)), 
+        color-stop(0.5, rgba(2,2,2,0.7)), 
+        to(rgba(14,14,14,0.7)));
+}
+
+toolbar > segmentedcontrol > uibutton.ui-custom-tint, navbar > uibutton.ui-custom-tint {
+    background-color: #484848;
+    font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	height: 45px;
+}
+
+uibutton.ui-custom-tint {
+    background-color: #484848;
+    font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	height: 45px;
+}
+
+tableview[ui-tablecell-order=stacked] > tablecell[ui-usage=image] > img ~ cellsubtitle {
+    width: 850px !important;
+}
+
+tablecell > cellsubtitle a {
+	color: #00E;
+}
+
+.fullbuttonheight {
+	margin: 0;
+	width: 65px !important;
+	height: 73px !important;
+	border-left: 1px solid #D9D9D9 !important;
+}
+
+.fullprofileimgheight {
+	width: 73px; 
+	height: 73px; 
+	border-right: 1px solid #D9D9D9;
+}
+
+tableview#timeline > tablecell.ui-no-hover:hover,
+tableview#timeline > tablecell.ui-no-hover.touched {
+	background-image: none !important;
+	background-color: #EFF9FC !important;
+}
+
+popup { 
+	width: 900px;
+	background-color: #000; 
+}
+
+popup > panel {
+    background-image: none;
+}
+
+uibutton[ui-kind="action"]:hover, 
+uibutton[ui-kind="action"].touched, 
+uibutton[ui-kind=action][ui-implements=cancel]:hover, 
+uibutton[ui-kind=action][ui-implements=cancel].touched {
+    background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(1, rgb(6,168,233)),
+	    color-stop(0, rgb(0,113,199))
+	);
+}
+
+uibutton[ui-kind="action"], uibutton[ui-kind="action"].disabled:hover, uibutton[ui-kind="action"].disabled.touched {
+	background-color: #F0F0F0;
+	background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#D1D2D4), to(#FCFCFC));
+	border-bottom-color: rgba(255, 255, 255, 0.496094);
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-left-color: rgba(255, 255, 255, 0.496094);
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-color: rgba(255, 255, 255, 0.496094);
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-color: rgba(255, 255, 255, 0.496094);
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	color: black;
+	font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	height: 45px;
+}
+
+label.qnx {
+	font-family: "DejaVu Sans" Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	line-height: 45px;
+	height: 45px;
+	display: inline-block;
+	color: #000000;
+}
+
+input.qnx {
+	-webkit-border-radius: 5px;
+	border: 1px rgba(0,0,0,0.5) solid;
+	display: inline-block;
+	outline-bottom: 1px #fff solid;
+	-webkit-box-shadow: 1px 1px 0px rgba(255,255,255,1);	
+	height: 35px;
+	font-family: "DejaVu Sans" Helvetica, Arial, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	padding: 5px 10px 5px 10px;
+}
+
+textarea.qnx {
+	-webkit-border-radius: 5px;
+	border: 1px rgba(0,0,0,0.5) solid;
+	display: inline-block;
+	outline-bottom: 1px #fff solid;
+	-webkit-box-shadow: 1px 1px 0px rgba(255,255,255,1);	
+	height: 35px;
+	font-family: "DejaVu Sans" Helvetica, Arial, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	padding: 5px 10px 5px 10px;
+}
+
+uibutton.qnx:hover, 
+uibutton.qnx.touched {
+    background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(1, rgb(6,168,233)),
+	    color-stop(0, rgb(0,113,199))
+	);
+	border: 1px #2ccfff solid;
+	color: #ffffff;
+}
+
+uibutton.qnx { 
+	background-color: #F0F0F0;
+	background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#D1D2D4), to(#FCFCFC));
+	border-bottom-color: rgba(255, 255, 255, 0.496094);
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-left-color: rgba(255, 255, 255, 0.496094);
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-color: rgba(255, 255, 255, 0.496094);
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-color: rgba(255, 255, 255, 0.496094);
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	color: black;
+	font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	height: 45px;
+}
+
+.spanlinks {
+	color: #2489CE;
+	font-weight: normal;
+	text-decoration: underline;
+}
+
+/* Start: Styling to make list selection items wider and more QNX-styled. */
+.listoption {
+	height: 52px;
+	padding-top: 13px;
+	font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+}
+
+.listoption:hover, .listoption.touched {
+    background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(1, rgb(6,168,233)),
+	    color-stop(0, rgb(0,113,199))
+	);
+	border: 1px #2ccfff solid;
+	color: #ffffff;
+}
+
+.listoption[ui-implements=detail-disclosure]:after {
+    content: "›";
+    font: normal 28px/28px Verdana;
+    color: #808080;
+    display: block;
+    height: 48px;
+    float: right;
+    margin-top: -4px;
+    margin-bottom: -20px;
+    margin-left: -10px;
+    background-color: transparent;
+    background-image: none;
+    border: 0;
+    -webkit-box-shadow: none;
+    top: 13px !important;
+}
+/* End: Styling to make list selection items wider and more QNX-styled. */
+
+/* Start: Styling to make select lists more QNX-styled. */
+tableview > tablecell:hover, tableview > tablecell.touched {
+	background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(1, rgb(6,168,233)),
+	    color-stop(0, rgb(0,113,199))
+	);
+	color: #fff;
+}
+/* End: Styling to make select lists more QNX-styled. */
+
+.actiontweet {
+    color: #fff;
+    margin-left: 10px;
+    white-space: normal;
+    display: inline-block;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.actiontweet {
+    color: #fff;
+    margin-left: 10px;
+    white-space: normal;
+    display: inline-block;
+    font-size: 18px;
+    line-height: 24px;
+}
