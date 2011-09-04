@@ -70,6 +70,7 @@ function updateTimeline( json_data, insert_more, data_type ) {
 	    	
 	    	if ( insert_more == false ) {
 	    		content.fill($.make('<div><tableview id="timeline" ui-tablecell-order="stacked">' + str_timeline + '</tableview></div>'));
+	    		$('#timeline_subview').scrollTop = 0;
 	    	}
 	    	else {
 	    		content.insert($.make(str_timeline));
