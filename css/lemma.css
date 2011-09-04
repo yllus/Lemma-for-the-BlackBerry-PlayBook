@@ -332,3 +332,22 @@ tableview > tablecell:hover, tableview > tablecell.touched {
     font-size: 18px;
     line-height: 24px;
 }
+
+/* Start: Custom WebKit scrollbars used along with the built-in kinetic DIV scrolling in WebWorks.
+ * See http://css-tricks.com/9130-custom-scrollbars-in-webkit/ for more info. 
+ */ 
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #00ACC6;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+/* End: Custom WebKit scrollbars used along with the built-in kinetic DIV scrolling in WebWorks. */

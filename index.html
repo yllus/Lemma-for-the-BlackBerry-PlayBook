@@ -268,16 +268,14 @@
 					<h1>Options</h1> 
 			</navbar> 
 			<subview id="options_subview" ui-associations="withNavBar"> 
-				<scrollpanel> 
-					<tableview style="margin-top: 16px;"> 
-						<tablecell onclick="gotoPage('#options_account_view');" class="listoption" ui-implements="detail-disclosure"> 
-							<celltitle>Account Settings</celltitle> 
-						</tablecell>
-						<tablecell onclick="gotoPage('#options_timeline_view');" class="listoption" ui-implements="detail-disclosure"> 
-							<celltitle>Timeline Settings</celltitle> 
-						</tablecell>
-					</tableview> 
-				</scrollpanel> 
+				<tableview style="margin-top: 16px;"> 
+					<tablecell onclick="gotoPage('#options_account_view');" class="listoption" ui-implements="detail-disclosure"> 
+						<celltitle>Account Settings</celltitle> 
+					</tablecell>
+					<tablecell onclick="gotoPage('#options_timeline_view');" class="listoption" ui-implements="detail-disclosure"> 
+						<celltitle>Timeline Settings</celltitle> 
+					</tablecell>
+				</tableview> 
 			</subview>
 		</view>
 		
@@ -307,13 +305,11 @@
 					<h1>Timeline Settings</h1> 
 			</navbar> 
 			<subview id="timeline_settings_subview" ui-associations="withNavBar"> 
-				<scrollpanel> 
-					<tableview style="margin-top: 16px;" ui-kind="grouped"> 
-						<tablecell class="ui-no-hover"> 
-					        <celldetail id="timeline_settings_text" class="ui-custom-tint"></celldetail>
-						</tablecell> 
-					</tableview> 
-				</scrollpanel> 
+				<tableview style="margin-top: 16px;" ui-kind="grouped"> 
+					<tablecell class="ui-no-hover"> 
+				        <celldetail id="timeline_settings_text" class="ui-custom-tint"></celldetail>
+					</tablecell> 
+				</tableview> 
 			</subview>
 		</view>
 		
@@ -325,22 +321,20 @@
 					<h1>Inbox</h1> 
 			</navbar> 
 			<subview id="inbox_subview" ui-associations="withNavBar"> 
-				<scrollpanel> 
-					<tableview style="margin-top: 16px;"> 
-						<tablecell onclick="viewDirectMessages(1);" class="listoption" ui-implements="detail-disclosure"> 
-							<celltitle>Direct Messages</celltitle> 
-						</tablecell>
-						<tablecell onclick="viewMentions(1);" class="listoption" ui-implements="detail-disclosure"> 
-							<celltitle>Mentions</celltitle> 
-						</tablecell>
-						<tablecell onclick="gotoPage('#search_view');" class="listoption" ui-implements="detail-disclosure"> 
-							<celltitle>Search</celltitle> 
-						</tablecell>
-						<tablecell onclick="gotoPage('#user_view');" class="listoption" ui-implements="detail-disclosure"> 
-							<celltitle>View User</celltitle> 
-						</tablecell>
-					</tableview> 
-				</scrollpanel> 
+				<tableview style="margin-top: 16px;"> 
+					<tablecell onclick="viewDirectMessages(1);" class="listoption" ui-implements="detail-disclosure"> 
+						<celltitle>Direct Messages</celltitle> 
+					</tablecell>
+					<tablecell onclick="viewMentions(1);" class="listoption" ui-implements="detail-disclosure"> 
+						<celltitle>Mentions</celltitle> 
+					</tablecell>
+					<tablecell onclick="gotoPage('#search_view');" class="listoption" ui-implements="detail-disclosure"> 
+						<celltitle>Search</celltitle> 
+					</tablecell>
+					<tablecell onclick="gotoPage('#user_view');" class="listoption" ui-implements="detail-disclosure"> 
+						<celltitle>View User</celltitle> 
+					</tablecell>
+				</tableview> 
 			</subview>
 		</view>
 		

@@ -69,20 +69,10 @@ function updateTimeline( json_data, insert_more, data_type ) {
 			str_template = null;
 	    	
 	    	if ( insert_more == false ) {
-	    		content.fill($.make('<scrollpanel id="timeline_scrollpanel"><tableview id="timeline" ui-tablecell-order="stacked">' + str_timeline + '</tableview></scrollpanel>'));
-	    		
-	    		// Re-enable scrolling for the timeline scrollpanel.
-		        var options = { bounce: false, fadeScrollbar: false };
-		        scrollpanelTimeline = $('#timeline_scrollpanel');
-		        var scroller = new $.UIScroll(scrollpanelTimeline.parentNode, options);
+	    		content.fill($.make('<div><tableview id="timeline" ui-tablecell-order="stacked">' + str_timeline + '</tableview></div>'));
 	    	}
 	    	else {
 	    		content.insert($.make(str_timeline));
-	    		
-	    		// Re-enable scrolling for the timeline scrollpanel.
-		        var options = { bounce: false, fadeScrollbar: false };
-		        var scroller = $.UIScrollers[whichScroller];
-		        scroller = new $.UIScroll(scrollpanelTimeline.parentNode, options);
 	    	}
 
 	    }
@@ -276,10 +266,9 @@ function viewUser( screen_name ) {
 			
 			current_view = screen_name;
 			updateViewName(screen_name, CONST_USER);
+			untouchButtons();
 		}
 	);
-	
-	untouchButtons();
 }
 
 function searchUser() {
