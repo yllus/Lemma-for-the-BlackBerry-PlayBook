@@ -13,6 +13,7 @@ function updateTimeline( json_data, insert_more, data_type ) {
 	    	*/
 	    	
 	    	// Iterate through the JSON data, creating the string in memory.
+	    	var str_lastprofileimageurl = ''; // Saves the last profile image URL for when the search API fails to send a new one in the user object.
 	    	for ( var i = 0; i < json_data.length; i++ ) {
 	    		var str_id = json_data[i].id_str;
 	    		
@@ -22,7 +23,8 @@ function updateTimeline( json_data, insert_more, data_type ) {
 		    		var str_raw_text = str_text;
 		    		var str_date = json_data[i].created_at;
 		    		var str_profileimageurl = '';
-		    		var str_screenname = ''; 
+		    		var str_screenname = '';
+		    		var str_raw_screenname = '';  
 		    		
 		    		// If the data is from the Twitter search API, get the profile image URL and screen name from the main object.
 		    		// Else retrieve it from the REST API's embedded user structure.
@@ -30,14 +32,17 @@ function updateTimeline( json_data, insert_more, data_type ) {
 						case CONST_SEARCH:
 							str_profileimageurl = json_data[i].profile_image_url;
 		    				str_screenname = json_data[i].from_user;
+		    				str_raw_screenname = str_screenname;
 							break;
 						case CONST_DIRECTMESSAGES:
 							str_profileimageurl = json_data[i].sender.profile_image_url;
 		    				str_screenname = json_data[i].sender.screen_name;
+		    				str_raw_screenname = str_screenname;
 							break;
 						default:
 							str_profileimageurl = json_data[i].user.profile_image_url;
 		    				str_screenname = json_data[i].user.screen_name;
+		    				str_raw_screenname = str_screenname;
 		    				
 		    				// If this is a retweet, use the original tweet, plus the original tweeter's profile image and screen name.
 		    				if ( json_data[i].retweeted_status != null ) {
@@ -45,6 +50,7 @@ function updateTimeline( json_data, insert_more, data_type ) {
 		    					str_raw_text = str_text;
 		    					str_profileimageurl = json_data[i].retweeted_status.user.profile_image_url;
 		    					str_screenname = json_data[i].retweeted_status.user.screen_name + ', retweeted by ' + json_data[i].user.screen_name;
+		    					str_raw_screenname = json_data[i].retweeted_status.user.screen_name;
 		    				}
 					}
 		    		
@@ -58,7 +64,11 @@ function updateTimeline( json_data, insert_more, data_type ) {
 		    		
 		    		// Use the bigger size profile images.
 		    		var re = new RegExp("_normal.jpg$", "g");
+		    		if ( str_profileimageurl == null  ) {
+		    			str_profileimageurl = str_lastprofileimageurl;
+		    		}
 		    		str_profileimageurl = str_profileimageurl.replace(re, '_bigger.jpg');
+		    		str_lastprofileimageurl = str_profileimageurl;
 		    		
 		    		// Display the timestamp in relative time.
 		    		str_date = new Date(json_data[i].created_at).toRelativeTime();
@@ -68,6 +78,7 @@ function updateTimeline( json_data, insert_more, data_type ) {
 			    	str_instance = str_instance.replace(/\$\{screen_name\}/g, str_screenname);
 			    	str_instance = str_instance.replace('${text}', str_text);
 			    	str_instance = str_instance.replace('${raw_text}', str_raw_text);
+			    	str_instance = str_instance.replace('${raw_screenname}', str_raw_screenname);
 			    	str_instance = str_instance.replace('${created_at}', str_date);
 			    	
 			    	str_timeline = str_timeline + str_instance;
