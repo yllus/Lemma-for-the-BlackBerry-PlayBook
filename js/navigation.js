@@ -1,4 +1,5 @@
 function updateTimeline( json_data, insert_more, data_type ) {
+
 	var content = $("#timeline_subview");
 	content.xhr("data/timeline.html", {
 	    successCallback: function() {
@@ -18,7 +19,7 @@ function updateTimeline( json_data, insert_more, data_type ) {
 	    		if ( str_id != last_tweet_id ) {
 	    			var str_instance = str_template;
 		    		var str_text = json_data[i].text;
-		    		var str_raw_text = json_data[i].text;
+		    		var str_raw_text = str_text;
 		    		var str_date = json_data[i].created_at;
 		    		var str_profileimageurl = '';
 		    		var str_screenname = ''; 
@@ -37,6 +38,14 @@ function updateTimeline( json_data, insert_more, data_type ) {
 						default:
 							str_profileimageurl = json_data[i].user.profile_image_url;
 		    				str_screenname = json_data[i].user.screen_name;
+		    				
+		    				// If this is a retweet, use the original tweet, plus the original tweeter's profile image and screen name.
+		    				if ( json_data[i].retweeted_status != null ) {
+		    					str_text = json_data[i].retweeted_status.text;
+		    					str_raw_text = str_text;
+		    					str_profileimageurl = json_data[i].retweeted_status.user.profile_image_url;
+		    					str_screenname = json_data[i].retweeted_status.user.screen_name + ', retweeted by ' + json_data[i].user.screen_name;
+		    				}
 					}
 		    		
 		    		// Update last_tweet_id with this tweet's ID.
