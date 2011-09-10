@@ -116,13 +116,13 @@ tablecell > cellsubtitle a {
 	height: 73px; 
 	border-right: 1px solid #D9D9D9;
 }
-
+/*
 tableview#timeline > tablecell.ui-no-hover:hover,
 tableview#timeline > tablecell.ui-no-hover.touched {
 	background-image: none !important;
 	background-color: #EFF9FC !important;
 }
-
+*/
 popup { 
 	width: 900px;
 	background-color: #000; 
