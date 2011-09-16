@@ -193,7 +193,7 @@ function postRetweet() {
 		function(data) {
 			var json_data = JSON.parse(data.text);
 			
-			$("#misc_header").fill('Retweeted succesfully.');
+			$("#misc_header").fill('Retweeted Succesfully');
 			$("#misc_text").fill($.make('The message below was sucessfully retweeted:<br /><br/ >@' + str_tweet));
 			gotoPage('#misc_view');
 		},
@@ -216,7 +216,7 @@ function postFavourite() {
 		function(data) {
 			var json_data = JSON.parse(data.text);
 			
-			$("#misc_header").fill('Favourited succesfully.');
+			$("#misc_header").fill('Favourited Succesfully');
 			$("#misc_text").fill($.make('The message below was sucessfully favourited:<br /><br/ >@' + str_tweet));
 			gotoPage('#misc_view');
 		},
