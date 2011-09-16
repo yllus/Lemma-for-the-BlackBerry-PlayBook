@@ -411,3 +411,12 @@ function untouchButtons() {
 		$.UITouchedButton.removeClass("touched");
 	}
 }
+
+function viewAbout() {
+	$("#misc_header").fill('About Lemma');
+	
+	var content = $("#misc_text").empty();
+	content.xhr("data/about_lemma.html");
+	
+	gotoPage('#misc_view');
+}
