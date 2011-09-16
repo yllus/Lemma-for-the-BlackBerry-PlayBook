@@ -19,15 +19,15 @@ tableview[ui-tablecell-order=stacked] > tablecell[ui-usage=image] > cellsubtitle
 }
 
 view tableview[ui-tablecell-order="stacked"] > tablecell.ui-no-hover:hover > cellsubtitle {
-	color: #484848 !important;
+	color: #282828 !important;
 }
 
 tableview[ui-tablecell-order=stacked] > tablecell > cellsubtitle {
-	color: #484848 !important;
+	color: #282828 !important;
 }
 
 tablecell > cellsubtitle {
-    color: #484848;
+    color: #282828;
     position: absolute;
     right: 10px;
     margin-top: 4px;
@@ -38,20 +38,20 @@ tablecell > cellsubtitle {
 }
 
 tablecell > celldetail.ui-custom-tint {
-    color: #484848 !important;
+    color: #282828 !important;
     font-size: 18px;
     line-height: 24px;
 }
 
 tableview > tablecell.ui-no-hover:hover > celldetail.ui-custom-tint,
 tableview > tablecell.ui-no-hover.touched > celldetail.ui-custom-tint {
-    color: #484848 !important;
+    color: #282828 !important;
     font-size: 18px;
     line-height: 24px;
 }
 
 tableview > tablecell.ui-no-hover > *, tableview.ui-no-hover > tablecell > * {
-    color: #484848 !important;
+    color: #282828 !important;
 }
 
 subview > scrollpanel {
@@ -77,7 +77,7 @@ navbar, toolbar {
 }
 
 toolbar > segmentedcontrol > uibutton.ui-custom-tint, navbar > uibutton.ui-custom-tint {
-    background-color: #484848;
+    background-color: #282828;
     font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	font-style: normal;
@@ -87,7 +87,7 @@ toolbar > segmentedcontrol > uibutton.ui-custom-tint, navbar > uibutton.ui-custo
 }
 
 uibutton.ui-custom-tint {
-    background-color: #484848;
+    background-color: #282828;
     font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	font-style: normal;
@@ -116,13 +116,13 @@ tablecell > cellsubtitle a {
 	height: 73px; 
 	border-right: 1px solid #D9D9D9;
 }
-/*
+
 tableview#timeline > tablecell.ui-no-hover:hover,
 tableview#timeline > tablecell.ui-no-hover.touched {
 	background-image: none !important;
 	background-color: #EFF9FC !important;
 }
-*/
+
 popup { 
 	width: 900px;
 	background-color: #000; 
