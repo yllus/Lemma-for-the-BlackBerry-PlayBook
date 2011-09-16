@@ -126,6 +126,9 @@ function doAuthStepTwo() {
 					$("#misc_header").fill('Account Authorized');
 					$("#misc_text").fill($.make('Account successfully authorized for <b>' + accountScreenName + '</b>! You can now begin to use <b>Lemma</b>.'));
 					gotoPage('#misc_view');
+					
+					// Refresh the home timeline.
+					doRefresh();
 				}
 			);
 		},
