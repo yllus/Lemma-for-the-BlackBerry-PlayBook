@@ -120,7 +120,7 @@ tablecell > cellsubtitle a {
 tableview#timeline > tablecell.ui-no-hover:hover,
 tableview#timeline > tablecell.ui-no-hover.touched {
 	background-image: none !important;
-	background-color: #EFF9FC !important;
+	/* background-color: #EFF9FC !important; */
 }
 
 popup { 
