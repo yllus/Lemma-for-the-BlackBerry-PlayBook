@@ -1,8 +1,11 @@
 // Timeline variables.
 var scrollpanelTimeline, whichScroller, last_tweet_id;
 var status_count = 50;
+var status_autorefresh = 0;
 var just_launched = 1;
 var last_view_type = 0;
+var last_view_action = 'doRefresh();';
+var timer_autorefresh;
 
 // Account variables.
 var accountIsSet = null;
@@ -12,6 +15,7 @@ var accessToken = null;
 var accessTokenSecret = null;
 if (typeof localStorage !== 'undefined') {
 	status_count = localStorage.getItem("status_count");
+	status_autorefresh = localStorage.getItem("status_autorefresh");
 	accountIsSet = localStorage.getItem("accountIsSet");
 	accountScreenName = localStorage.getItem("accountScreenName");
 	accountID = localStorage.getItem("accountID");
@@ -22,12 +26,22 @@ if (typeof localStorage !== 'undefined') {
 		status_count = 50;
 		localStorage.setItem('status_count', status_count);
 	}
+	
+	if ( status_autorefresh == null ) {
+		status_autorefresh = 0;
+		localStorage.setItem('status_autorefresh', status_autorefresh);
+	}
 }
 
 // OAuth variables are loaded from key.js.
 oauth = OAuth(options);
 if ( accountIsSet != null ) {
 	oauth.setAccessToken([accessToken, accessTokenSecret]);
+}
+
+// If status_autorefresh > 0, start the timer.
+if ( status_autorefresh > 0 ) {
+	timer_autorefresh = setTimeout('doAutoRefresh();', status_autorefresh);
 }
 
 // List variables.

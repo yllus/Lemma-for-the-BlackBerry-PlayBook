@@ -360,30 +360,39 @@ function viewList( id_str, name, go_back ) {
 }
 
 function updateViewName( name, view_type, id_str ) {
+	var str_action = '';
+	
 	// If the back button is hit, load the last view type.
 	if ( view_type == CONST_BACKBUTTON ) {
 		view_type = last_view_type;
 	}
 	
+	// Update the refresh button with a new title and action.
+	// Also update the last view action (in case automatic refresh is turned on).
 	switch( view_type ) {
 		case CONST_DIRECTMESSAGES:
-			name = '<span onclick="viewDirectMessages(0);"><img src="images/refresh.png" style="vertical-align: text-bottom;" /> Direct Messages</span>';
+			last_view_action = 'viewDirectMessages(0);';
+			name = '<span onclick="' + last_view_action + '"><img src="images/refresh.png" style="vertical-align: text-bottom;" /> Direct Messages</span>';
 			color = '#fff';
 			break;
 		case CONST_MENTIONS:
-			name = '<span onclick="viewMentions(0);"><img src="images/refresh.png" style="vertical-align: text-bottom;" /> Mentions</span>';
+			last_view_action = 'viewMentions(0);';
+			name = '<span onclick="' + last_view_action + '"><img src="images/refresh.png" style="vertical-align: text-bottom;" /> Mentions</span>';
 			color = '#fff';
 			break;
 		case CONST_SEARCH:
-			name = '<span onclick="viewHashTag(\'' + name + '\');"><img src="images/refresh.png" style="vertical-align: text-bottom;" /> ' + name + '</span>';
+			last_view_action = 'viewHashTag(\'' + name + '\');';
+			name = '<span onclick="' + last_view_action + '"><img src="images/refresh.png" style="vertical-align: text-bottom;" /> ' + name + '</span>';
 			color = '#fff';
 			break;
 		case CONST_LIST:
-			name = '<span onclick="viewList(\'' + id_str + '\', \'' + name + '\', 0);"><img src="images/refresh.png" style="vertical-align: text-bottom;" /> ' + name + '</span>';
+			last_view_action = 'viewList(\'' + id_str + '\', \'' + name + '\', 0);';
+			name = '<span onclick="' + last_view_action + '"><img src="images/refresh.png" style="vertical-align: text-bottom;" /> ' + name + '</span>';
 			color = '#fff';
 			break;
 		case CONST_USER:
-			name = '<span onclick="viewUser(\'' + name + '\');"><img src="images/refresh.png" style="vertical-align: text-bottom;" /> @' + name + '</span>';
+			last_view_action = 'viewUser(\'' + name + '\');';
+			name = '<span onclick="' + last_view_action + '"><img src="images/refresh.png" style="vertical-align: text-bottom;" /> @' + name + '</span>';
 			color = '#fff';
 			break;
 		case CONST_LOADING:
@@ -391,7 +400,8 @@ function updateViewName( name, view_type, id_str ) {
 			color = '#95B9C7';
 			break;
 		default:
-			name = '<span onclick="doRefresh();"><img src="images/refresh.png" style="vertical-align: text-bottom;" /> All</span>';
+			last_view_action = 'doRefresh();';
+			name = '<span onclick="' + last_view_action + '"><img src="images/refresh.png" style="vertical-align: text-bottom;" /> All</span>';
 			color = '#fff';
 	}
 	
@@ -419,4 +429,9 @@ function viewAbout() {
 	content.xhr("data/about_lemma.html");
 	
 	gotoPage('#misc_view');
+}
+
+function doAutoRefresh() {
+	eval(last_view_action);
+	timer_autorefresh = setTimeout('doAutoRefresh();', status_autorefresh);
 }

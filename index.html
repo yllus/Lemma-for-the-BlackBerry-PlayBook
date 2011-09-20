@@ -115,11 +115,24 @@
 					content.xhr("data/timeline_settings.html", {
 						successCallback: function() {
 							content.fill($.make($.responseText));
+					    	
 					    	$("#activityChoices").UISelectionList(function(item) {
 					    		status_count = item.getAttribute("ui-value");
 					    		localStorage.setItem('status_count', status_count);
 						    });
 						    $('#num_timeline_' + status_count).addClass("selected");
+						    
+						    $("#autorefreshChoices").UISelectionList(function(item) {
+					    		status_autorefresh = item.getAttribute("ui-value");
+					    		localStorage.setItem('status_autorefresh', status_autorefresh);
+					    		
+					    		// If status_autorefresh > 0, start the timer.
+					    		if ( status_autorefresh > 0 ) {
+					    			timer_autorefresh = setTimeout('doAutoRefresh();', status_autorefresh);
+					    		}
+						    });
+						    $('#num_refresh_' + status_autorefresh).addClass("selected");
+						    
 						    $.responseText = null;
 					    }
 					});
