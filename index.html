@@ -130,6 +130,9 @@
 					    		if ( status_autorefresh > 0 ) {
 					    			timer_autorefresh = setTimeout('doAutoRefresh();', status_autorefresh);
 					    		}
+					    		else {
+					    			window.clearTimeout(timer_autorefresh);
+					    		}
 						    });
 						    $('#num_refresh_' + status_autorefresh).addClass("selected");
 						    
