@@ -19,39 +19,39 @@ tableview[ui-tablecell-order=stacked] > tablecell[ui-usage=image] > cellsubtitle
 }
 
 view tableview[ui-tablecell-order="stacked"] > tablecell.ui-no-hover:hover > cellsubtitle {
-	color: #282828 !important;
+	color: #000000 !important;
 }
 
 tableview[ui-tablecell-order=stacked] > tablecell > cellsubtitle {
-	color: #282828 !important;
+	color: #000000 !important;
 }
 
 tablecell > cellsubtitle {
-    color: #282828;
+    color: #000000;
     position: absolute;
     right: 10px;
     margin-top: 4px;
     white-space: normal;
     display: inline-block;
     font-size: 18px;
-    line-height: 24px;
+    line-height: 26px;
 }
 
 tablecell > celldetail.ui-custom-tint {
-    color: #282828 !important;
+    color: #000000 !important;
     font-size: 18px;
-    line-height: 24px;
+    line-height: 26px;
 }
 
 tableview > tablecell.ui-no-hover:hover > celldetail.ui-custom-tint,
 tableview > tablecell.ui-no-hover.touched > celldetail.ui-custom-tint {
-    color: #282828 !important;
+    color: #000000 !important;
     font-size: 18px;
-    line-height: 24px;
+    line-height: 26px;
 }
 
 tableview > tablecell.ui-no-hover > *, tableview.ui-no-hover > tablecell > * {
-    color: #282828 !important;
+    color: #000000 !important;
 }
 
 subview > scrollpanel {
@@ -324,7 +324,7 @@ tableview > tablecell:hover, tableview > tablecell.touched {
     white-space: normal;
     display: inline-block;
     font-size: 18px;
-    line-height: 24px;
+    line-height: 26px;
 }
 
 .actiontweet {
