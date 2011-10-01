@@ -58,9 +58,12 @@
 			str_tweet_raw = $('#raw_' + tweet_id).innerHTML;
 			str_tweet_user = $('#user_' + tweet_id).innerHTML;
 			
+			// Finally, set the text above the action sheet.
+			var str_action = '<span class=\"spanlinks\">@' + str_tweet_user + '</span> ' + str_tweet_raw;
+			
 			var opts = {
 				id : action_id,
-				title : str_tweet,
+				title : str_action,
 				color : "black",
 				uiButtons : [
 					{ title : "Reply", callback: "respondToReplyButton" }, 
