@@ -34,20 +34,20 @@ tablecell > cellsubtitle {
     white-space: normal;
     display: inline-block;
     font-size: 18px;
-    line-height: 26px;
+    line-height: 24px;
 }
 
 tablecell > celldetail.ui-custom-tint {
     color: #000000 !important;
     font-size: 18px;
-    line-height: 26px;
+    line-height: 24px;
 }
 
 tableview > tablecell.ui-no-hover:hover > celldetail.ui-custom-tint,
 tableview > tablecell.ui-no-hover.touched > celldetail.ui-custom-tint {
     color: #000000 !important;
     font-size: 18px;
-    line-height: 26px;
+    line-height: 24px;
 }
 
 tableview > tablecell.ui-no-hover > *, tableview.ui-no-hover > tablecell > * {
@@ -324,7 +324,7 @@ tableview > tablecell:hover, tableview > tablecell.touched {
     white-space: normal;
     display: inline-block;
     font-size: 18px;
-    line-height: 26px;
+    line-height: 24px;
 }
 
 .actiontweet {
