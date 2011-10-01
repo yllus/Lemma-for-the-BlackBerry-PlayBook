@@ -63,11 +63,11 @@ function updateTimeline( json_data, insert_more, data_type ) {
 		    		str_text = str_text.replace_url_with_html_links();
 		    		
 		    		// Use the bigger size profile images.
-		    		var re = new RegExp("_normal.jpg$", "g");
 		    		if ( str_profileimageurl == null  ) {
 		    			str_profileimageurl = str_lastprofileimageurl;
 		    		}
-		    		str_profileimageurl = str_profileimageurl.replace(re, '_bigger.jpg');
+		    		var re = new RegExp("_normal\.(.{3})$", "gi");
+		    		str_profileimageurl = str_profileimageurl.replace(re, '_bigger.$1');
 		    		str_lastprofileimageurl = str_profileimageurl;
 		    		
 		    		// Display the timestamp in relative time.
