@@ -5,7 +5,13 @@ var status_autorefresh = 0;
 var just_launched = 1;
 var last_view_type = 0;
 var last_view_action = 'doRefresh();';
-var timer_autorefresh;
+var timer_autorefresh, timer_oauth;
+
+// Browser variables.
+var browser = null;
+if (typeof blackberry !== 'undefined') {
+	browser = blackberry.polarmobile.childbrowser;
+}
 
 // Account variables.
 var accountIsSet = null;
@@ -88,11 +94,18 @@ String.prototype.replace_smart_quotes = function() {
 // Makes use of jsOAuth ( https://github.com/bytespider/jsOAuth ).
 // To simulate in Chrome: chrome.exe --disable-web-security
 function doAuthGetPIN() {
-	oauth.post('https://twitter.com/oauth/request_token', 
+	oauth.post('https://api.twitter.com/oauth/request_token', 
 		{},
 		function(data) {
 			requestParams = data.text;
-			followLink('https://twitter.com/oauth/authorize?' + data.text);
+			
+			if (typeof blackberry !== 'undefined') {
+				browser.loadURL('https://api.twitter.com/oauth/authorize?' + data.text);
+				timer_oauth = setTimeout('doAutoAuthCheck();', 5000);
+			}
+			else {
+				followLink('https://api.twitter.com/oauth/authorize?' + data.text);
+			}
 		}
 	);
 }
@@ -100,10 +113,8 @@ function doAuthGetPIN() {
 // Authorization step #2: Submit the PIN and get back an access token and access token secret.
 // Makes use of jsOAuth ( https://github.com/bytespider/jsOAuth ).
 // To simulate in Chrome: chrome.exe --disable-web-security
-function doAuthStepTwo() {
-	var accountPIN = $('#accessPIN').value;
-	
-	oauth.get('https://twitter.com/oauth/access_token?oauth_verifier=' + accountPIN + '&' + requestParams,
+function doAuthStepTwo( oauth_verifier ) {
+	oauth.get('https://twitter.com/oauth/access_token?oauth_verifier=' + oauth_verifier + '&' + requestParams,
 		function(data) {
 			// Split the query string as needed.						
 			var accessParams = {};

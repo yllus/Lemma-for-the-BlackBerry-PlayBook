@@ -435,3 +435,29 @@ function doAutoRefresh() {
 	eval(last_view_action);
 	timer_autorefresh = setTimeout('doAutoRefresh();', status_autorefresh);
 }
+
+function doAutoAuthCheck() {
+	var str_currlocation = browser.getLocation();
+	if ( str_currlocation.indexOf(options['callbackUrl'], 0) >= 0 ) {
+		var oauth_verifier = getQueryVariable(str_currlocation, 'oauth_verifier');
+		
+		// Close the in-app browser.
+		browser.close();
+		
+		doAuthStepTwo(oauth_verifier);
+	}
+	else {
+		timer_autorefresh = setTimeout('doAutoAuthCheck();', 5000);
+	}
+}
+
+function getQueryVariable(url, variable) { 
+	var query = url.substring((url.indexOf('?') + 1), url.length); 
+	var vars = query.split('&'); 
+	for ( var i = 0; i < vars.length; i++ ) { 
+		var pair = vars[i].split('='); 
+    	if (pair[0] == variable) { 
+    		return pair[1]; 
+    	}
+  	} 
+} 

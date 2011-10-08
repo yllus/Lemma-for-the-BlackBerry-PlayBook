@@ -11,4 +11,5 @@
 	<feature id="blackberry.invoke" />
 	<feature id="blackberry.invoke.BrowserArguments" />
 	<feature id="blackberry.identity" />
+	<feature id="blackberry.polarmobile.childbrowser" />
 </widget>
