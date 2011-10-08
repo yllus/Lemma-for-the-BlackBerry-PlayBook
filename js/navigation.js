@@ -442,7 +442,9 @@ function doAutoAuthCheck() {
 		var oauth_verifier = getQueryVariable(str_currlocation, 'oauth_verifier');
 		
 		// Close the in-app browser.
-		browser.close();
+		if (typeof blackberry !== 'undefined') {
+			browser.close();
+		}
 		
 		doAuthStepTwo(oauth_verifier);
 	}

@@ -94,6 +94,8 @@ String.prototype.replace_smart_quotes = function() {
 // Makes use of jsOAuth ( https://github.com/bytespider/jsOAuth ).
 // To simulate in Chrome: chrome.exe --disable-web-security
 function doAuthGetPIN() {
+	$('#button_authorize').fill($.make('<label>Please wait...</label>'));
+	
 	oauth.post('https://api.twitter.com/oauth/request_token', 
 		{},
 		function(data) {
