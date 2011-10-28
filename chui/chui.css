@@ -68,6 +68,7 @@ view {
 view[ui-navigation-status=upcoming] {
 	-webkit-transform: translateX(100%);
 	-webkit-transform: translate3d(100%,0%,0%);
+	display: none;
 }
 view[ui-navigation-status=current] {
 	-webkit-transform: translateX(0%);
