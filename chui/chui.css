@@ -2534,6 +2534,7 @@ actionsheet[ui-action-sheet-color=black] {
 actionsheet.hidden {
 	-webkit-transform: translate3d(0,100%,0);
 	opacity: 0;
+	display: none;
 }
 actionsheet > scrollpanel {
 	padding: 0 0 20px 0;
