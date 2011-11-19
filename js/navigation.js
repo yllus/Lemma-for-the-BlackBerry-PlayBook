@@ -441,15 +441,10 @@ function doAutoAuthCheck() {
 	if ( str_currlocation.indexOf(options['callbackUrl'], 0) >= 0 ) {
 		var oauth_verifier = getQueryVariable(str_currlocation, 'oauth_verifier');
 		
-		// Close the in-app browser.
-		if (typeof blackberry !== 'undefined') {
-			browser.close();
-		}
-		
 		doAuthStepTwo(oauth_verifier);
 	}
 	else {
-		timer_autorefresh = setTimeout('doAutoAuthCheck();', 5000);
+		timer_autorefresh = setTimeout('doAutoAuthCheck();', 2000);
 	}
 }
 
