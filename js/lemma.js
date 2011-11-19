@@ -143,9 +143,6 @@ function doAuthStepTwo( oauth_verifier ) {
 			// Set the access token and access token secret so the application can be used.
 			oauth.setAccessToken([accessToken, accessTokenSecret]);
 			
-			// Close the in-app browser.
-			browser.close();
-			
 			// Show the success screen.
 			$("#misc_header").fill('Account Authorized');
 			$("#misc_text").fill($.make('Account successfully authorized for <b>' + accountScreenName + '</b>! You can now begin to use <b>Lemma</b>.'));
@@ -153,18 +150,19 @@ function doAuthStepTwo( oauth_verifier ) {
 			
 			// Refresh the home timeline.
 			doRefresh();
+			
+			// Close the in-app browser.
+			browser.close();
 		},
 
 		function(data) {
-			// Close the in-app browser.
-			if (typeof blackberry !== 'undefined') {
-				browser.close();
-			}
-			
 			// Show the failure screen. 
 			$("#misc_header").fill('Error');
 			$("#misc_text").fill($.make("Sorry, we weren't able to set up your account to use Lemma. Please try again."));
-			gotoPage('#misc_view'); 
+			gotoPage('#misc_view');
+			
+			// Close the in-app browser.
+			browser.close(); 
 		}
 	);			
 }
