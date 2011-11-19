@@ -3,5 +3,5 @@ var oauth, requestParams, accessParams;
 var options = {
     consumerKey: '123',
     consumerSecret: '456789', 
-    callbackUrl: 'http://127.0.0.1/callback.html'
+    callbackUrl: 'local:///callback.html'
 };
