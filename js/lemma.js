@@ -40,7 +40,7 @@ if (typeof localStorage !== 'undefined') {
 }
 
 // OAuth variables are loaded from key.js.
-oauth = OAuth(options);
+var oauth = OAuth(options);
 if ( accountIsSet != null ) {
 	oauth.setAccessToken([accessToken, accessTokenSecret]);
 }
@@ -130,37 +130,37 @@ function doAuthStepTwo( oauth_verifier ) {
 			accountIsSet = '1';
 			accessToken = accessParams.oauth_token;
 			accessTokenSecret = accessParams.oauth_token_secret;
+			accountScreenName = accessParams.screen_name;
+			accountID = accessParams.user_id;
 			if (typeof localStorage !== 'undefined') {
 				localStorage.setItem('accountIsSet', accountIsSet);
 				localStorage.setItem('accessToken', accessToken);
 				localStorage.setItem('accessTokenSecret', accessTokenSecret);
+				localStorage.setItem('accountScreenName', accountScreenName);
+				localStorage.setItem('accountID', accountID);
 			}
 
 			// Set the access token and access token secret so the application can be used.
 			oauth.setAccessToken([accessToken, accessTokenSecret]);
 			
-			oauth.get('http://api.twitter.com/1/account/verify_credentials.json',
-				function(data) {
-					var account = JSON.parse(data.text);
-					
-					// Set the account screen name.
-					accountScreenName = account.screen_name;
-					accountID = account.id_str;
-					localStorage.setItem('accountScreenName', accountScreenName);
-					localStorage.setItem('accountID', accountID);
-					
-					// Show the success screen.
-					$("#misc_header").fill('Account Authorized');
-					$("#misc_text").fill($.make('Account successfully authorized for <b>' + accountScreenName + '</b>! You can now begin to use <b>Lemma</b>.'));
-					gotoPage('#misc_view');
-					
-					// Refresh the home timeline.
-					doRefresh();
-				}
-			);
+			// Close the in-app browser.
+			browser.close();
+			
+			// Show the success screen.
+			$("#misc_header").fill('Account Authorized');
+			$("#misc_text").fill($.make('Account successfully authorized for <b>' + accountScreenName + '</b>! You can now begin to use <b>Lemma</b>.'));
+			gotoPage('#misc_view');
+			
+			// Refresh the home timeline.
+			doRefresh();
 		},
 
 		function(data) {
+			// Close the in-app browser.
+			if (typeof blackberry !== 'undefined') {
+				browser.close();
+			}
+			
 			// Show the failure screen. 
 			$("#misc_header").fill('Error');
 			$("#misc_text").fill($.make("Sorry, we weren't able to set up your account to use Lemma. Please try again."));
