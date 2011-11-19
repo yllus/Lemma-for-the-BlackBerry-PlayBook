@@ -19,7 +19,7 @@ function List( u, s ) {
 	
 	this.change_list = function( direction ) {
 		if ( lists.retrieved_lists == 0 ) {
-			oauth.get('http://api.twitter.com/1/lists.json',
+			oauth.get('https://api.twitter.com/1/lists.json',
 				function(data) {
 					var lists_json = JSON.parse(data.text);
 					
@@ -89,7 +89,7 @@ function List( u, s ) {
 	
 	// View a specific list's timeline.
 	this.view_list = function( id_str, name ) {
-		oauth.get('http://api.twitter.com/1/lists/statuses.json?per_page=' + status_count + '&list_id=' + id_str,
+		oauth.get('https://api.twitter.com/1/lists/statuses.json?per_page=' + status_count + '&list_id=' + id_str,
 			function(data) {
 				var json_data = JSON.parse(data.text);
 
@@ -103,7 +103,7 @@ function List( u, s ) {
 	
 	// Get all of the user's lists. 
 	this.get_lists = function() {
-		oauth.get('http://api.twitter.com/1/lists.json',
+		oauth.get('https://api.twitter.com/1/lists.json',
 			function(data) {
 				var lists_json = JSON.parse(data.text);
 				
@@ -166,7 +166,7 @@ function List( u, s ) {
 			return lists.display_lists();
 		}
 		
-		oauth.get('http://api.twitter.com/1/lists.json',
+		oauth.get('https://api.twitter.com/1/lists.json',
 			function(data) {
 				var lists_json = JSON.parse(data.text);
 				

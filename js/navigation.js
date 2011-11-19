@@ -185,7 +185,7 @@ function postTweet() {
 
 // Retweet a tweet.
 function postRetweet() {
-	var url = 'http://api.twitter.com/1/statuses/retweet/' + reply_id + '.json';
+	var url = 'https://api.twitter.com/1/statuses/retweet/' + reply_id + '.json';
 	
 	oauth.post(url, 
 		{ 'id': reply_id, 'trim_user': '1', 'include_entities': '0' },
@@ -208,7 +208,7 @@ function postRetweet() {
 
 // Favourite a tweet.
 function postFavourite() {
-	var url = 'http://api.twitter.com/1/favorites/create/' + reply_id + '.json';
+	var url = 'https://api.twitter.com/1/favorites/create/' + reply_id + '.json';
 	
 	oauth.post(url, 
 		{ 'id': reply_id, 'skip_status': '1', 'include_entities': '0' },
@@ -253,7 +253,7 @@ function viewDirectMessages( go_back ) {
 
 // Navigate to a list of mentions.
 function viewMentions( go_back ) {
-	var url = 'http://api.twitter.com/1/statuses/mentions.json?include_rts=1&count=' + status_count;
+	var url = 'https://api.twitter.com/1/statuses/mentions.json?include_rts=1&count=' + status_count;
 	
 	if ( go_back == 1 ) {
 		goBack();
@@ -275,7 +275,7 @@ function viewMentions( go_back ) {
 
 // Navigate to a list of a user's tweets.
 function viewUser( screen_name ) {
-	var url = 'http://api.twitter.com/1/statuses/user_timeline.json?include_rts=1&screen_name=' + screen_name + '&count=' + status_count;
+	var url = 'https://api.twitter.com/1/statuses/user_timeline.json?include_rts=1&screen_name=' + screen_name + '&count=' + status_count;
 	
 	updateViewName('Retrieving tweets...', CONST_LOADING);
 	
