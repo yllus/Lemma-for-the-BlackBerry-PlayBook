@@ -19,8 +19,10 @@ bb = {
 	
 	// Assign any listeners we need to make the bbUI framework function
 	assignBackHandler: function(callback) {
-		if (blackberry.system.event.onHardwareKey) {
-			blackberry.system.event.onHardwareKey(blackberry.system.event.KEY_BACK, callback);
+		if (typeof blackberry !== 'undefined') {
+			if (blackberry.system.event.onHardwareKey) {
+				blackberry.system.event.onHardwareKey(blackberry.system.event.KEY_BACK, callback);
+			}
 		}
 	},
 	
@@ -104,6 +106,27 @@ bb = {
 			// Remove script tag from container because we are going to add it to <head>
 			bbScript.parentNode.removeChild(bbScript);
 		}
+		
+		// Add getElementById for the container so that it can be used in the onscreenready event
+		container.getElementById = function(id, node) {
+				var result = null;
+				if (!node) {
+					node = this;
+				}
+				
+				if ( node.getAttribute('id') == id )
+					return node;
+
+				for ( var i = 0; i < node.childNodes.length; i++ ) {
+					var child = node.childNodes[i];
+					if ( child.nodeType == 1 ) {
+						result = this.getElementById( id, child );
+						if ( result != null )
+							break;
+					}
+				}
+				return result;
+			}
 		
 		// Special handling for inserting script tags		
 		bb.screen.scriptCounter = 0;

@@ -1,5 +1,18 @@
+/* START: Overrides for bbUI.css specifically for Lemma. */
 .bb-hires-image-list-item
 {
+	border-bottom: solid 1px #D9DCDE;
+	padding-top: 10px;	
+	padding-left: 5px;
+	padding-bottom: 0px;
+	overflow:hidden;
+	height: 76px;
+}
+
+.bb-hires-image-list-item-hover
+{
+	/*background-color:#2175F7;*/
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#0dacff), to(#0f75ff));
 	border-bottom: solid 1px #D9DCDE;
 	padding-top: 10px;	
 	padding-left: 5px;
@@ -11,10 +24,11 @@
 .bb-hires-image-list img
 {
 	position:relative;
-	left: 4px;	
+	left: 0;	
 	float: left;
 	height: 73px;
 	width: 73px;
 	top: -3px;
 	margin-right: 20px;
 }
+/* END: Overrides for bbUI.css specifically for Lemma. */
