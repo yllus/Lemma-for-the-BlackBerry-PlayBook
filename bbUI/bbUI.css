@@ -461,7 +461,7 @@ a.bb5-button-highlight span {
 	padding-left: 5px;
 	padding-bottom: 0px;
 	overflow:hidden;
-	height: 76px;
+	height: 60px;
 }
 
 .bb-hires-image-list-item-hover
@@ -473,7 +473,7 @@ a.bb5-button-highlight span {
 	padding-left: 5px;
 	padding-bottom: 0px;
 	overflow:hidden;
-	height: 76px;
+	height: 60px;
 }
 
 .bb-hires-image-list .details
@@ -499,11 +499,10 @@ a.bb5-button-highlight span {
 {
 	position:relative;
 	left: 4px;	
-	float: left;
-	height: 72px;
-	width: 72px;
-	top: -3px;
-	margin-right: 20px;
+	float:left;
+	height:48px;
+	width:48px;
+	top:-3px;
 }
 
 .bb-hires-image-list .description
@@ -517,7 +516,7 @@ a.bb5-button-highlight span {
 
 .bb-hires-image-list-item-hover .description
 {
-	color: white;
+	color: White;
 	overflow: hidden;
 	white-space:nowrap;
 	font-size: 14pt;	
