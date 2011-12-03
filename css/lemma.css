@@ -1,4 +1,57 @@
 /* START: Overrides for bbUI.css specifically for Lemma. */
+body, html {
+	font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
+	background-color: white;
+}
+
+.bb-hires-screen {
+	font-size: 20px;
+	width: 1024px;
+}
+
+.bb-hires-image-list .details
+{
+	position: relative;
+	margin-left: 0;
+	margin-bottom: 0;
+}
+
+.bb-hires-image-list-item .title
+{
+	font-size: 15px;
+	font-weight: bold;
+	color: black;
+	overflow: hidden;
+}
+
+.bb-hires-image-list-item-hover .title
+{
+	font-size: 15px;
+	font-weight: bold;
+	color: white;
+	overflow: hidden;
+}
+
+.bb-hires-image-list .description
+{
+	color: black;
+	overflow: hidden;
+	white-space: normal;
+	font-size: 17px;	
+	line-height: 24px;
+	margin-bottom: 0px;
+}
+
+.bb-hires-image-list-item-hover .description
+{
+	color: white;
+	overflow: hidden;
+	white-space: normal;
+	font-size: 17px;	
+	line-height: 24px;
+	margin-bottom: 0px;
+}
+
 .bb-hires-image-list-item
 {
 	border-bottom: solid 1px #D9DCDE;
@@ -32,3 +85,14 @@
 	margin-right: 20px;
 }
 /* END: Overrides for bbUI.css specifically for Lemma. */
+
+.toolbar {
+	z-index: 100; 
+	position: fixed; 
+	bottom: 0; 
+	width: 1024px; 
+	height: 30px; 
+	background-color: black; 
+	color: white; 
+	padding: 16px 8px 8px 8px;
+}

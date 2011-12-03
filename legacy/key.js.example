@@ -1,7 +1,0 @@
-// OAuth variables. The consumerKey and consumerSecret must be requested from @sullysyed ( http://twitter.com/#!/sullysyed ); callbackUrl should stay the same.
-var oauth, requestParams, accessParams;
-var options = {
-    consumerKey: '123',
-    consumerSecret: '456789', 
-    callbackUrl: 'local:///callback.html'
-};

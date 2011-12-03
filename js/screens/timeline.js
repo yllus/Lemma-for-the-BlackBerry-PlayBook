@@ -10,7 +10,7 @@ function do_timeline( element ) {
 		
 		var str_profileimageurl = 'https://si0.twimg.com/profile_images/1666864732/mike_-_Copy_bigger.jpg';
 		var str_screenname = 'mikemassimi';
-		var str_text = 'Getting ready to enjoy some Longo\'s food as prepared by @mattkantor and hosted by @alexaclark at #TasteOntario #in';
+		var str_text = 'Getting ready to enjoy some Longo\'s food as prepared by @mattkantor and hosted by @alexaclark at #TasteOntario #in continuing tweet to make it wrap to the next line!';
 		var str_raw_text = str_text;
 		var str_raw_screenname = str_screenname;
 		var str_date = '';
@@ -43,9 +43,9 @@ String.prototype.replace_url_with_html_links = function() {
 };
 
 String.prototype.linkify_tweet = function() {
-	var tweet = this.replace(/(^|\s|\.|")@(\w+)/g, "$1&lt;span onclick=\&quot;viewUser(\'$2\');\&quot; class=\&quot;spanlinks\&quot;&gt;@$2&lt;/span&gt;");
+	var tweet = this.replace(/(^|\s|\.|")@(\w+)/g, "$1<span onclick=\"viewUser(\'$2\');\" class=\"spanlinks\">@$2</span>");
 	
-	return tweet.replace(/(^|\s)#(\w+)/g, "$1&lt;span onclick=\&quot;viewHashTag(\'#$2\');\&quot; class=\&quot;spanlinks\&quot;&gt;#$2&lt;/span&gt;");
+	return tweet.replace(/(^|\s)#(\w+)/g, "$1<span onclick=\"viewHashTag(\'#$2\');\" class=\"spanlinks\">#$2</span>");
 };
 
 String.prototype.replace_smart_quotes = function() {
