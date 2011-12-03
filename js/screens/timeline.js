@@ -1,12 +1,11 @@
-function do_timeline( element ) {
+function do_timeline( element, json_data, data_type ) {
 	var str_timeline = '';
+	var str_lastprofileimageurl = ''; // Saves the last profile image URL for when the search API fails to send a new one in the user object.
+	var str_template = data_retrieve('data/tweet.html');
 	
 	for ( var i = 0; i < 50; i++ ) {
-		var str_instance = '';
+		var str_instance = str_template;
 		var str_id = 'tweet_' + i;
-		
-		// Retrieve the contents of the tweet.html file.
-		str_instance = data_retrieve('data/tweet.html');
 		
 		var str_profileimageurl = 'https://si0.twimg.com/profile_images/1666864732/mike_-_Copy_bigger.jpg';
 		var str_screenname = 'mikemassimi';
@@ -18,7 +17,7 @@ function do_timeline( element ) {
 		// Change URLs into links and make hashtags and usernames clickable.
 		str_text = str_text.replace_smart_quotes();
 		str_text = str_text.linkify_tweet();
-		//str_text = str_text.replace_url_with_html_links();
+		str_text = str_text.replace_url_with_html_links();
 		
 		// Replace the ${id} , ${profile_image_url}" , ${text} and ${raw_screenname} variables.
 		str_instance = str_instance.replace(/\$\{id\}/g, str_id);
@@ -34,6 +33,18 @@ function do_timeline( element ) {
 	}
 	
 	element.getElementById('div_timeline').innerHTML = str_timeline; 
+}
+
+function get_timeline_home( element ) {
+	var url = 'https://api.twitter.com/1/statuses/home_timeline.json';
+	
+	oauth.get(url,
+		function(data) {
+			var json_data = JSON.parse(data.text);
+
+			do_timeline(element, json_data, CONST_HOME);
+		}
+	);
 }
 
 String.prototype.replace_url_with_html_links = function() {

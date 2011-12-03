@@ -86,6 +86,40 @@ body, html {
 }
 /* END: Overrides for bbUI.css specifically for Lemma. */
 
+/* START: Style buttons in the QNX style. */
+button.qnx:hover, 
+button.qnx.touched {
+    background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(1, rgb(6,168,233)),
+	    color-stop(0, rgb(0,113,199))
+	);
+	border: 1px #2ccfff solid;
+	color: #ffffff;
+}
+
+button.qnx { 
+	background-color: #F0F0F0;
+	background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#D1D2D4), to(#FCFCFC));
+	border: 1px solid #B0B0B0;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	color: black;
+	font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	height: 45px;
+	padding-left: 25px;
+	padding-right: 25px;
+}
+/* END: Style buttons in the QNX style. */
+
 .toolbar {
 	z-index: 100; 
 	position: fixed; 
