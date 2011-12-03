@@ -3,21 +3,62 @@ function do_timeline( element, json_data, data_type ) {
 	var str_lastprofileimageurl = ''; // Saves the last profile image URL for when the search API fails to send a new one in the user object.
 	var str_template = data_retrieve('data/tweet.html');
 	
-	for ( var i = 0; i < 50; i++ ) {
+	for ( var i = 0; i < json_data.length; i++ ) {
 		var str_instance = str_template;
-		var str_id = 'tweet_' + i;
-		
-		var str_profileimageurl = 'https://si0.twimg.com/profile_images/1666864732/mike_-_Copy_bigger.jpg';
-		var str_screenname = 'mikemassimi';
-		var str_text = 'Getting ready to enjoy some Longo\'s food as prepared by @mattkantor and hosted by @alexaclark at #TasteOntario #in continuing tweet to make it wrap to the next line!';
+		var str_text = json_data[i].text;
 		var str_raw_text = str_text;
-		var str_raw_screenname = str_screenname;
-		var str_date = '';
+		var str_date = json_data[i].created_at;
+		var str_profileimageurl = '';
+		var str_screenname = '';
+		var str_raw_screenname = '';
+		var str_id = json_data[i].id_str;
+		
+		// If the data is from the Twitter search API, get the profile image URL and screen name from the main object.
+		// Else retrieve it from the REST API's embedded user structure.
+		switch( data_type ) {
+			case CONST_SEARCH:
+				str_profileimageurl = json_data[i].profile_image_url;
+				str_screenname = json_data[i].from_user;
+				str_raw_screenname = str_screenname;
+				break;
+			case CONST_DIRECTMESSAGES:
+				str_profileimageurl = json_data[i].sender.profile_image_url;
+				str_screenname = json_data[i].sender.screen_name;
+				str_raw_screenname = str_screenname;
+				break;
+			default:
+				str_profileimageurl = json_data[i].user.profile_image_url;
+				str_screenname = json_data[i].user.screen_name;
+				str_raw_screenname = str_screenname;
+				
+				// If this is a retweet, use the original tweet, plus the original tweeter's profile image and screen name.
+				if ( json_data[i].retweeted_status != null ) {
+					str_text = json_data[i].retweeted_status.text;
+					str_raw_text = str_text;
+					str_profileimageurl = json_data[i].retweeted_status.user.profile_image_url;
+					str_screenname = json_data[i].retweeted_status.user.screen_name + ', retweeted by ' + json_data[i].user.screen_name;
+					str_raw_screenname = json_data[i].retweeted_status.user.screen_name;
+				}
+		}
+		
+		// Update last_tweet_id with this tweet's ID.
+		last_tweet_id = str_id;
 		
 		// Change URLs into links and make hashtags and usernames clickable.
 		str_text = str_text.replace_smart_quotes();
 		str_text = str_text.linkify_tweet();
 		str_text = str_text.replace_url_with_html_links();
+		
+		// Use the bigger size profile images.
+		if ( str_profileimageurl == null  ) {
+			str_profileimageurl = str_lastprofileimageurl;
+		}
+		var re = new RegExp("_normal\.(.{3})$", "gi");
+		str_profileimageurl = str_profileimageurl.replace(re, '_bigger.$1');
+		str_lastprofileimageurl = str_profileimageurl;
+		
+		// Display the timestamp in relative time.
+		str_date = new Date(json_data[i].created_at).toRelativeTime();
 		
 		// Replace the ${id} , ${profile_image_url}" , ${text} and ${raw_screenname} variables.
 		str_instance = str_instance.replace(/\$\{id\}/g, str_id);
@@ -33,10 +74,15 @@ function do_timeline( element, json_data, data_type ) {
 	}
 	
 	element.getElementById('div_timeline').innerHTML = str_timeline; 
+	bb.tweetList.apply(element.querySelectorAll('[data-bb-type=tweet-list]'));	// Added a declaration for tweetList.
+	element.getElementById('div_timeline').style.display = 'block';
 }
 
 function get_timeline_home( element ) {
 	var url = 'https://api.twitter.com/1/statuses/home_timeline.json';
+	
+	// Add the number of tweets to the URL as a parameter.
+	url = url + '?count=' + status_count;
 	
 	oauth.get(url,
 		function(data) {

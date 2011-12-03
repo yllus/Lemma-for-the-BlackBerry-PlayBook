@@ -120,6 +120,12 @@ button.qnx {
 }
 /* END: Style buttons in the QNX style. */
 
+.date {
+	float: right;
+	font-size: 15px;
+	color: #888888;
+}
+
 .toolbar {
 	z-index: 100; 
 	position: fixed; 

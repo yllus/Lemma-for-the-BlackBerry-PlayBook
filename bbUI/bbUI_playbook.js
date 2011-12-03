@@ -1,32 +1,3 @@
-// Override the bb object from bbUI.js with an added declaration for bb.tweetList.
-bb.doLoad = function(element) {
-	// Apply our styling
-	var root;
-
-	if (element == undefined) {
-		root = document.body;
-	} else  {
-		root = element;
-	}
-	
-	bb.screen.apply(root.querySelectorAll('[data-bb-type=screen]'));
-	bb.textInput.apply(root.querySelectorAll('input[type=text]'));
-	bb.dropdown.apply(root.querySelectorAll('select'));
-	bb.roundPanel.apply(root.querySelectorAll('[data-bb-type=round-panel]'));
-	bb.textArrowList.apply(root.querySelectorAll('[data-bb-type=text-arrow-list]'));	
-	bb.imageList.apply(root.querySelectorAll('[data-bb-type=image-list]'));
-	bb.tweetList.apply(root.querySelectorAll('[data-bb-type=tweet-list]'));	// Added a declaration for tweetList.
-	bb.tallList.apply(root.querySelectorAll('[data-bb-type=tall-list]'));
-	bb.inboxList.apply(root.querySelectorAll('[data-bb-type=inbox-list]'));
-	bb.bbmBubble.apply(root.querySelectorAll('[data-bb-type=bbm-bubble]'));
-	bb.pillButtons.apply(root.querySelectorAll('[data-bb-type=pill-buttons]'));
-	bb.labelControlContainers.apply(root.querySelectorAll('[data-bb-type=label-control-container]'));
-	bb.button.apply(root.querySelectorAll('[data-bb-type=button]'));
-		
-	// perform device specific formatting
-	bb.screen.reAdjustHeight();
-};
-
 // Extend the bb object from bbUI.js with the tweetList object.
 bb.tweetList = {
 	apply: function(elements) {
@@ -55,6 +26,7 @@ bb.tweetList = {
 						innerChildNode.innerHTML = '<img src="'+ innerChildNode.getAttribute('data-bb-img') +'" />\n'+
 										'<div class="details" style="float: left; width: 855px; height: 73px;">\n'+
 										'	   <span class="title">' + innerChildNode.getAttribute('data-bb-screenname') + '</span>\n'+
+										'	   <div class="date">'+ innerChildNode.getAttribute('data-bb-date') +'</div>\n'+
 										'	   <div class="description">' + description + '</div>\n'+
 										'</div>\n'+
 										'<div style="float: left; width: 70px; height: 73px;">\n'+

@@ -33,6 +33,16 @@ if ( accountIsSet != null ) {
 	oauth.setAccessToken([accessToken, accessTokenSecret]);
 }
 
+// Constants.
+var CONST_HOME = 0;
+var CONST_LOADING = 1;
+var CONST_USER = 2;
+var CONST_LIST = 3;
+var CONST_SEARCH = 4;
+var CONST_BACKBUTTON = 5;
+var CONST_MENTIONS = 6;
+var CONST_DIRECTMESSAGES = 7;
+
 // The "traffic cop" function controlling what JS gets executed when a screen has loaded (but is not yet 
 // displayed), so refer to element.
 bb.onscreenready = function(element, id) {
