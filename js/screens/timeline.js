@@ -1,6 +1,8 @@
 function do_timeline( element, json_data, data_type ) {
 	var str_timeline = '';
 	var str_lastprofileimageurl = ''; // Saves the last profile image URL for when the search API fails to send a new one in the user object.
+	var str_title = '';
+	var str_raw_screenname = '';
 	var str_template = data_retrieve('data/tweet.html');
 	
 	// Add some white space to the bottom of the list so no tweets are blocked by the toolbar.
@@ -17,7 +19,6 @@ function do_timeline( element, json_data, data_type ) {
 		var str_date = json_data[i].created_at;
 		var str_profileimageurl = '';
 		var str_screenname = '';
-		var str_raw_screenname = '';
 		var str_id = json_data[i].id_str;
 		
 		// If the data is from the Twitter search API, get the profile image URL and screen name from the main object.
@@ -29,6 +30,7 @@ function do_timeline( element, json_data, data_type ) {
 				str_raw_screenname = str_screenname;
 				break;
 			case CONST_DIRECTMESSAGES:
+				str_title = 'Direct Messages';
 				str_profileimageurl = json_data[i].sender.profile_image_url;
 				str_screenname = json_data[i].sender.screen_name;
 				str_raw_screenname = str_screenname;
@@ -73,7 +75,7 @@ function do_timeline( element, json_data, data_type ) {
 		str_instance = str_instance.replace(/\$\{screen_name\}/g, str_screenname);
 		str_instance = str_instance.replace('${text}', str_text);
 		str_instance = str_instance.replace('${raw_text}', str_raw_text);
-		str_instance = str_instance.replace('${raw_screenname}', str_raw_screenname);
+		str_instance = str_instance.replace('${screen_name_raw}', str_raw_screenname);
 		str_instance = str_instance.replace('${created_at}', str_date);
 		
 		// Add to the overall timeline string.
@@ -83,9 +85,28 @@ function do_timeline( element, json_data, data_type ) {
 	// Add some white space to the bottom of the list so no tweets are blocked by the toolbar.
 	str_timeline = str_timeline + '<div style="width: 855px; height: 54px;">&nbsp;</div>';
 	
+	// Set the title for the page.
+	switch( data_type ) {
+		case CONST_SEARCH:
+			str_title = 'Search Term: ';
+			break;
+		case CONST_LIST:
+			str_title = 'List: ';
+			break;
+		case CONST_USER:
+			str_title = str_raw_screenname;
+			break;
+		default:
+			str_title = 'Home Timeline';
+	}
+	element.getElementsByClassName('bb-hires-screen-title')[0].innerHTML = str_title;
+	
 	element.getElementById('div_timeline').innerHTML = str_timeline; 
 	bb.tweetList.apply(element.querySelectorAll('[data-bb-type=tweet-list]'));
 	element.getElementById('div_timeline').style.display = 'block';
+	
+	// Scroll to the top of the window.
+	window.scrollTo(0, 0);
 }
 
 function do_screen_timeline_home( element ) {
@@ -126,6 +147,20 @@ function followLink( address ) {
 		// If I am not a BlackBerry device, open link in current browser.
 		window.open(encodedAddress); 
 	}
+}
+
+// Navigate to a list of a user's tweets.
+function viewUser( screen_name ) {
+	var url = 'https://api.twitter.com/1/statuses/user_timeline.json?include_rts=1&screen_name=' + screen_name + '&count=' + status_count;
+	var element = document.getElementById('timeline_home');
+
+	oauth.get(url,
+		function(data) {
+			var json_data = JSON.parse(data.text);
+
+			do_timeline(element, json_data, CONST_USER);
+		}
+	);
 }
 
 String.prototype.replace_url_with_html_links = function() {
