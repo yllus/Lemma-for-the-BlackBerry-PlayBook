@@ -1,16 +1,16 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
-<div data-bb-type="screen"  data-bb-title="Home Timeline" data-bb-effect="fade">
+<div data-bb-type="screen" data-bb-title="Home Timeline" data-bb-effect="fade">
 	<script type="text/javascript" src="js/screens/timeline.js"></script>
 	<div id="div_timeline" data-bb-type="tweet-list" style="position: absolute; overflow: auto; display: none;"></div>
 	<div class="toolbar" style="padding: 0; height: 64px;">
 		<div style="float: left;">
 			<img src="images/compose.png" />
 			<img src="images/inbox.png" /> 
-			<span onclick="button_options();"><img src="images/options.png" /></a>
+			<img src="images/options.png" onclick="button_options();" />
 		</div>
 		<div style="float: right;">
 			<img src="images/previous.png" /> 
-			<img src="images/home.png" />
+			<img src="images/home.png" onclick="button_home();" />
 			<img src="images/lists.png" />  
 			<img src="images/next.png" />
 		</div>

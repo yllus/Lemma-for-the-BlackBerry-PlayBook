@@ -3,6 +3,13 @@ function do_timeline( element, json_data, data_type ) {
 	var str_lastprofileimageurl = ''; // Saves the last profile image URL for when the search API fails to send a new one in the user object.
 	var str_template = data_retrieve('data/tweet.html');
 	
+	// Add some white space to the bottom of the list so no tweets are blocked by the toolbar.
+	/*
+	var currentTime = new Date();
+	var currUnixTime = currentTime.getTime();
+	str_timeline = str_timeline + '<div style="width: 855px; height: 54px;">Last updated: ' + currUnixTime + '</div>';
+	*/
+	
 	for ( var i = 0; i < json_data.length; i++ ) {
 		var str_instance = str_template;
 		var str_text = json_data[i].text;
@@ -36,7 +43,7 @@ function do_timeline( element, json_data, data_type ) {
 					str_text = json_data[i].retweeted_status.text;
 					str_raw_text = str_text;
 					str_profileimageurl = json_data[i].retweeted_status.user.profile_image_url;
-					str_screenname = json_data[i].retweeted_status.user.screen_name + ', retweeted by ' + json_data[i].user.screen_name;
+					str_screenname = json_data[i].retweeted_status.user.screen_name + ' &lt;img src=&quot;images/retweet.gif&quot; style=&quot;width: 16px; height: 10px; top: 0; margin: 2.5px 5px 0 0;&quot; /&gt; &lt;span style=&quot;font-weight: normal;&quot;&gt;by&lt;/span&gt; ' + json_data[i].user.screen_name;
 					str_raw_screenname = json_data[i].retweeted_status.user.screen_name;
 				}
 		}
@@ -94,6 +101,31 @@ function do_screen_timeline_home( element ) {
 			do_timeline(element, json_data, CONST_HOME);
 		}
 	);
+}
+
+// Launch the BlackBerry PlayBook browser for a URL (or the native browser if we're not on a PlayBook).
+function followLink( address ) {
+	var encodedAddress = '';
+
+	// URL Encode all instances of ':' in the address
+	encodedAddress = address.replace(/:/g, "%3A");
+	// Leave the first instance of ':' in its normal form
+	encodedAddress = encodedAddress.replace(/%3A/, ":");
+	// Escape all instances of '&' in the address
+	encodedAddress = encodedAddress.replace(/&/g, "\&");
+
+	if (typeof blackberry !== 'undefined') {
+		try {
+			// If I am a BlackBerry device, invoke native browser.
+			var args = new blackberry.invoke.BrowserArguments(encodedAddress);
+			blackberry.invoke.invoke(blackberry.invoke.APP_BROWSER, args);
+		} catch(e) {
+ 			alert("Sorry, there was a problem invoking the browser.");
+ 		}
+	} else {
+		// If I am not a BlackBerry device, open link in current browser.
+		window.open(encodedAddress); 
+	}
 }
 
 String.prototype.replace_url_with_html_links = function() {

@@ -92,6 +92,11 @@ function button_back() {
 	}
 }
 
+function button_home() {
+	//bb.overrideScreen('screens/timeline.html', 'timeline_home');
+	do_screen_timeline_home(document.getElementById('timeline_home'));
+}
+
 function data_retrieve( url ) {
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.open("GET", url, false);

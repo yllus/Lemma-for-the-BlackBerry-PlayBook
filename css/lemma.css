@@ -127,6 +127,18 @@ button.qnx {
 	padding-right: 10px;
 }
 
+.spanlinks {
+	color: #2489CE;
+	font-weight: normal;
+	text-decoration: underline;
+}
+
+.retweet {
+	width: 16px; 
+	height: 10px; 
+	top: 0; 
+}
+
 .toolbar {
 	z-index: 100; 
 	position: fixed; 
