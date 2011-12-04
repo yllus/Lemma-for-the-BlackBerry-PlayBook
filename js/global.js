@@ -33,6 +33,9 @@ if ( accountIsSet != null ) {
 	oauth.setAccessToken([accessToken, accessTokenSecret]);
 }
 
+// A message variable for when the miscellaneous screen is called.
+var str_misc = '';
+
 // Constants.
 var CONST_HOME = 0;
 var CONST_LOADING = 1;
@@ -47,21 +50,44 @@ var CONST_DIRECTMESSAGES = 7;
 // displayed), so refer to element.
 bb.onscreenready = function(element, id) {
 	switch ( id ) {
-		case 'options_user':
+		case 'options_user_unauthorized':
+			do_screen_user_unauthorized(element);
 			break;
-		default:
-			get_timeline_home(element);
+		case 'options_user':
+			do_screen_user(element);
+			break;
+		case 'misc':
+			do_screen_misc(element);
+			break;
+		case 'timeline_home':
+			do_screen_timeline_home(element);
+			break;
 	}
+}
+
+function button_options() {
+	bb.pushScreen('screens/user.html', 'options_user');
 }
 
 function do_just_launched() {
 	// If a user account has not been set up, redirect to that page.
 	// Else load the home timeline.
 	if ( accountIsSet == null ) {
-		bb.pushScreen('screens/user.html', 'options_user');
+		bb.pushScreen('screens/user.html', 'options_user_unauthorized');
 	}
 	else {
-		// Push the home screen, which will trigger bb.onscreenready() and get_timeline_home().
+		// Push the home screen, which will trigger bb.onscreenready() and do_screen_timeline_home().
+		bb.pushScreen('screens/timeline.html', 'timeline_home');
+	}
+}
+
+function button_back() {
+	var num_screens = bb.screens.length;
+	
+	if ( num_screens > 1 ) {
+		bb.popScreen();
+	}
+	else {
 		bb.pushScreen('screens/timeline.html', 'timeline_home');
 	}
 }

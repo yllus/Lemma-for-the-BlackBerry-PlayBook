@@ -79,10 +79,17 @@ function doAuthStepTwo( oauth_verifier ) {
 			if (typeof blackberry !== 'undefined') {
 				browser.close();
 			}
+			
+			// Show the success screen.
+			var str_text = data_retrieve('data/user.html');
+			str_text = str_text.replace('${screen_name}', accountScreenName);
+			document.getElementById('div_user').innerHTML = str_text;
 		},
 
 		function(data) {
 			// Show the failure screen. 
+			str_misc = '';
+			bb.pushScreen('screens/misc.html', 'misc');
 			
 			// Close the in-app browser.
 			if (typeof blackberry !== 'undefined') {
@@ -91,6 +98,24 @@ function doAuthStepTwo( oauth_verifier ) {
 		}
 	);			
 }
+
+// Remove the local storage of the user's credentials.
+function doAuthRemove() {
+	accountIsSet = null;
+	accountScreenName = null;
+	accountID = null;
+	accessToken = null;
+	accessTokenSecret = null;
+	localStorage.removeItem('accountIsSet');
+	localStorage.removeItem('accountScreenName');
+	localStorage.removeItem('accountID');
+	localStorage.removeItem('accessToken');
+	localStorage.removeItem('accessTokenSecret');
+	
+	// Show the success screen. 
+	document.getElementById('div_user').innerHTML = data_retrieve('data/user_unauthorized.html');
+}
+
 
 function doFinishAuth() {
 	var str_currlocation = String(window.location);
@@ -111,7 +136,7 @@ function doAutoAuthCheck() {
 	}
 }
 
-function getQueryVariable(url, variable) { 
+function getQueryVariable( url, variable ) { 
 	var query = url.substring((url.indexOf('?') + 1), url.length); 
 	var vars = query.split('&'); 
 	for ( var i = 0; i < vars.length; i++ ) { 
@@ -121,3 +146,16 @@ function getQueryVariable(url, variable) {
     	}
   	} 
 } 
+
+function do_screen_user_unauthorized( element ) {
+	element.getElementById('div_user').innerHTML = data_retrieve('data/user_unauthorized.html');
+}
+
+function do_screen_user( element ) {
+	var accountScreenName = localStorage.getItem("accountScreenName");
+	var str_text = data_retrieve('data/user.html');
+	
+	str_text = str_text.replace('${screen_name}', accountScreenName);
+	
+	element.getElementById('div_user').innerHTML = str_text;
+}

@@ -169,6 +169,7 @@ function doAuthStepTwo( oauth_verifier ) {
 
 // Remove the local storage of the user's credentials.
 function doAuthRemove() {
+	/*
 	accountIsSet = null;
 	accountScreenName = null;
 	accountID = null;
@@ -179,8 +180,9 @@ function doAuthRemove() {
 	localStorage.removeItem('accountID');
 	localStorage.removeItem('accessToken');
 	localStorage.removeItem('accessTokenSecret');
+	*/
 	
-	// Show the failure screen. 
+	// Show the success screen.
 	$("#misc_header").fill('Account Removed');
 	$("#misc_text").fill($.make("Your account settings were successfully removed."));
 	gotoPage('#misc_view');

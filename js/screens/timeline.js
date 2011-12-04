@@ -73,12 +73,15 @@ function do_timeline( element, json_data, data_type ) {
 		str_timeline = str_timeline + str_instance;
 	}
 	
+	// Add some white space to the bottom of the list so no tweets are blocked by the toolbar.
+	str_timeline = str_timeline + '<div style="width: 855px; height: 54px;">&nbsp;</div>';
+	
 	element.getElementById('div_timeline').innerHTML = str_timeline; 
-	bb.tweetList.apply(element.querySelectorAll('[data-bb-type=tweet-list]'));	// Added a declaration for tweetList.
+	bb.tweetList.apply(element.querySelectorAll('[data-bb-type=tweet-list]'));
 	element.getElementById('div_timeline').style.display = 'block';
 }
 
-function get_timeline_home( element ) {
+function do_screen_timeline_home( element ) {
 	var url = 'https://api.twitter.com/1/statuses/home_timeline.json';
 	
 	// Add the number of tweets to the URL as a parameter.
