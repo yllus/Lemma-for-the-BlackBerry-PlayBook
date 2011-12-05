@@ -93,6 +93,7 @@ function List( u, s ) {
 			function(data) {
 				var json_data = JSON.parse(data.text);
 
+				lists.set_position(id_str);
 				do_timeline(document.getElementById('timeline_home'), json_data, CONST_LIST, name);
 			}
 		);
