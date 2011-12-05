@@ -80,10 +80,6 @@ function do_just_launched() {
 	}
 }
 
-function button_options() {
-	bb.pushScreen('screens/user.html', 'options_user');
-}
-
 function button_back() {
 	var num_screens = bb.screens.length;
 	
@@ -93,6 +89,10 @@ function button_back() {
 	else {
 		bb.pushScreen('screens/timeline.html', 'timeline_home');
 	}
+}
+
+function button_options() {
+	bb.pushScreen('screens/options.html', 'options');
 }
 
 function button_home() {
