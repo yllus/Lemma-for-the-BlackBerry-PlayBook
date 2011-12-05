@@ -36,6 +36,9 @@ if ( accountIsSet != null ) {
 // A message variable for when the miscellaneous screen is called.
 var str_misc = '';
 
+// List variables.
+var lists = null;
+
 // Constants.
 var CONST_HOME = 0;
 var CONST_LOADING = 1;
@@ -65,10 +68,6 @@ bb.onscreenready = function(element, id) {
 	}
 }
 
-function button_options() {
-	bb.pushScreen('screens/user.html', 'options_user');
-}
-
 function do_just_launched() {
 	// If a user account has not been set up, redirect to that page.
 	// Else load the home timeline.
@@ -79,6 +78,10 @@ function do_just_launched() {
 		// Push the home screen, which will trigger bb.onscreenready() and do_screen_timeline_home().
 		bb.pushScreen('screens/timeline.html', 'timeline_home');
 	}
+}
+
+function button_options() {
+	bb.pushScreen('screens/user.html', 'options_user');
 }
 
 function button_back() {
@@ -93,8 +96,23 @@ function button_back() {
 }
 
 function button_home() {
-	//bb.overrideScreen('screens/timeline.html', 'timeline_home');
 	do_screen_timeline_home(document.getElementById('timeline_home'));
+}
+
+function button_list_prev() {
+	if ( lists == null ) {
+		lists = new List(accountID, accountScreenName);
+	}
+	
+	lists.change_list('prev');
+}
+
+function button_list_next() {
+	if ( lists == null ) {
+		lists = new List(accountID, accountScreenName);
+	}
+	
+	lists.change_list('next');
 }
 
 function data_retrieve( url ) {

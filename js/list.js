@@ -78,7 +78,7 @@ function List( u, s ) {
 		}
 	}
 	
-	// Get the current list's position.
+	// Set the current list's position.
 	this.set_position = function( id_str ) {
 		for ( var i = 0; i < lists.all_lists.length; i++ ) {
 			if ( lists.all_lists[i].id_str == id_str ) {
@@ -93,10 +93,7 @@ function List( u, s ) {
 			function(data) {
 				var json_data = JSON.parse(data.text);
 
-				current_view = name;
-				lists.set_position(id_str);
-				updateViewName(name, CONST_LIST, id_str);
-				updateTimeline(json_data, false, CONST_LIST);
+				do_timeline(document.getElementById('timeline_home'), json_data, CONST_LIST, name);
 			}
 		);
 	}
@@ -147,14 +144,7 @@ function List( u, s ) {
 				str_template = null;
 				
 				// Display the list of lists.
-				$("#lists_subview").fill($.make('<scrollpanel id="lists_scrollpanel"><tableview id="lists_text" style="margin-top: 16px;">' + str_lists + '</tableview></scrollpanel>'));
 				
-				// Re-enable scrolling for the timeline scrollpanel.
-		        var options = { bounce: false, fadeScrollbar: false };
-		        scrollpanelTimeline = $('#lists_scrollpanel'); 
-		        var scroller = new $.UIScroll(scrollpanelTimeline.parentNode, options);
-				
-				gotoPage('#lists_view');
 			}
 		});
 	}
@@ -201,22 +191,14 @@ function List( u, s ) {
 						lists.retrieved_lists = 1;
 						
 						// Display the list of lists.
-						$("#lists_subview").fill($.make('<scrollpanel id="lists_scrollpanel"><tableview id="lists_text" style="margin-top: 16px;">' + str_lists + '</tableview></scrollpanel>'));
 						
-						// Re-enable scrolling for the timeline scrollpanel.
-				        var options = { bounce: false, fadeScrollbar: false };
-				        scrollpanelTimeline = $('#lists_scrollpanel'); 
-				        var scroller = new $.UIScroll(scrollpanelTimeline.parentNode, options);
-						
-						gotoPage('#lists_view');
 					}
 				});
 			},
 			
 			function(data) {
-				$("#misc_header").fill('Error');
-				$("#misc_text").fill($.make('Sorry, your lists could not be retrieved at this time. Please try again later.'));
-				gotoPage('#misc_view');
+				// Display an error message.
+				
 			}
 		);
 	}

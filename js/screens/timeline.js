@@ -1,8 +1,7 @@
-function do_timeline( element, json_data, data_type ) {
+function do_timeline( element, json_data, data_type, title_timeline ) {
 	var str_timeline = '';
 	var str_lastprofileimageurl = ''; // Saves the last profile image URL for when the search API fails to send a new one in the user object.
 	var str_title = '';
-	var str_raw_screenname = '';
 	var str_template = data_retrieve('data/tweet.html');
 	
 	// Add some white space to the bottom of the list so no tweets are blocked by the toolbar.
@@ -19,6 +18,7 @@ function do_timeline( element, json_data, data_type ) {
 		var str_date = json_data[i].created_at;
 		var str_profileimageurl = '';
 		var str_screenname = '';
+		var str_raw_screenname = '';
 		var str_id = json_data[i].id_str;
 		
 		// If the data is from the Twitter search API, get the profile image URL and screen name from the main object.
@@ -88,13 +88,13 @@ function do_timeline( element, json_data, data_type ) {
 	// Set the title for the page.
 	switch( data_type ) {
 		case CONST_SEARCH:
-			str_title = 'Search Term: ';
+			str_title = 'Search Term: ' + title_timeline;
 			break;
 		case CONST_LIST:
-			str_title = 'List: ';
+			str_title = 'List: ' + title_timeline;
 			break;
 		case CONST_USER:
-			str_title = str_raw_screenname;
+			str_title = 'User: ' + title_timeline;
 			break;
 		default:
 			str_title = 'Home Timeline';
@@ -119,7 +119,7 @@ function do_screen_timeline_home( element ) {
 		function(data) {
 			var json_data = JSON.parse(data.text);
 
-			do_timeline(element, json_data, CONST_HOME);
+			do_timeline(element, json_data, CONST_HOME, 'Home Timeline');
 		}
 	);
 }
@@ -158,7 +158,7 @@ function viewUser( screen_name ) {
 		function(data) {
 			var json_data = JSON.parse(data.text);
 
-			do_timeline(element, json_data, CONST_USER);
+			do_timeline(element, json_data, CONST_USER, screen_name);
 		}
 	);
 }
