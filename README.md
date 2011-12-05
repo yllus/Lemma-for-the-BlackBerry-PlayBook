@@ -22,8 +22,8 @@ https://github.com/bytespider/jsOAuth
 
 ### Icons ###
 
-Icons are from Super Mono Stickers by Double-J designs under the Creative Commons (Attribution 3.0 Unported) licence. Download your own 
-copy from:
+Icons are from Super Mono Stickers by Double-J designs ( http://www.doublejdesign.co.uk/ ) under the Creative Commons (Attribution 3.0 
+Unported) licence. Download your own copy from:
 
 http://www.iconfinder.com/search/?q=iconset%3Asuper-mono-sticker 
 
