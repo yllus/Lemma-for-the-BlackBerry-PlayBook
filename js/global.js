@@ -53,6 +53,9 @@ var CONST_DIRECTMESSAGES = 7;
 // displayed), so refer to element.
 bb.onscreenready = function(element, id) {
 	switch ( id ) {
+		case 'lists_display_all':
+			do_screen_lists(element);
+			break;
 		case 'options_user_unauthorized':
 			do_screen_user_unauthorized(element);
 			break;
@@ -113,6 +116,14 @@ function button_list_next() {
 	}
 	
 	lists.change_list('next');
+}
+
+function button_list_display_all() {
+	if ( lists == null ) {
+		lists = new List(accountID, accountScreenName);
+	}
+	
+	bb.pushScreen('screens/lists.html', 'lists_display_all');
 }
 
 function data_retrieve( url ) {
