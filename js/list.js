@@ -88,13 +88,21 @@ function List( u, s ) {
 	}
 	
 	// View a specific list's timeline.
-	this.view_list = function( id_str, name ) {
+	this.view_list = function( id_str, name, go_back ) {
 		oauth.get('https://api.twitter.com/1/lists/statuses.json?per_page=' + status_count + '&list_id=' + id_str,
 			function(data) {
 				var json_data = JSON.parse(data.text);
 
 				lists.set_position(id_str);
-				do_timeline(document.getElementById('timeline_home'), json_data, CONST_LIST, name);
+				
+				if ( go_back == 1 ) {
+					list_name = name;
+					list_data = json_data;
+					bb.pushScreen('screens/timeline.html', 'timeline_list');
+				}
+				else {
+					do_timeline(document.getElementById('timeline_home'), json_data, CONST_LIST, name);
+				}
 			}
 		);
 	}

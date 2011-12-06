@@ -38,6 +38,8 @@ var str_misc = '';
 
 // List variables.
 var lists = null;
+var list_name = '';
+var list_data = '';
 
 // Constants.
 var CONST_HOME = 0;
@@ -64,6 +66,9 @@ bb.onscreenready = function(element, id) {
 			break;
 		case 'misc':
 			do_screen_misc(element);
+			break;
+		case 'timeline_list':
+			do_screen_timeline_list(element);
 			break;
 		case 'timeline_home':
 			do_screen_timeline_home(element);
@@ -124,6 +129,10 @@ function button_list_display_all() {
 	}
 	
 	lists.retrieve_all();
+}
+
+function view_list( id_str, name, go_back ) {
+	lists.view_list(id_str, name, go_back);
 }
 
 function data_retrieve( url ) {

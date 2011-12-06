@@ -88,18 +88,20 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 	// Set the title for the page.
 	switch( data_type ) {
 		case CONST_SEARCH:
-			str_title = 'Search Term: ' + title_timeline;
+			str_title = title_timeline + ' (Search)';
 			break;
 		case CONST_LIST:
-			str_title = 'List: ' + title_timeline;
+			str_title = title_timeline + ' (List)';
 			break;
 		case CONST_USER:
-			str_title = 'User: ' + title_timeline;
+			str_title = title_timeline + ' (User)';
 			break;
 		default:
 			str_title = 'Home Timeline';
 	}
-	element.getElementsByClassName('bb-hires-screen-title')[0].innerHTML = str_title;
+	if ( element.getElementsByClassName('bb-hires-screen-title').length > 0 ) {
+		element.getElementsByClassName('bb-hires-screen-title')[0].innerHTML = str_title;
+	}
 	
 	element.getElementById('div_timeline').innerHTML = str_timeline; 
 	bb.tweetList.apply(element.querySelectorAll('[data-bb-type=tweet-list]'));
@@ -122,6 +124,10 @@ function do_screen_timeline_home( element ) {
 			do_timeline(element, json_data, CONST_HOME, 'Home Timeline');
 		}
 	);
+}
+
+function do_screen_timeline_list( element ) {
+	do_timeline(element, list_data, CONST_LIST, list_name);
 }
 
 // Launch the BlackBerry PlayBook browser for a URL (or the native browser if we're not on a PlayBook).
