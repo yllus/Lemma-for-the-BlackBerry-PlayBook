@@ -12,8 +12,9 @@ function do_screen_lists( element ) {
 		str_lists = str_lists + str_instance;
 	}
 	
-	element.getElementById('div_lists').innerHTML = str_timeline; 
-	bb.tweetList.apply(element.querySelectorAll('[data-bb-type=text-arrow-list]'));
+	str_lists = str_lists + '<div style="width: 855px; height: 65px;">&nbsp;</div>';
+	
+	element.getElementById('div_lists').innerHTML = str_lists; 
 	element.getElementById('div_lists').style.display = 'block';
 	
 	// Scroll to the top of the window.

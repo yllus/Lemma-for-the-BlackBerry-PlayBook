@@ -137,37 +137,57 @@ function List( u, s ) {
 			str_instance = str_instance.replace(/\$\{name\}/g, lists.all_lists[i]['name']);
 			str_lists = str_lists + str_instance;
 		}
+		str_template = null;
 		
-		// Retrieve the template for the list of lists and iterate through it.
-		var content = $("#lists_subview");
-		content.xhr("data/list.html", {
-			successCallback: function() {
-				var str_template = $.responseText;
+		// Display the list of lists.
+		bb.pushScreen('screens/lists.html', 'lists_display_all');
+	}
+	
+	// Combination of the two functions above: Get all of the user's lists and display all of them.
+	this.retrieve_all = function() {
+		// If we've already retrieved all lists once this session, just use those.
+		if ( lists.retrieved_lists == 1 ) {
+			return lists.display_lists();
+		}
+		
+		oauth.get('https://api.twitter.com/1/lists.json',
+			function(data) {
+				var lists_json = JSON.parse(data.text);
+				
+				// Retrieve the template for the list of lists and iterate through it.
+				var str_template = data_retrieve('data/list.html');
 				var str_lists = '';
-
+				
 				// Iterate through the lists, creating the string in memory.
-				for ( var i = 0; i < lists.all_lists.length; i++ ) {
+				for ( var i = 0; i < lists_json.lists.length; i++ ) {
+					var new_list = new Array();
 					var str_instance = str_template;
-
+					
+					// Save the lists to a global variable so we can page through them quickly.
+					new_list['id_str'] = lists_json.lists[i].id_str;
+					new_list['slug'] = lists_json.lists[i].slug;
+					new_list['name'] = lists_json.lists[i].name;
+					lists.all_lists.push(new_list);
+					
 					// Swap in list data for create our view.
-					str_instance = str_instance.replace('${id_str}', lists.all_lists[i]['id_str']);
-					str_instance = str_instance.replace(/\$\{name\}/g, lists.all_lists[i]['name']);
+					str_instance = str_instance.replace('${id_str}', new_list['id_str']);
+					str_instance = str_instance.replace(/\$\{name\}/g, new_list['name']);
 					str_lists = str_lists + str_instance;
 				}
-
-				$.responseText = null;
 				str_template = null;
-
+				
+				// Mark the lists as having been retrieved.
+				lists.retrieved_lists = 1;
+				
 				// Display the list of lists.
-				$("#lists_subview").fill($.make('<scrollpanel id="lists_scrollpanel"><tableview id="lists_text" style="margin-top: 16px;">' + str_lists + '</tableview></scrollpanel>'));
-
-				// Re-enable scrolling for the timeline scrollpanel.
-		        var options = { bounce: false, fadeScrollbar: false };
-		        scrollpanelTimeline = $('#lists_scrollpanel'); 
-		        var scroller = new $.UIScroll(scrollpanelTimeline.parentNode, options);
-
-				gotoPage('#lists_view');
+				bb.pushScreen('screens/lists.html', 'lists_display_all');
+			},
+			
+			function(data) {
+				// Show the failure screen. 
+				str_misc = 'Sorry, we were unable to retrieve your lists at this time. Please try again later.';
+				bb.pushScreen('screens/misc.html', 'misc');
 			}
-		});
+		);
 	}
 }

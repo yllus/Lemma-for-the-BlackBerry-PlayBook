@@ -83,7 +83,7 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 	}
 	
 	// Add some white space to the bottom of the list so no tweets are blocked by the toolbar.
-	str_timeline = str_timeline + '<div style="width: 855px; height: 54px;">&nbsp;</div>';
+	str_timeline = str_timeline + '<div style="width: 855px; height: 65px;">&nbsp;</div>';
 	
 	// Set the title for the page.
 	switch( data_type ) {

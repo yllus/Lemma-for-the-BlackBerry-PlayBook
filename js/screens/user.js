@@ -88,7 +88,7 @@ function doAuthStepTwo( oauth_verifier ) {
 
 		function(data) {
 			// Show the failure screen. 
-			str_misc = '';
+			str_misc = 'Sorry, we were unable to authorize your Twitter account at this time. Please try again later.';
 			bb.pushScreen('screens/misc.html', 'misc');
 			
 			// Close the in-app browser.

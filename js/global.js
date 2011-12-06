@@ -123,7 +123,7 @@ function button_list_display_all() {
 		lists = new List(accountID, accountScreenName);
 	}
 	
-	bb.pushScreen('screens/lists.html', 'lists_display_all');
+	lists.retrieve_all();
 }
 
 function data_retrieve( url ) {
