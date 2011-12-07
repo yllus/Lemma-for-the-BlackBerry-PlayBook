@@ -63,6 +63,9 @@ bb.onscreenready = function(element, id) {
 	str_timeline_name = id;
 	
 	switch ( id ) {
+		case 'compose':
+			focus_compose(element);
+			break;
 		case 'lists_display_all':
 			do_screen_lists(element);
 			break;
@@ -111,6 +114,10 @@ function button_back() {
 	else {
 		bb.pushScreen('screens/timeline.html', 'timeline_home');
 	}
+}
+
+function button_compose() {
+	bb.pushScreen('screens/compose.html', 'compose');
 }
 
 function button_inbox() {

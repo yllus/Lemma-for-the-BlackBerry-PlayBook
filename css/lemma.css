@@ -149,6 +149,23 @@ button.qnx {
 	padding-left: 25px;
 	padding-right: 25px;
 }
+
+textarea.qnx {
+	-webkit-box-shadow: inset 1px 1px 2px 1px rgba(0,0,0,0.2);
+	background: transparent;
+	outline: none;
+	border: 0;
+	margin: 0;
+	padding: 0 10px;
+	font-size: 20px;
+	height: 32px;
+	line-height: 32px;
+}
+
+textarea.qnx.focused {
+	-webkit-box-shadow: 0 0 6px #0096ff;
+	border: 1px #366889 solid;
+} 
 /* END: Style buttons in the QNX style. */
 
 .date {
