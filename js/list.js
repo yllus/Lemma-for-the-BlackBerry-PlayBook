@@ -101,7 +101,7 @@ function List( u, s ) {
 					bb.pushScreen('screens/timeline.html', 'timeline_list');
 				}
 				else {
-					do_timeline(document.getElementById('timeline_home'), json_data, CONST_LIST, name);
+					do_timeline(document.getElementById(str_timeline_name), json_data, CONST_LIST, name);
 				}
 			}
 		);

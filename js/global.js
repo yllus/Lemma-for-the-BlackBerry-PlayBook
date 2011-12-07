@@ -36,6 +36,9 @@ if ( accountIsSet != null ) {
 // A message variable for when the miscellaneous screen is called.
 var str_misc = '';
 
+// A variable tracking the ID of the timeline DIV element.
+var str_timeline_name = 'timeline_home';
+
 // List variables.
 var lists = null;
 var list_name = '';
@@ -68,9 +71,11 @@ bb.onscreenready = function(element, id) {
 			do_screen_misc(element);
 			break;
 		case 'timeline_list':
+			str_timeline_name = 'timeline_list';
 			do_screen_timeline_list(element);
 			break;
 		case 'timeline_home':
+			str_timeline_name = 'timeline_home';
 			do_screen_timeline_home(element);
 			break;
 	}
@@ -104,7 +109,7 @@ function button_options() {
 }
 
 function button_home() {
-	do_screen_timeline_home(document.getElementById('timeline_home'));
+	do_screen_timeline_home(document.getElementById(str_timeline_name));
 }
 
 function button_list_prev() {

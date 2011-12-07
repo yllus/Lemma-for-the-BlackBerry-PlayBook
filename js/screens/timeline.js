@@ -158,7 +158,7 @@ function followLink( address ) {
 // Navigate to a list of a user's tweets.
 function viewUser( screen_name ) {
 	var url = 'https://api.twitter.com/1/statuses/user_timeline.json?include_rts=1&screen_name=' + screen_name + '&count=' + status_count;
-	var element = document.getElementById('timeline_home');
+	var element = document.getElementById(str_timeline_name);
 
 	oauth.get(url,
 		function(data) {
