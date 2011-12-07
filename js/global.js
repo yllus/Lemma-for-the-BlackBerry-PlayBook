@@ -148,20 +148,23 @@ function view_list( id_str, name, go_back ) {
 	lists.view_list(id_str, name, go_back);
 }
 
-function display_action_message( num_action ) {
+function display_action_message( num_action, element ) {
 	var str_action = '';
+
+	switch ( num_action ) {
+		case CONST_ACTION_LOADING:
+			str_action = '<img src="images/ajax-loader.gif" /> Loading, please wait...';
+			break;
+		case CONST_ACTION_READY:
+			str_action = 'Touch to refresh';
+			break;
+	}
 	
 	if ( document.getElementById('div_titleaction') !== null ) {
-		switch ( num_action ) {
-			case CONST_ACTION_LOADING:
-				str_action = '<img src="images/ajax-loader.gif" /> Loading, please wait...';
-				break;
-			case CONST_ACTION_READY:
-				str_action = 'Touch to refresh';
-				break;
-		}
-		
 		document.getElementById('div_titleaction').innerHTML = str_action;
+	}
+	else if ( element !== undefined ) {
+		element.getElementById('div_titleaction').innerHTML = str_action;
 	}
 }
 
