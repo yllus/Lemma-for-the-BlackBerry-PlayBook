@@ -87,6 +87,12 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 	
 	// Set the title for the page.
 	switch( data_type ) {
+		case CONST_DIRECTMESSAGES:
+			str_title = 'Direct Messages';
+			break;
+		case CONST_MENTIONS:
+			str_title = 'Mentions';
+			break;
 		case CONST_SEARCH:
 			str_title = title_timeline + ' (Search)';
 			break;
@@ -126,6 +132,34 @@ function do_screen_timeline_home( element ) {
 			var json_data = JSON.parse(data.text);
 
 			do_timeline(element, json_data, CONST_HOME, 'Home Timeline');
+		}
+	);
+}
+
+function do_screen_timeline_direct_messages( element ) {
+	display_action_message(CONST_ACTION_LOADING);
+	
+	var url = 'https://api.twitter.com/1/direct_messages.json?include_entities=0&count=' + status_count;
+	
+	oauth.get(url,
+		function(data) {
+			var json_data = JSON.parse(data.text);
+
+			do_timeline(element, json_data, CONST_DIRECTMESSAGES, 'Direct Messages');
+		}
+	);
+}
+
+function do_screen_timeline_mentions( element ) {
+	display_action_message(CONST_ACTION_LOADING);
+	
+	var url = 'https://api.twitter.com/1/statuses/mentions.json?include_rts=1&count=' + status_count;
+	
+	oauth.get(url,
+		function(data) {
+			var json_data = JSON.parse(data.text);
+
+			do_timeline(element, json_data, CONST_MENTIONS, 'Mentions');
 		}
 	);
 }

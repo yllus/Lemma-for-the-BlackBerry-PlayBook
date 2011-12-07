@@ -59,6 +59,9 @@ var CONST_ACTION_LOADING = 1;
 // The "traffic cop" function controlling what JS gets executed when a screen has loaded (but is not yet 
 // displayed), so refer to element.
 bb.onscreenready = function(element, id) {
+	// Save the title of the timeline DIV for 
+	str_timeline_name = id;
+	
 	switch ( id ) {
 		case 'lists_display_all':
 			do_screen_lists(element);
@@ -72,12 +75,16 @@ bb.onscreenready = function(element, id) {
 		case 'misc':
 			do_screen_misc(element);
 			break;
+		case 'timeline_direct_messages':
+			do_screen_timeline_direct_messages(element);
+			break;
+		case 'timeline_mentions':
+			do_screen_timeline_mentions(element);
+			break;
 		case 'timeline_list':
-			str_timeline_name = 'timeline_list';
 			do_screen_timeline_list(element);
 			break;
 		case 'timeline_home':
-			str_timeline_name = 'timeline_home';
 			do_screen_timeline_home(element);
 			break;
 	}
@@ -104,6 +111,10 @@ function button_back() {
 	else {
 		bb.pushScreen('screens/timeline.html', 'timeline_home');
 	}
+}
+
+function button_inbox() {
+	bb.pushScreen('screens/inbox.html', 'inbox');
 }
 
 function button_options() {
