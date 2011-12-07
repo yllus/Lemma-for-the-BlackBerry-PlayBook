@@ -1,8 +1,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
 <div data-bb-type="screen" data-bb-title="Home Timeline" data-bb-effect="fade">
 	<script type="text/javascript" src="js/screens/timeline.js"></script>
+	<div class="titlebar">
+		<div id="div_titlename" style="float: left;"></div>
+		<div id="div_titleaction" style="padding-right: 10px; float: right;"><img src="images/ajax-loader.gif" /> Loading, please wait...</div>
+	</div>
 	<div id="div_timeline" data-bb-type="tweet-list" style="position: absolute; overflow: auto; display: none;"></div>
-	<div class="toolbar" style="padding: 0; height: 64px;">
+	<div class="toolbar">
 		<div style="float: left;">
 			<img src="images/compose.png" />
 			<img src="images/inbox.png" /> 

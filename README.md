@@ -27,6 +27,10 @@ Unported) licence. Download your own copy from:
 
 http://www.iconfinder.com/search/?q=iconset%3Asuper-mono-sticker 
 
+The loading icon was generated at ajaxload.info:
+
+http://www.ajaxload.info/
+
 ## Authors ##
 
 * Sully Syed ( sully@yllus.com or [@sullysyed](http://twitter.com/sullysyed) )

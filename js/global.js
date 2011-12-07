@@ -53,6 +53,8 @@ var CONST_SEARCH = 4;
 var CONST_BACKBUTTON = 5;
 var CONST_MENTIONS = 6;
 var CONST_DIRECTMESSAGES = 7;
+var CONST_ACTION_READY = 0;
+var CONST_ACTION_LOADING = 1;
 
 // The "traffic cop" function controlling what JS gets executed when a screen has loaded (but is not yet 
 // displayed), so refer to element.
@@ -109,10 +111,14 @@ function button_options() {
 }
 
 function button_home() {
+	display_action_message(CONST_ACTION_LOADING);
+	
 	do_screen_timeline_home(document.getElementById(str_timeline_name));
 }
 
 function button_list_prev() {
+	display_action_message(CONST_ACTION_LOADING);
+	
 	if ( lists == null ) {
 		lists = new List(accountID, accountScreenName);
 	}
@@ -121,6 +127,8 @@ function button_list_prev() {
 }
 
 function button_list_next() {
+	display_action_message(CONST_ACTION_LOADING);
+	
 	if ( lists == null ) {
 		lists = new List(accountID, accountScreenName);
 	}
@@ -138,6 +146,23 @@ function button_list_display_all() {
 
 function view_list( id_str, name, go_back ) {
 	lists.view_list(id_str, name, go_back);
+}
+
+function display_action_message( num_action ) {
+	var str_action = '';
+	
+	if ( document.getElementById('div_titleaction') !== null ) {
+		switch ( num_action ) {
+			case CONST_ACTION_LOADING:
+				str_action = '<img src="images/ajax-loader.gif" /> Loading, please wait...';
+				break;
+			case CONST_ACTION_READY:
+				str_action = 'Touch to refresh';
+				break;
+		}
+		
+		document.getElementById('div_titleaction').innerHTML = str_action;
+	}
 }
 
 function data_retrieve( url ) {

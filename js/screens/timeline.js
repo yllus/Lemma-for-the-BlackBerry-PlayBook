@@ -102,6 +102,10 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 	if ( element.getElementsByClassName('bb-hires-screen-title').length > 0 ) {
 		element.getElementsByClassName('bb-hires-screen-title')[0].innerHTML = str_title;
 	}
+	if ( element.getElementById('div_titlename') !== null ) {
+		element.getElementById('div_titlename').innerHTML = str_title;
+	}
+	display_action_message(CONST_ACTION_READY);
 	
 	element.getElementById('div_timeline').innerHTML = str_timeline; 
 	bb.tweetList.apply(element.querySelectorAll('[data-bb-type=tweet-list]'));

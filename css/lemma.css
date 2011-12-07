@@ -170,15 +170,26 @@ button.qnx {
 	top: 0; 
 }
 
+.titlebar {
+	z-index: 100; 
+	position: fixed; 
+	top: 0; 
+	width: 1024px; 
+	height: 25px; 
+	background-color: black; 
+	color: white; 
+	padding: 4px 4px 4px 4px;
+}
+
 .toolbar {
 	z-index: 100; 
 	position: fixed; 
 	bottom: 0; 
 	width: 1024px; 
-	height: 30px; 
+	height: 64px; 
 	background-color: black; 
 	color: white; 
-	padding: 16px 8px 8px 8px;
+	padding: 0;
 }
 
 .toolbar div img {
