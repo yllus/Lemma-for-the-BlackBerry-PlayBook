@@ -19,10 +19,8 @@ bb = {
 	
 	// Assign any listeners we need to make the bbUI framework function
 	assignBackHandler: function(callback) {
-		if (typeof blackberry !== 'undefined') {
-			if (blackberry.system.event.onHardwareKey) {
-				blackberry.system.event.onHardwareKey(blackberry.system.event.KEY_BACK, callback);
-			}
+		if (blackberry.system.event.onHardwareKey) {
+			blackberry.system.event.onHardwareKey(blackberry.system.event.KEY_BACK, callback);
 		}
 	},
 	
@@ -71,6 +69,10 @@ bb = {
 		// Determine if this browser is BB7.. Ripple's Render is similar to that in BB7
 		isBB7: function() {
 			return (navigator.appVersion.indexOf('7.0.0') >= 0) || (navigator.appVersion.indexOf('7.1.0') >= 0) || (navigator.appVersion.indexOf('Ripple') >= 0);
+		},
+		
+		isPlayBook: function() {
+			return (navigator.appVersion.indexOf('PlayBook') >= 0) || ((window.innerWidth == 1024 && window.innerHeight == 600) || (window.innerWidth == 600 && window.innerHeight == 1024));
 		},
 		
 		// Determines if this device supports touch
@@ -206,7 +208,6 @@ bb = {
 				blackberry.app.exit();
 			}
 		}
-		
 	},
 	
 	removeLoadedScripts: function() {
@@ -242,22 +243,68 @@ bb = {
 				if (bb.device.isHiRes) {
 					outerElement.setAttribute('class', 'bb-hires-screen');
 				}
-				if (outerElement.hasAttribute('data-bb-title')) {
-					var outerStyle = outerElement.getAttribute('style'),
-						title = document.createElement('div');
-					if (bb.device.isHiRes) {
-						title.setAttribute('class', 'bb-hires-screen-title');
-						outerElement.setAttribute('style', outerStyle + ';padding-top:33px');
-					} else {
-						title.setAttribute('class', 'bb-lowres-screen-title');
-						outerElement.setAttribute('style', outerStyle + ';padding-top:27px');
+				
+				if (bb.device.isPlayBook()) {
+					outerElement.style.height = window.innerHeight;
+					outerElement.style.width = window.innerWidth;
+					outerElement.style.overflow = 'auto';
+					//alert(bb.screens.length);
+					var titleBar = outerElement.querySelectorAll('[data-bb-type=title]')
+					if (titleBar.length > 0) {
+						titleBar = titleBar[0];
+						
+						// Create our scrollable <div>
+						var scrollArea = document.createElement('div');
+						scrollArea.setAttribute('style','overflow:auto;bottom:0px;position:absolute;top:55px;left:0px;right:0px;');
+						outerElement.appendChild(scrollArea);
+						// Copy all nodes that are not the title bar
+						var tempHolder = [],
+							childNode = null, 
+							j;
+						for (j = 0; j < outerElement.childNodes.length - 1; j++) {
+							childNode = outerElement.childNodes[j];
+							if (childNode != titleBar) {
+								tempHolder.push(childNode);
+							}
+						}
+						// Add them into the scrollable area
+						for (j = 0; j < tempHolder.length -1; j++) {
+							scrollArea.appendChild(tempHolder[j]);
+						}
+						
+						titleBar.setAttribute('class', 'pb-title-bar');
+						titleBar.innerHTML = titleBar.getAttribute('data-bb-caption');
+						if (titleBar.hasAttribute('data-bb-back-caption')) {
+							var button = document.createElement('div'), 
+								buttonInner = document.createElement('div');
+							button.setAttribute('class', 'pb-title-bar-back');
+							
+							button.onclick = bb.popScreen;
+							
+							buttonInner.setAttribute('class','pb-title-bar-back-inner');
+							buttonInner.innerHTML = titleBar.getAttribute('data-bb-back-caption'); 
+							button.appendChild(buttonInner);
+							titleBar.appendChild(button);
+						}
 					}
-					title.innerHTML = outerElement.getAttribute('data-bb-title');
-					var firstChild = outerElement.firstChild;
-					if (firstChild != undefined && firstChild != null) {
-						outerElement.insertBefore(title, firstChild);
-					} else {
-						outerElement.appendChild(title);
+					
+				}
+				else {
+					// See if there is a title bar
+					var titleBar = outerElement.querySelectorAll('[data-bb-type=title]')
+					if (titleBar.length > 0) {
+						titleBar = titleBar[0];
+						if (titleBar.hasAttribute('data-bb-caption')) {
+							var outerStyle = outerElement.getAttribute('style');
+							if (bb.device.isHiRes) {
+								titleBar.setAttribute('class', 'bb-hires-screen-title');
+								outerElement.setAttribute('style', outerStyle + ';padding-top:33px');
+							} else {
+								titleBar.setAttribute('class', 'bb-lowres-screen-title');
+								outerElement.setAttribute('style', outerStyle + ';padding-top:27px');
+							}
+							titleBar.innerHTML = titleBar.getAttribute('data-bb-caption');
+						}
 					}
 				}
 			}
@@ -876,20 +923,74 @@ bb = {
 						var innerChildNode = items[j];
 						innerChildNode.setAttribute('x-blackberry-focusable','true');
 						if (j == 0) {  // First button
-							innerChildNode.setAttribute('class','bb-bb7-pill-button bb-bb7-pill-button-left '+ buttonStyle);
-							innerChildNode.setAttribute('onmouseover',"this.setAttribute('class','bb-bb7-pill-button-highlight bb-bb7-pill-button-left " + buttonStyle +"')");
-							innerChildNode.setAttribute('onmouseout',"this.setAttribute('class','bb-bb7-pill-button bb-bb7-pill-button-left " + buttonStyle +"')");
+							if (innerChildNode.getAttribute('data-bb-selected') == 'true') {
+								innerChildNode.setAttribute('class','bb-bb7-pill-button-highlight bb-bb7-pill-button-left '+ buttonStyle);
+							} else {
+								innerChildNode.setAttribute('class','bb-bb7-pill-button bb-bb7-pill-button-left '+ buttonStyle);
+								innerChildNode.setAttribute('onmouseover',"this.setAttribute('class','bb-bb7-pill-button-highlight bb-bb7-pill-button-left " + buttonStyle +"')");
+								innerChildNode.setAttribute('onmouseout',"this.setAttribute('class','bb-bb7-pill-button bb-bb7-pill-button-left " + buttonStyle +"')");
+							}
 						} else if (j == items.length -1) { // Right button
-							innerChildNode.setAttribute('class','bb-bb7-pill-button bb-bb7-pill-button-right ' + buttonStyle);
-							innerChildNode.setAttribute('onmouseover',"this.setAttribute('class','bb-bb7-pill-button-highlight bb-bb7-pill-button-right " + buttonStyle +"')");
-							innerChildNode.setAttribute('onmouseout',"this.setAttribute('class','bb-bb7-pill-button bb-bb7-pill-button-right " + buttonStyle +"')");
+							if (innerChildNode.getAttribute('data-bb-selected') == 'true') {
+								innerChildNode.setAttribute('class','bb-bb7-pill-button-highlight bb-bb7-pill-button-right '+ buttonStyle);
+							} else {
+								innerChildNode.setAttribute('class','bb-bb7-pill-button bb-bb7-pill-button-right ' + buttonStyle);
+								innerChildNode.setAttribute('onmouseover',"this.setAttribute('class','bb-bb7-pill-button-highlight bb-bb7-pill-button-right " + buttonStyle +"')");
+								innerChildNode.setAttribute('onmouseout',"this.setAttribute('class','bb-bb7-pill-button bb-bb7-pill-button-right " + buttonStyle +"')");
+							}
 						} else { // Middle Buttons
-							innerChildNode.setAttribute('class','bb-bb7-pill-button ' + buttonStyle);
-							innerChildNode.setAttribute('onmouseover',"this.setAttribute('class','bb-bb7-pill-button-highlight " + buttonStyle +"')");
-							innerChildNode.setAttribute('onmouseout',"this.setAttribute('class','bb-bb7-pill-button " + buttonStyle +"')");
+							if (innerChildNode.getAttribute('data-bb-selected') == 'true') {
+								innerChildNode.setAttribute('class','bb-bb7-pill-button-highlight '+ buttonStyle);
+							} else {
+								innerChildNode.setAttribute('class','bb-bb7-pill-button ' + buttonStyle);
+								innerChildNode.setAttribute('onmouseover',"this.setAttribute('class','bb-bb7-pill-button-highlight " + buttonStyle +"')");
+								innerChildNode.setAttribute('onmouseout',"this.setAttribute('class','bb-bb7-pill-button " + buttonStyle +"')");
+							}
 						}
 						// Set our width
 						innerChildNode.style.width = percentWidth + '%';
+						// Add our subscription for click events to change highlighting
+						innerChildNode.addEventListener('click',function (e) {
+								var items = this.parentNode.querySelectorAll('[data-bb-type=pill-button]');
+								for (var j = 0; j < items.length; j++) {
+									var innerChildNode = items[j];
+									
+									if (j == 0) {  // First button
+										if (innerChildNode == this) {
+											innerChildNode.setAttribute('class','bb-bb7-pill-button-highlight bb-bb7-pill-button-left '+ buttonStyle);
+											innerChildNode.onmouseover = null;
+											innerChildNode.onmouseout = null;
+										} else {
+											innerChildNode.setAttribute('class','bb-bb7-pill-button bb-bb7-pill-button-left '+ buttonStyle);
+											innerChildNode.setAttribute('onmouseover',"this.setAttribute('class','bb-bb7-pill-button-highlight bb-bb7-pill-button-left " + buttonStyle +"')");
+											innerChildNode.setAttribute('onmouseout',"this.setAttribute('class','bb-bb7-pill-button bb-bb7-pill-button-left " + buttonStyle +"')");
+										}
+									} else if (j == items.length -1) { // Right button
+										if (innerChildNode == this) {
+											innerChildNode.setAttribute('class','bb-bb7-pill-button-highlight bb-bb7-pill-button-right '+ buttonStyle);
+											innerChildNode.onmouseover = null;
+											innerChildNode.onmouseout = null;
+										} else {
+											innerChildNode.setAttribute('class','bb-bb7-pill-button bb-bb7-pill-button-right ' + buttonStyle);
+											innerChildNode.setAttribute('onmouseover',"this.setAttribute('class','bb-bb7-pill-button-highlight bb-bb7-pill-button-right " + buttonStyle +"')");
+											innerChildNode.setAttribute('onmouseout',"this.setAttribute('class','bb-bb7-pill-button bb-bb7-pill-button-right " + buttonStyle +"')");
+										}
+									} else { // Middle Buttons
+										if (innerChildNode == this) {
+											innerChildNode.setAttribute('class','bb-bb7-pill-button-highlight '+ buttonStyle);
+											innerChildNode.onmouseover = null;
+											innerChildNode.onmouseout = null;
+										} else {
+											innerChildNode.setAttribute('class','bb-bb7-pill-button ' + buttonStyle);
+											innerChildNode.setAttribute('onmouseover',"this.setAttribute('class','bb-bb7-pill-button-highlight " + buttonStyle +"')");
+											innerChildNode.setAttribute('onmouseout',"this.setAttribute('class','bb-bb7-pill-button " + buttonStyle +"')");
+										}
+									}
+								}
+								
+							},false);
+						
+						
 					}
 				}			
 			}

@@ -27,6 +27,11 @@ body, html {
 
 @-webkit-keyframes bbUI-fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
 
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
 .bb-hires-screen {
 	font-size: 16pt;
 }
@@ -162,6 +167,56 @@ body, html {
 .button-stretch{
 	display:block;
 }
+
+/* ================================================= 
+   PlayBook Title Bar
+   =================================================*/
+.pb-title-bar {
+	height:54px;
+	border-bottom:solid #626262 1px;
+	position:absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+	background-color:#181818;
+	text-align:center;
+	color:#626262;
+	line-height:54px;
+	font-size: 14pt;
+	z-index:1000;
+}
+
+.pb-title-bar-back {
+	position: absolute;
+	border:solid black 1px;
+	top:8px;
+	left:11px;
+	height:37px;
+	line-height:35px;
+	font-size: 14pt; 
+	box-shadow: 0px 2px 0px #2E2E2E; 
+	border-radius:4px;
+	color:white;
+	z-index:1001;
+}
+
+/*
+.pb-title-bar-back-hover{
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#0dacff), to(#0f75ff));
+	box-shadow: none;
+}*/
+
+.pb-title-bar-back-inner {
+	border-top: 2px solid #2E2E2E;
+	padding-left:35px;
+	padding-right:12px;
+	border-radius:4px;
+	background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAARCAYAAADpPU2iAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sMCQ4AGWIgYQ0AAAE0SURBVCjPhZI9joJQEIAnewXPY+FVLIwxFsbeRRC5gCYGGwtvY28wUplYgQYiiuLL49tiw2Z3FZhpZjLzzV9GkGq1LIv5fE7h1yafTifu9zuWZYEgH1IixqdBr9eTRqMhcRxLlmXfgXeVbdsmjmMAjscjjuOUj2QYBtfrFa01YRgyGo34Hf+TbJomURQBcD6fGY/H/C/4Y0ynU5IkQWv9MsYLYNs2l8uF5/NJFEWYpknZ5aTVahEEAUoptNZsNhuqTi0IslqteDwe5HnOfr+n2+1SCSDIbDYjz3MAdrsd/X6fSgBBXNclTVO01vi+T7vdphJAkOVyCYBSisPhQKfToRIoOt1uNwC22y2DwaD++RaLBWmaAuB5HsPhkNpvdV2XLMtQSjGZTOqBYqf1ek2z2QRBvgC36+O26W6RWQAAAABJRU5ErkJggg=="); 
+	background-repeat: no-repeat;
+	background-position: 13px 8px;
+}
+   
+   
 
 /* ================================================= 
    BB7 DropDown Buttons

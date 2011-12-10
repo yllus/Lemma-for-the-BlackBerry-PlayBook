@@ -4,11 +4,11 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 	var str_title = '';
 	var str_template = data_retrieve('data/tweet.html');
 	
-	// Add some white space to the bottom of the list so no tweets are blocked by the toolbar.
+	// Add some white space to the top of the list so no tweets are blocked by the toolbar.
 	/*
 	var currentTime = new Date();
 	var currUnixTime = currentTime.getTime();
-	str_timeline = str_timeline + '<div style="width: 855px; height: 54px;">Last updated: ' + currUnixTime + '</div>';
+	str_timeline = str_timeline + '<div style="width: 855px; height: 34px;">Last updated: ' + currUnixTime + '</div>';
 	*/
 	
 	for ( var i = 0; i < json_data.length; i++ ) {
@@ -83,7 +83,7 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 	}
 	
 	// Add some white space to the bottom of the list so no tweets are blocked by the toolbar.
-	str_timeline = str_timeline + '<div style="width: 855px; height: 65px;">&nbsp;</div>';
+	//str_timeline = str_timeline + '<div style="width: 855px; height: 65px;">&nbsp;</div>';
 	
 	// Set the title for the page.
 	switch( data_type ) {
