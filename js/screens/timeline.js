@@ -118,7 +118,7 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 	element.getElementById('div_timeline').style.display = 'block';
 	
 	// Scroll to the top of the window.
-	window.scrollTo(0, 0);
+	element.getElementById('div_timeline').scrollTop = 0;
 }
 
 function do_screen_timeline_home( element ) {
