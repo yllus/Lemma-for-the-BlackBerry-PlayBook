@@ -19,8 +19,10 @@ bb = {
 	
 	// Assign any listeners we need to make the bbUI framework function
 	assignBackHandler: function(callback) {
-		if (blackberry.system.event.onHardwareKey) {
-			blackberry.system.event.onHardwareKey(blackberry.system.event.KEY_BACK, callback);
+		if (typeof blackberry !== 'undefined') {
+			if (blackberry.system.event.onHardwareKey) {
+				blackberry.system.event.onHardwareKey(blackberry.system.event.KEY_BACK, callback);
+			}
 		}
 	},
 	
