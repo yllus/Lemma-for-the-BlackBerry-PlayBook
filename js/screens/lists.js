@@ -12,7 +12,7 @@ function do_screen_lists( element ) {
 		str_lists = str_lists + str_instance;
 	}
 	
-	str_lists = str_lists + '<div style="width: 855px; height: 65px;">&nbsp;</div>';
+	//str_lists = str_lists + '<div style="width: 855px; height: 65px;">&nbsp;</div>';
 	
 	element.getElementById('div_lists').innerHTML = str_lists; 
 	element.getElementById('div_lists').style.display = 'block';

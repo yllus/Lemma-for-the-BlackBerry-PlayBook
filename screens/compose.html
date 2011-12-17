@@ -1,7 +1,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
 <div data-bb-type="screen"  data-bb-title="Compose Tweet" data-bb-effect="fade">
 	<script type="text/javascript" src="js/screens/compose.js"></script>
-	<div style="margin: 10px 10px 0 10px;">
+	<div class="titlebar">
+		<div id="div_titlename" style="float: left;">Compose Tweet</div>
+	</div>
+	<div style="top: 33px; margin: 10px 10px 0 10px; position: absolute;">
 		<div style="height: 225px; width: 750px; float: left;">
 			<textarea id="tweet_textarea" class="qnx" style="width: 700px; height: 200px;" onclick="countTweetChars();" onkeyup="countTweetChars();"></textarea>
 		</div>
