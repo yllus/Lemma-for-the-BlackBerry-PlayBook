@@ -24,7 +24,7 @@ body, html {
 	overflow: hidden;
 }
 
-.bb-hires-image-list-item-hover .title
+.bb-hires-image-list-item-click .title
 {
 	font-size: 15px;
 	font-weight: bold;
@@ -43,7 +43,7 @@ body, html {
 	margin-right: 10px;
 }
 
-.bb-hires-image-list-item-hover .description
+.bb-hires-image-list-item-click .description
 {
 	color: white;
 	overflow: hidden;
@@ -52,6 +52,16 @@ body, html {
 	line-height: 24px;
 	margin-bottom: 0px;
 	margin-right: 10px;
+}
+
+.bb-hires-image-list-item-click .spanlinks
+{
+	color: white;
+}
+
+.bb-hires-image-list-item-click .date
+{
+	color: white;
 }
 
 .bb-hires-image-list-item
@@ -64,9 +74,9 @@ body, html {
 	height: 76px;
 }
 
-.bb-hires-image-list-item-hover
+.bb-hires-image-list-item-click
 {
-	/*background-color:#2175F7;*/
+	background-color: #2175F7;
 	background-image: -webkit-gradient(linear, center top, center bottom, from(#0dacff), to(#0f75ff));
 	border-bottom: solid 1px #D9DCDE;
 	padding-top: 10px;	
