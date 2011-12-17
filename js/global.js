@@ -156,6 +156,8 @@ function button_list_next() {
 
 function button_list_display_all() {
 	if ( lists == null ) {
+		display_action_message(CONST_ACTION_LOADING);
+		
 		lists = new List(accountID, accountScreenName);
 	}
 	
@@ -171,7 +173,7 @@ function display_action_message( num_action, element ) {
 
 	switch ( num_action ) {
 		case CONST_ACTION_LOADING:
-			str_action = '<img src="images/ajax-loader.gif" /> Loading, please wait...';
+			str_action = '<img src="images/ajax-loader.gif" /> <span style="color: #00CCFF;">Loading, please wait...</span>';
 			break;
 		case CONST_ACTION_READY:
 			str_action = 'Touch to refresh';
