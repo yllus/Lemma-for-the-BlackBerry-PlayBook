@@ -195,6 +195,53 @@ textarea.qnx.focused {
 }
 /* End: Custom WebKit scrollbars used along with the built-in kinetic DIV scrolling in WebWorks. */
 
+/* Start: Modal dialog. */
+div#div_modal 
+{ 
+	position: absolute; 
+	top: 40px; 
+	width: 560px; 
+	left: 170px; 
+	border: solid 1px #bbb; 
+	padding: 20px; 
+	background: #fff; 
+	-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.25); 
+	opacity: 0.0; 
+	z-index: -1; 
+}
+
+div#div_modal.show 
+{ 
+	opacity: 1.0; 
+	z-index: 100; 
+}
+
+/*
+div#div_modal 
+{ 
+	display: block; 
+	width: 560px; 
+	height: 440px;
+	left: 170px; 
+	position: absolute; 
+	top: 0px; 
+	z-index: 100;
+	overflow: scroll; 
+	border: solid 1px #999; 
+	-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.25); 
+	padding: 90px 20px 20px 20px; 
+	-webkit-border-bottom-left-radius: 6px; 
+	-webkit-border-bottom-right-radius: 6px; 
+	background: #fff; 
+	background: #fff -webkit-gradient(linear, left top, left bottom, from(rgb(255,255,255)), to(rgb(230,230,230))); 
+	-webkit-transition: -webkit-transform 0.25s ease-out; 
+	-webkit-transform: translateY(-570px); 
+}
+div#div_modal h3, div#div_modal p { text-shadow: 0px 1px 1px #fff; color: rgba(0,0,0,0.75) }		
+div#div_modal.show { -webkit-transform: translateY(-80px); -moz-transform: translatey(-80px); }
+*/
+/* End: Modal dialog. */
+
 .date {
 	float: right;
 	font-size: 12px;

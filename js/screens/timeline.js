@@ -209,6 +209,15 @@ function viewUser( screen_name ) {
 	);
 }
 
+function show_modal() {
+	document.getElementById("div_modal").className = '';
+	document.getElementById("div_modal").className += "show";
+}
+
+function hide_modal() {
+	document.getElementById("div_modal").className = document.getElementById("div_modal").className.replace( /(?:^|\s)show(?!\S)/ , '' );
+}
+
 String.prototype.replace_url_with_html_links = function() {
 	var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 	

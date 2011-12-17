@@ -20,7 +20,7 @@ bb.tweetList = {
 					
 					innerChildNode.setAttribute('class', 'bb-hires-image-list-item');
 					//innerChildNode.setAttribute('onmouseover', "this.setAttribute('class','bb-hires-image-list-item-hover')");
-					innerChildNode.setAttribute('onclick', "this.setAttribute('class','bb-hires-image-list-item-click')");
+					innerChildNode.setAttribute('onclick', "this.setAttribute('class','bb-hires-image-list-item-click'); show_modal();");
 					innerChildNode.setAttribute('onmouseout', "this.setAttribute('class','bb-hires-image-list-item')");
 					innerChildNode.setAttribute('x-blackberry-focusable','true');
 					innerChildNode.innerHTML = '<img src="'+ innerChildNode.getAttribute('data-bb-img') +'" style="z-index: 1;" onclick="viewUser(\'' + innerChildNode.getAttribute('data-bb-screennameraw') + '\');" />\n'+
