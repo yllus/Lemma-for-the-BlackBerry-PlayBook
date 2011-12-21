@@ -20,14 +20,20 @@ bb.tweetList = {
 					
 					innerChildNode.setAttribute('class', 'bb-hires-image-list-item');
 					//innerChildNode.setAttribute('onmouseover', "this.setAttribute('class','bb-hires-image-list-item-hover')");
-					innerChildNode.setAttribute('onclick', "this.setAttribute('class','bb-hires-image-list-item-click'); show_modal();");
-					innerChildNode.setAttribute('onmouseout', "this.setAttribute('class','bb-hires-image-list-item')");
-					innerChildNode.setAttribute('x-blackberry-focusable','true');
-					innerChildNode.innerHTML = '<img src="'+ innerChildNode.getAttribute('data-bb-img') +'" style="z-index: 1;" onclick="viewUser(\'' + innerChildNode.getAttribute('data-bb-screennameraw') + '\');" />\n'+
-									'<div class="details" style="width: 1019px; height: 73px;">\n'+
+					//innerChildNode.setAttribute('onclick', "this.setAttribute('class','bb-hires-image-list-item-click');");
+					//innerChildNode.setAttribute('onmouseout', "this.setAttribute('class','bb-hires-image-list-item')");
+					//innerChildNode.setAttribute('x-blackberry-focusable','true');
+					innerChildNode.innerHTML = '<img src="'+ innerChildNode.getAttribute('data-bb-img') +'" style="z-index: 1; margin-top: 10px;" onclick="viewUser(\'' + innerChildNode.getAttribute('data-bb-screennameraw') + '\');" />\n'+
+									'<div class="details">\n'+
+									'	<div style="width: 860px; height: 67px; float: left; margin-top: 10px;">\n'+
 									'	   <span class="title">' + innerChildNode.getAttribute('data-bb-screenname') + '</span>\n'+
 									'	   <div class="date">'+ innerChildNode.getAttribute('data-bb-date') +'</div>\n'+
 									'	   <div class="description">' + description + '</div>\n'+
+									'	</div>\n'+
+									'	<div style="width: 74px; height: 86px; float: right; border-left: 1px solid rgb(217, 220, 222);">\n'+
+									//'	<div style="width: 74px; height: 86px; float: right;">\n'+
+									'	   <img src="images/actions.png" style="width: 30px; height: 30px; padding-left: 18px; padding-top: 30px;" />\n'+
+									'	</div>\n'+
 									'</div>\n';
 					/*
 					innerChildNode.innerHTML = '<img src="'+ innerChildNode.getAttribute('data-bb-img') +'" />\n'+
