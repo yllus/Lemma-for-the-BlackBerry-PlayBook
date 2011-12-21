@@ -131,7 +131,9 @@ body, html {
 
 /* START: Style buttons in the QNX style. */
 button.qnx:hover, 
-button.qnx.touched {
+button.qnx-cancel:hover,  
+button.qnx.touched, 
+button.qnx-cancel.touched {
     background-image: -webkit-gradient(
 	    linear,
 	    left bottom,
@@ -152,6 +154,25 @@ button.qnx {
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	color: black;
+	font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	height: 45px;
+	padding-left: 25px;
+	padding-right: 25px;
+}
+
+button.qnx-cancel {
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(74,74,74,0.7)), color-stop(0.5, rgba(20,20,20,0.7)), color-stop(0.5, rgba(2,2,2,0.7)), to(rgba(14,14,14,0.7)));
+	color: #fff;
+	text-shadow: 0 1px 1px #000; 
+	border: 1px solid #B0B0B0;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 	font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
 	font-size: 20px;
 	font-style: normal;
