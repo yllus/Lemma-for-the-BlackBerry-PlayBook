@@ -32,7 +32,7 @@ bb.tweetList = {
 									'	</div>\n'+
 									'	<div style="width: 74px; height: 86px; float: right; border-left: 1px solid rgb(217, 220, 222);">\n'+
 									//'	<div style="width: 74px; height: 86px; float: right;">\n'+
-									'	   <img src="images/actions.png" style="width: 30px; height: 30px; padding-left: 18px; padding-top: 30px;" />\n'+
+									'	   <img src="images/actions.png" onclick="show_modal();" style="width: 30px; height: 30px; padding-left: 18px; padding-top: 30px;" />\n'+
 									'	</div>\n'+
 									'</div>\n';
 					/*
