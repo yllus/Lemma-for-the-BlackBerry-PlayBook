@@ -15,8 +15,10 @@ bb.tweetList = {
 			for (var j = 0; j < items.length; j++) {
 				var innerChildNode = items[j];
 				if (innerChildNode.hasAttribute('data-bb-type')) {
-					var type = innerChildNode.getAttribute('data-bb-type').toLowerCase(),
-						description = innerChildNode.innerHTML;
+					var type = innerChildNode.getAttribute('data-bb-type').toLowerCase();
+					//var description = innerChildNode.innerHTML;
+					var description = innerChildNode.getElementsByClassName('text')[0].innerHTML;
+					var raw_text = innerChildNode.getElementsByClassName('raw_text')[0].innerHTML;
 					
 					innerChildNode.setAttribute('class', 'bb-hires-image-list-item');
 					innerChildNode.innerHTML = '<img src="'+ innerChildNode.getAttribute('data-bb-img') +'" style="z-index: 1; margin-top: 10px;" onclick="viewUser(\'' + innerChildNode.getAttribute('data-bb-screennameraw') + '\');" />\n'+
@@ -25,9 +27,10 @@ bb.tweetList = {
 									'	   <span class="title">' + innerChildNode.getAttribute('data-bb-screenname') + '</span>\n'+
 									'	   <div class="date">'+ innerChildNode.getAttribute('data-bb-date') +'</div>\n'+
 									'	   <div id="tweet_message_' + j + '" class="description">' + description + '</div>\n'+
+									'	   <div id="tweet_raw_message_' + j + '" style="display: none;">' + raw_text + '</div>\n'+
 									'	</div>\n'+
 									'	<div style="width: 74px; height: 86px; float: right; border-left: 1px solid rgb(217, 220, 222);">\n'+
-									'	   <img src="images/actions.png" onclick="show_actions(\'' + innerChildNode.getAttribute('data-bb-id') + '\', \'' + innerChildNode.getAttribute('data-bb-screennameraw') + '\', \'tweet_message_' + j + '\');" style="width: 30px; height: 30px; padding-left: 18px; padding-top: 30px;" />\n'+
+									'	   <img src="images/actions.png" onclick="show_actions(\'' + innerChildNode.getAttribute('data-bb-id') + '\', \'' + innerChildNode.getAttribute('data-bb-screennameraw') + '\', \'' + j + '\');" style="width: 30px; height: 30px; padding-left: 18px; padding-top: 30px;" />\n'+
 									'	</div>\n'+
 									'</div>\n';
 					innerChildNode.removeAttribute('data-bb-img');

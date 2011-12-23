@@ -197,6 +197,13 @@ function action_button_retweet() {
 	);
 }
 
+// Reply to a tweet with an added message (puts the original tweet in the Compose box).
+function action_button_retweet_with_message() {
+	reply_type = 2;
+	
+	bb.pushScreen('screens/compose.html', 'compose');
+}
+
 // Favourite a tweet.
 function action_button_favourite() {
 	// Hide the action pane before starting the call.
@@ -260,11 +267,11 @@ function viewUser( screen_name ) {
 	);
 }
 
-function show_actions( str_id, str_user, id_tweet ) {
+function show_actions( str_id, str_user, num_tweet ) {
 	reply_id = str_id;
 	reply_username = str_user;
-	reply_tweet = document.getElementById(id_tweet).innerHTML;
-	reply_tweet_raw = document.getElementById(id_tweet).innerHTML;
+	reply_tweet = document.getElementById('tweet_message_' + num_tweet).innerHTML;
+	reply_tweet_raw = document.getElementById('tweet_raw_message_' + num_tweet).innerHTML;
 	
 	document.getElementById("div_action_username").innerHTML = "<span onclick=\"viewUser(\'" + reply_username + "\');\" class=\"spanlinks\">@" + reply_username + "</span>";
 	document.getElementById("div_action_tweet").innerHTML = reply_tweet;

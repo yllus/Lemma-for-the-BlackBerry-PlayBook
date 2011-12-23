@@ -41,7 +41,7 @@ function do_screen_compose( element ) {
 			countTweetChars(element);
 			break;
 		case 2:
-			element.getElementById('tweet_textarea').value = '@' + reply_username + ' ' + reply_tweet;
+			element.getElementById('tweet_textarea').value = 'RT @' + reply_username + ' ' + reply_tweet_raw;
 			countTweetChars(element);
 			break;
 	}
