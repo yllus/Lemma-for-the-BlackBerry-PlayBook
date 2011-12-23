@@ -168,6 +168,15 @@ function do_screen_timeline_list( element ) {
 	do_timeline(element, list_data, CONST_LIST, list_name);
 }
 
+function do_screen_timeline_search( element ) {
+	display_action_message(CONST_ACTION_LOADING);
+	
+	var str_data = data_retrieve('http://search.twitter.com/search.json?rpp=' + status_count + '&q=' + encodeURIComponent(search_term));
+	var json_data = JSON.parse(str_data);
+	
+	do_timeline(element, json_data, CONST_SEARCH, 'Search');
+}
+
 // Reply to a tweet.
 function action_button_reply() {
 	reply_type = 1;
@@ -270,6 +279,17 @@ function viewUser( screen_name ) {
 			do_timeline(element, json_data, CONST_USER, screen_name);
 		}
 	);
+}
+
+// Run a search for a hash tag.
+function viewHashTag( hash_tag ) {
+	display_action_message(CONST_ACTION_LOADING);
+	
+	var str_data = data_retrieve('http://search.twitter.com/search.json?rpp=' + status_count + '&q=' + encodeURIComponent(hash_tag));
+	var json_data_all = JSON.parse(str_data);
+	var json_data = json_data_all.results;
+	
+	do_timeline(document.getElementById(str_timeline_name), json_data, CONST_SEARCH, hash_tag);
 }
 
 function show_actions( str_id, str_user, num_tweet ) {

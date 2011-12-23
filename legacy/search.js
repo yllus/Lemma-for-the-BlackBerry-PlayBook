@@ -26,4 +26,8 @@ function Search( t ) {
 		    }
 		});	
 	}
+	
+	this.execute = function() {
+		var str_data = data_retrieve('http://search.twitter.com/search.json?rpp=' + status_count + '&q=' + encodeURIComponent(search_term));
+	}
 }
