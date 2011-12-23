@@ -48,6 +48,7 @@ var list_data = '';
 var reply_type = 0;
 var reply_username = '';
 var reply_tweet = '';
+var reply_tweet_raw = '';
 
 // Constants.
 var CONST_HOME = 0;

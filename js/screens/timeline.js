@@ -209,19 +209,29 @@ function viewUser( screen_name ) {
 	);
 }
 
-function show_actions( id_user, id_tweet ) {
+function show_actions( id_user, id_tweet, id_tweet_raw ) {
 	reply_username = document.getElementById(id_user).innerHTML;
 	reply_tweet = document.getElementById(id_tweet).innerHTML;
+	reply_tweet_raw = document.getElementById(id_tweet).innerHTML;
 	
 	document.getElementById("div_action_username").innerHTML = "<span onclick=\"viewUser(\'" + reply_username + "\');\" class=\"spanlinks\">@" + reply_username + "</span>";
 	document.getElementById("div_action_tweet").innerHTML = reply_tweet;
 	
-	document.getElementById("div_modal").className = '';
-	document.getElementById("div_modal").className += "show";
+	document.getElementById("div_actions").className = '';
+	document.getElementById("div_actions").className += "show";
+}
+
+function show_message( id_user, id_tweet, id_tweet_raw ) {
+	document.getElementById("div_message").className = '';
+	document.getElementById("div_message").className += "show";
 }
 
 function hide_actions() {
-	document.getElementById("div_modal").className = document.getElementById("div_modal").className.replace( /(?:^|\s)show(?!\S)/ , '' );
+	document.getElementById("div_actions").className = document.getElementById("div_actions").className.replace( /(?:^|\s)show(?!\S)/ , '' );
+}
+
+function hide_message() {
+	document.getElementById("div_message").className = document.getElementById("div_message").className.replace( /(?:^|\s)show(?!\S)/ , '' );
 }
 
 function action_button_reply() {
