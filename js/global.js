@@ -73,6 +73,9 @@ bb.onscreenready = function(element, id) {
 		case 'compose':
 			do_screen_compose(element);
 			break;
+		case 'direct_message':
+			do_screen_direct_message(element);
+			break;
 		case 'lists_display_all':
 			do_screen_lists(element);
 			break;

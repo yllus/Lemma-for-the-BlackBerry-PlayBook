@@ -204,6 +204,11 @@ function action_button_retweet_with_message() {
 	bb.pushScreen('screens/compose.html', 'compose');
 }
 
+// Send a direct message.
+function action_button_direct_message() {
+	bb.pushScreen('screens/direct_message.html', 'direct_message');
+}
+
 // Favourite a tweet.
 function action_button_favourite() {
 	// Hide the action pane before starting the call.
