@@ -168,6 +168,57 @@ function do_screen_timeline_list( element ) {
 	do_timeline(element, list_data, CONST_LIST, list_name);
 }
 
+// Reply to a tweet.
+function action_button_reply() {
+	reply_type = 1;
+	
+	bb.pushScreen('screens/compose.html', 'compose');
+}
+
+// Retweet a tweet.
+function action_button_retweet() {
+	// Hide the action pane before starting the call.
+	hide_actions();
+	
+	var url = 'https://api.twitter.com/1/statuses/retweet/' + reply_id + '.json';
+	
+	oauth.post(url, 
+		{ 'id': reply_id, 'trim_user': '1', 'include_entities': '0' },
+		 
+		function(data) {
+			var json_data = JSON.parse(data.text);
+			
+			show_message('Done; retweeted successfully.');
+		},
+		 
+		function(data) {
+			show_message('Error: Could not complete the action.');
+		}
+	);
+}
+
+// Favourite a tweet.
+function action_button_favourite() {
+	// Hide the action pane before starting the call.
+	hide_actions();
+	
+	var url = 'https://api.twitter.com/1/favorites/create/' + reply_id + '.json';
+	
+	oauth.post(url, 
+		{ 'id': reply_id, 'skip_status': '1', 'include_entities': '0' },
+		 
+		function(data) {
+			var json_data = JSON.parse(data.text);
+			
+			show_message('Done; favourited successfully.');
+		},
+		 
+		function(data) {
+			show_message('Error: Could not complete the action.');
+		}
+	);
+}
+
 // Launch the BlackBerry PlayBook browser for a URL (or the native browser if we're not on a PlayBook).
 function followLink( address ) {
 	var encodedAddress = '';
@@ -209,8 +260,9 @@ function viewUser( screen_name ) {
 	);
 }
 
-function show_actions( id_user, id_tweet, id_tweet_raw ) {
-	reply_username = document.getElementById(id_user).innerHTML;
+function show_actions( str_id, str_user, id_tweet ) {
+	reply_id = str_id;
+	reply_username = str_user;
 	reply_tweet = document.getElementById(id_tweet).innerHTML;
 	reply_tweet_raw = document.getElementById(id_tweet).innerHTML;
 	
@@ -221,7 +273,9 @@ function show_actions( id_user, id_tweet, id_tweet_raw ) {
 	document.getElementById("div_actions").className += "show";
 }
 
-function show_message( id_user, id_tweet, id_tweet_raw ) {
+function show_message( str_message ) {
+	document.getElementById("div_message_text").innerHTML = str_message;
+	
 	document.getElementById("div_message").className = '';
 	document.getElementById("div_message").className += "show";
 }
@@ -232,12 +286,6 @@ function hide_actions() {
 
 function hide_message() {
 	document.getElementById("div_message").className = document.getElementById("div_message").className.replace( /(?:^|\s)show(?!\S)/ , '' );
-}
-
-function action_button_reply() {
-	reply_type = 1;
-	
-	bb.pushScreen('screens/compose.html', 'compose');
 }
 
 String.prototype.replace_url_with_html_links = function() {

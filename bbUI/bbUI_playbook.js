@@ -25,10 +25,9 @@ bb.tweetList = {
 									'	   <span class="title">' + innerChildNode.getAttribute('data-bb-screenname') + '</span>\n'+
 									'	   <div class="date">'+ innerChildNode.getAttribute('data-bb-date') +'</div>\n'+
 									'	   <div id="tweet_message_' + j + '" class="description">' + description + '</div>\n'+
-									'	   <div id="tweet_user_' + j + '" style="display: none;">' + innerChildNode.getAttribute('data-bb-screennameraw') + '</div>\n'+
 									'	</div>\n'+
 									'	<div style="width: 74px; height: 86px; float: right; border-left: 1px solid rgb(217, 220, 222);">\n'+
-									'	   <img src="images/actions.png" onclick="show_actions(\'tweet_user_' + j + '\', \'tweet_message_' + j + '\');" style="width: 30px; height: 30px; padding-left: 18px; padding-top: 30px;" />\n'+
+									'	   <img src="images/actions.png" onclick="show_actions(\'' + innerChildNode.getAttribute('data-bb-id') + '\', \'' + innerChildNode.getAttribute('data-bb-screennameraw') + '\', \'tweet_message_' + j + '\');" style="width: 30px; height: 30px; padding-left: 18px; padding-top: 30px;" />\n'+
 									'	</div>\n'+
 									'</div>\n';
 					innerChildNode.removeAttribute('data-bb-img');

@@ -46,6 +46,7 @@ var list_data = '';
 
 // Reply/retweet variables.
 var reply_type = 0;
+var reply_id = '';
 var reply_username = '';
 var reply_tweet = '';
 var reply_tweet_raw = '';
