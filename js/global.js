@@ -106,6 +106,9 @@ bb.onscreenready = function(element, id) {
 		case 'timeline_search':
 			do_screen_timeline_search(element);
 			break;
+		case 'timeline_user_search':
+			do_screen_timeline_user_search(element);
+			break;
 		case 'timeline_home':
 			do_screen_timeline_home(element);
 			break;

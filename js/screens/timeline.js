@@ -178,6 +178,20 @@ function do_screen_timeline_search( element ) {
 	do_timeline(element, json_data, CONST_SEARCH, 'Search');
 }
 
+function do_screen_timeline_user_search( element ) {
+	display_action_message(CONST_ACTION_LOADING);
+	
+	var url = 'https://api.twitter.com/1/statuses/user_timeline.json?include_rts=1&screen_name=' + search_term + '&count=' + status_count;
+
+	oauth.get(url,
+		function(data) {
+			var json_data = JSON.parse(data.text);
+
+			do_timeline(element, json_data, CONST_USER, search_term);
+		}
+	);
+}
+
 // Reply to a tweet.
 function action_button_reply() {
 	reply_type = 1;
