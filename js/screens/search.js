@@ -1,6 +1,5 @@
-// Post a new status message to the user's own timeline.
-function postDirectMessage() {
-	var url = 'https://api.twitter.com/1/direct_messages/new.json';
+// Post a new search request.
+function postSearch() {
 	var text = document.getElementById('tweet_textarea').value;
 	
 	// If the status is empty or more than 30 characters, just exit without posting to the Twitter API.
@@ -8,23 +7,10 @@ function postDirectMessage() {
 		return;
 	}
 	
-	oauth.post(url, 
-		{ 'text': text, 'screen_name': reply_username, 'wrap_links': 'true' },
-		
-		// Show the success message. 
-		function(data) {
-			//var json_data = JSON.parse(data.text);
-			
-			document.getElementById('tweet_result').innerHTML = '<span style="color: #009933;">Success!</span>';
-			document.getElementById('tweet_textarea').value = '';
-		},
-		 
-		// Show a failure message.
-		function(data) { 
-			document.getElementById('tweet_result').innerHTML = '<span style="color: #FF0000;">Error, please retry.</span>';
-			//document.getElementById('tweet_textarea').value = '';
-		}
-	);
+	// Set the search term to be accessible on the next screen.
+	search_term = text;
+	
+	bb.overrideScreen('screens/timeline.html', 'timeline_search');
 }
 
 function do_screen_search( element ) {

@@ -51,6 +51,9 @@ var reply_username = '';
 var reply_tweet = '';
 var reply_tweet_raw = '';
 
+// Search variables.
+var search_term = '';
+
 // Constants.
 var CONST_HOME = 0;
 var CONST_LOADING = 1;
@@ -99,6 +102,9 @@ bb.onscreenready = function(element, id) {
 			break;
 		case 'timeline_list':
 			do_screen_timeline_list(element);
+			break;
+		case 'timeline_search':
+			do_screen_timeline_search(element);
 			break;
 		case 'timeline_home':
 			do_screen_timeline_home(element);

@@ -172,7 +172,8 @@ function do_screen_timeline_search( element ) {
 	display_action_message(CONST_ACTION_LOADING);
 	
 	var str_data = data_retrieve('http://search.twitter.com/search.json?rpp=' + status_count + '&q=' + encodeURIComponent(search_term));
-	var json_data = JSON.parse(str_data);
+	var json_data_all = JSON.parse(str_data);
+	var json_data = json_data_all.results;
 	
 	do_timeline(element, json_data, CONST_SEARCH, 'Search');
 }
