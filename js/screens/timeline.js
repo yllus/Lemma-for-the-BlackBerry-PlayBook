@@ -209,13 +209,25 @@ function viewUser( screen_name ) {
 	);
 }
 
-function show_modal() {
+function show_actions( id_user, id_tweet ) {
+	reply_username = document.getElementById(id_user).innerHTML;
+	reply_tweet = document.getElementById(id_tweet).innerHTML;
+	
+	document.getElementById("div_action_username").innerHTML = "<span onclick=\"viewUser(\'" + reply_username + "\');\" class=\"spanlinks\">@" + reply_username + "</span>";
+	document.getElementById("div_action_tweet").innerHTML = reply_tweet;
+	
 	document.getElementById("div_modal").className = '';
 	document.getElementById("div_modal").className += "show";
 }
 
-function hide_modal() {
+function hide_actions() {
 	document.getElementById("div_modal").className = document.getElementById("div_modal").className.replace( /(?:^|\s)show(?!\S)/ , '' );
+}
+
+function action_button_reply() {
+	reply_type = 1;
+	
+	bb.pushScreen('screens/compose.html', 'compose');
 }
 
 String.prototype.replace_url_with_html_links = function() {

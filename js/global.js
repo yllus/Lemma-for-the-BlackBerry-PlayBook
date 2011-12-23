@@ -44,6 +44,11 @@ var lists = null;
 var list_name = '';
 var list_data = '';
 
+// Reply/retweet variables.
+var reply_type = 0;
+var reply_username = '';
+var reply_tweet = '';
+
 // Constants.
 var CONST_HOME = 0;
 var CONST_LOADING = 1;
@@ -64,7 +69,7 @@ bb.onscreenready = function(element, id) {
 	
 	switch ( id ) {
 		case 'compose':
-			focus_compose(element);
+			do_screen_compose(element);
 			break;
 		case 'lists_display_all':
 			do_screen_lists(element);
@@ -117,6 +122,9 @@ function button_back() {
 }
 
 function button_compose() {
+	// Remove the username/tweet data so it doesn't appear filled in on the compose page.
+	reply_type = 0;
+	
 	bb.pushScreen('screens/compose.html', 'compose');
 }
 

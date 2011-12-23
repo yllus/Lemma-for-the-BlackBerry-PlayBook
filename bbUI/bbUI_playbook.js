@@ -19,33 +19,18 @@ bb.tweetList = {
 						description = innerChildNode.innerHTML;
 					
 					innerChildNode.setAttribute('class', 'bb-hires-image-list-item');
-					//innerChildNode.setAttribute('onmouseover', "this.setAttribute('class','bb-hires-image-list-item-hover')");
-					//innerChildNode.setAttribute('onclick', "this.setAttribute('class','bb-hires-image-list-item-click');");
-					//innerChildNode.setAttribute('onmouseout', "this.setAttribute('class','bb-hires-image-list-item')");
-					//innerChildNode.setAttribute('x-blackberry-focusable','true');
 					innerChildNode.innerHTML = '<img src="'+ innerChildNode.getAttribute('data-bb-img') +'" style="z-index: 1; margin-top: 10px;" onclick="viewUser(\'' + innerChildNode.getAttribute('data-bb-screennameraw') + '\');" />\n'+
 									'<div class="details">\n'+
 									'	<div style="width: 860px; height: 67px; float: left; margin-top: 10px;">\n'+
 									'	   <span class="title">' + innerChildNode.getAttribute('data-bb-screenname') + '</span>\n'+
 									'	   <div class="date">'+ innerChildNode.getAttribute('data-bb-date') +'</div>\n'+
-									'	   <div class="description">' + description + '</div>\n'+
+									'	   <div id="tweet_message_' + j + '" class="description">' + description + '</div>\n'+
+									'	   <div id="tweet_user_' + j + '" style="display: none;">' + innerChildNode.getAttribute('data-bb-screennameraw') + '</div>\n'+
 									'	</div>\n'+
 									'	<div style="width: 74px; height: 86px; float: right; border-left: 1px solid rgb(217, 220, 222);">\n'+
-									//'	<div style="width: 74px; height: 86px; float: right;">\n'+
-									'	   <img src="images/actions.png" onclick="show_modal();" style="width: 30px; height: 30px; padding-left: 18px; padding-top: 30px;" />\n'+
+									'	   <img src="images/actions.png" onclick="show_actions(\'tweet_user_' + j + '\', \'tweet_message_' + j + '\');" style="width: 30px; height: 30px; padding-left: 18px; padding-top: 30px;" />\n'+
 									'	</div>\n'+
 									'</div>\n';
-					/*
-					innerChildNode.innerHTML = '<img src="'+ innerChildNode.getAttribute('data-bb-img') +'" />\n'+
-									'<div class="details" style="float: left; width: 855px; height: 73px;" onclick="alert(\'hi\');">\n'+
-									'	   <span class="title">' + innerChildNode.getAttribute('data-bb-screenname') + '</span>\n'+
-									'	   <div class="date">'+ innerChildNode.getAttribute('data-bb-date') +'</div>\n'+
-									'	   <div class="description">' + description + '</div>\n'+
-									'</div>\n'+
-									'<div style="float: left; width: 70px; height: 73px;">\n'+
-									'	   <div style="width: 50%; margin: auto; padding-top: 22px;"><img src="images/actions.png" style="width: 30px; height: 30px;" /></div>\n'+
-									'</div>\n';
-					*/
 					innerChildNode.removeAttribute('data-bb-img');
 					innerChildNode.removeAttribute('data-bb-title');						
 				}				
