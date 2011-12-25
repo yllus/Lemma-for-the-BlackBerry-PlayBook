@@ -2,19 +2,32 @@ var readabilityVersion = "0.4";
 var emailSrc = 'http://davehauenstein.com/readability/email.php';
 var iframeLoads = 0;
 
-function readability() {
-	var str_data = data_retrieve('http://fullcomment.nationalpost.com/2011/12/24/robert-fulford-on-the-secret-to-happiness-sip-it-in-small-doses/?utm_source=dlvr.it&utm_medium=twitter');
-	var element = document.implementation.createHTMLDocument('Readability');
-    element.open();
-    element.write(str_data);
-    element.close();	
-	start_parser(element);
+function readability( url ) {
+	var xhr = new XMLHttpRequest();
+	
+	xhr.open("GET", url, true);
+	xhr.onreadystatechange = function() {
+		if ( xhr.readyState == 4 ) {
+			if ( xhr.status == 200 ) {
+				var element = document.implementation.createHTMLDocument('Readability');
+			    
+			    element.open();
+			    element.write(xhr.responseText);
+			    element.close();
+			    
+			    document.getElementById("div_reader_text").innerHTML = start_parser(element);
+	    	} 
+	    	else {
+	    		document.getElementById("div_reader_text").innerHTML = 'Failed to load.';
+	    	}
+	  	}
+	};
+	xhr.send();
 }
 
 function start_parser( element ) {
 	var objOverlay = element.createElement("div");
 	var objinnerDiv = element.createElement("div");
-	var articleTools = element.createElement("DIV");
 	
 	objOverlay.id = "readOverlay";
 	objinnerDiv.id = "readInner";
@@ -24,20 +37,7 @@ function start_parser( element ) {
 	//objOverlay.className = readStyle;
 	//objinnerDiv.className = readMargin + " " + readSize;
 	
-	// Set up tools widget 
-	
-	// NOTE THE IMAGE URL'S HERE !!!!!!!!!!!!!!!!!
-	// NOTE THE IMAGE URL'S HERE !!!!!!!!!!!!!!!!!
-	// NOTE THE IMAGE URL'S HERE !!!!!!!!!!!!!!!!!
-	articleTools.id = "readTools";
-	articleTools.innerHTML = "\
-		<a href='#' onclick='return window.location.reload()' title='Reload original page' id='reload-page'>Reload Original Page</a>\
-		<a href='#' onclick='javascript:window.print();' title='Print page' id='print-page'>Print Page</a>\
-		<a href='#' onclick='emailBox(); return false;' title='Email page' id='email-page'>Email Page</a>\
-	";
-
 	objinnerDiv.appendChild(grabArticle(element));		// Get the article and place it inside the inner Div
-	objOverlay.appendChild(articleTools);
 	objOverlay.appendChild(objinnerDiv);		// Insert the inner div into the overlay
 
 	// For totally hosed HTML, add body node that can't be found because of bad HTML or something.
@@ -51,6 +51,8 @@ function start_parser( element ) {
 	
 	// Inserts the new content :
 	element.body.insertBefore(objOverlay, element.body.firstChild);
+	
+	return element.body.innerHTML;
 }
 
 function grabArticle( element ) {
@@ -60,7 +62,7 @@ function grabArticle( element ) {
 	var topDivParas;
 	
 	var articleContent = element.createElement("DIV");
-	var articleTitle = element.createElement("H1");
+	var articleTitle = element.createElement("H3");
 	var articleFooter = element.createElement("DIV");
 	
 	// Replace all doubled-up <BR> tags with <P> tags, and remove fonts.
@@ -110,7 +112,7 @@ function grabArticle( element ) {
 	if(topDiv == null)
 	{
 	  topDiv = element.createElement('div');
-	  topDiv.innerHTML = 'Sorry, readability was unable to parse this page for content. If you feel like it should have been able to, please <a href="http://code.google.com/p/arc90labs-readability/issues/entry">let us know by submitting an issue.</a>';
+	  topDiv.innerHTML = '<p>Sorry, readability was unable to parse this page for content. If you feel like it should have been able to, please <a href="http://code.google.com/p/arc90labs-readability/issues/entry">let us know by submitting an issue.</a></p>';
 	}
 	
 	// REMOVES ALL STYLESHEETS ...
@@ -137,19 +139,8 @@ function grabArticle( element ) {
 	topDiv = clean(topDiv, "h1");
 	topDiv = clean(topDiv, "h2");
 	topDiv = clean(topDiv, "iframe");
-	
-
-	// Add the footer and contents:
-	articleFooter.id = "readFooter";
-	articleFooter.innerHTML = "\
-		<a href='http://www.arc90.com'><img src='http://lab.arc90.com/experiments/readability/images/footer.png'></a>\
-                <div class='footer-right' >\
-                        <span class='version'>Readability version " + readabilityVersion + "</span>\
-		</div>\
-	";
 
 	articleContent.appendChild(topDiv);
-	articleContent.appendChild(articleFooter);
 	
 	return articleContent;
 }
@@ -261,5 +252,3 @@ function removeFrame()
         iframeLoads = 0;
     }
 }
-
-//readability();

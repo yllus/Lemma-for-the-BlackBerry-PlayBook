@@ -267,6 +267,9 @@ function followLink( address ) {
 	encodedAddress = encodedAddress.replace(/&/g, "\&");
 
 	if (typeof blackberry !== 'undefined') {
+		show_reader(encodedAddress); 
+		
+		/*
 		try {
 			// If I am a BlackBerry device, invoke native browser.
 			var args = new blackberry.invoke.BrowserArguments(encodedAddress);
@@ -274,9 +277,11 @@ function followLink( address ) {
 		} catch(e) {
  			alert("Sorry, there was a problem invoking the browser.");
  		}
+ 		*/
 	} else {
 		// If I am not a BlackBerry device, open link in current browser.
-		window.open(encodedAddress); 
+		//window.open(encodedAddress);
+		show_reader(encodedAddress); 
 	}
 }
 
@@ -327,12 +332,17 @@ function show_message( str_message ) {
 	document.getElementById("div_message").className += "show";
 }
 
-function hide_actions() {
-	document.getElementById("div_actions").className = document.getElementById("div_actions").className.replace( /(?:^|\s)show(?!\S)/ , '' );
+function show_reader( url ) {
+	document.getElementById("div_reader_text").innerHTML = 'Please wait, loading...';
+	
+	document.getElementById("div_reader").className = '';
+	document.getElementById("div_reader").className += "show";
+				
+	readability(url);
 }
 
-function hide_message() {
-	document.getElementById("div_message").className = document.getElementById("div_message").className.replace( /(?:^|\s)show(?!\S)/ , '' );
+function hide_modal( div_name ) {
+	document.getElementById(div_name).className = document.getElementById(div_name).className.replace( /(?:^|\s)show(?!\S)/ , '' );
 }
 
 String.prototype.replace_url_with_html_links = function() {

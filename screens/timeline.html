@@ -23,17 +23,25 @@
 		<button class="qnx" style="width: 100%; margin-top: 20px;" onclick="action_button_favourite();"> 
 			<label>Favourite</label> 
 		</button>
-		<button class="qnx-cancel" style="width: 100%; margin-top: 20px;" onclick="hide_actions();"> 
+		<button class="qnx-cancel" style="width: 100%; margin-top: 20px;" onclick="hide_modal('div_actions');"> 
 			<label>Cancel</label> 
 		</button>
 	</div>
 	<div id="div_message">
 		<div id="div_message_text" style="margin-top: 10px; color: #ffffff; float: left;"></div>
 		<div style="float: right;">
-			<button class="qnx-cancel" style="" onclick="hide_message();"> 
+			<button class="qnx-cancel" style="" onclick="hide_modal('div_message');"> 
 				<label>Okay</label> 
 			</button>
 		</div>
+	</div>
+	<div id="div_reader">
+		<div style="float: right;">
+			<button class="qnx-cancel" style="" onclick="hide_modal('div_reader');"> 
+				<label>Done</label> 
+			</button>
+		</div>
+		<div id="div_reader_text"></div>
 	</div>
 	<div class="toolbar">
 		<div style="float: left;">
