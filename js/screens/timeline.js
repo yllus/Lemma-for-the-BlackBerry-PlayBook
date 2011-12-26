@@ -267,9 +267,8 @@ function followLink( address ) {
 	encodedAddress = encodedAddress.replace(/&/g, "\&");
 
 	if (typeof blackberry !== 'undefined') {
-		show_reader(encodedAddress); 
+		// show_reader(encodedAddress);
 		
-		/*
 		try {
 			// If I am a BlackBerry device, invoke native browser.
 			var args = new blackberry.invoke.BrowserArguments(encodedAddress);
@@ -277,7 +276,6 @@ function followLink( address ) {
 		} catch(e) {
  			alert("Sorry, there was a problem invoking the browser.");
  		}
- 		*/
 	} else {
 		// If I am not a BlackBerry device, open link in current browser.
 		//window.open(encodedAddress);
@@ -318,9 +316,19 @@ function show_actions( str_id, str_user, num_tweet ) {
 	reply_tweet = document.getElementById('tweet_message_' + num_tweet).innerHTML;
 	reply_tweet_raw = document.getElementById('tweet_raw_message_' + num_tweet).innerHTML;
 	
+	// Set the tweet username and text at the top of the action pane.
 	document.getElementById("div_action_username").innerHTML = "<span onclick=\"viewUser(\'" + reply_username + "\');\" class=\"spanlinks\">@" + reply_username + "</span>";
 	document.getElementById("div_action_tweet").innerHTML = reply_tweet;
 	
+	// If a URL is found in the tweet, offer to display it using the in-app reader.
+	var str_url_first = reply_tweet_raw.find_first_html_link();
+	if ( str_url_first !== null ) {
+		document.getElementById("action_viewreader_button").setAttribute ("onclick", "show_reader('" + str_url_first + "');");
+		document.getElementById("action_viewreader_label").innerHTML = 'View ' + str_url_first[0] + ' Using In-App Browser';
+		document.getElementById("action_viewreader_button").style.display = 'block';
+	}
+	
+	// Actually display the action pane.
 	document.getElementById("div_actions").className = '';
 	document.getElementById("div_actions").className += "show";
 }
@@ -333,6 +341,8 @@ function show_message( str_message ) {
 }
 
 function show_reader( url ) {
+	hide_modal('div_actions');
+	
 	document.getElementById("div_reader_text").innerHTML = 'Please wait, loading...';
 	
 	document.getElementById("div_reader").className = '';
@@ -355,6 +365,12 @@ String.prototype.linkify_tweet = function() {
 	var tweet = this.replace(/(^|\s|\.|"|:)@(\w+)/g, "$1<span onclick=\"viewUser(\'$2\');\" class=\"spanlinks\">@$2</span>");
 	
 	return tweet.replace(/(^|\s)#(\w+)/g, "$1<span onclick=\"viewHashTag(\'#$2\');\" class=\"spanlinks\">#$2</span>");
+};
+
+String.prototype.find_first_html_link = function() {
+	var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+	
+	return this.match(exp);
 };
 
 String.prototype.replace_smart_quotes = function() {

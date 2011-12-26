@@ -8,22 +8,25 @@
 	<div id="div_timeline" data-bb-type="tweet-list" style="top: 33px; height: 503px; width: 1024px; position: absolute; overflow: auto; display: none;"></div>
 	<div id="div_actions">
 		<p><span id="div_action_username"></span> <span id="div_action_tweet"></span></p>
-		<button class="qnx" style="width: 100%; margin-top: 20px;" onclick="action_button_reply();"> 
+		<button id="action_viewreader_button" class="qnx" style="width: 100%; margin-top: 15px; display: none;"> 
+			<label id="action_viewreader_label">Use In-App Reader</label> 
+		</button>
+		<button class="qnx" style="width: 100%; margin-top: 15px;" onclick="action_button_reply();"> 
 			<label>Reply</label> 
 		</button>
-		<button class="qnx" style="width: 100%; margin-top: 20px;" onclick="action_button_retweet();"> 
+		<button class="qnx" style="width: 100%; margin-top: 15px;" onclick="action_button_retweet();"> 
 			<label>Retweet</label> 
 		</button>
-		<button class="qnx" style="width: 100%; margin-top: 20px;" onclick="action_button_retweet_with_message();"> 
+		<button class="qnx" style="width: 100%; margin-top: 15px;" onclick="action_button_retweet_with_message();"> 
 			<label>Retweet With Message</label> 
 		</button>
-		<button class="qnx" style="width: 100%; margin-top: 20px;" onclick="action_button_direct_message();"> 
+		<button class="qnx" style="width: 100%; margin-top: 15px;" onclick="action_button_direct_message();"> 
 			<label>Send Direct Message</label> 
 		</button>
-		<button class="qnx" style="width: 100%; margin-top: 20px;" onclick="action_button_favourite();"> 
+		<button class="qnx" style="width: 100%; margin-top: 15px;" onclick="action_button_favourite();"> 
 			<label>Favourite</label> 
 		</button>
-		<button class="qnx-cancel" style="width: 100%; margin-top: 20px;" onclick="hide_modal('div_actions');"> 
+		<button class="qnx-cancel" style="width: 100%; margin-top: 15px;" onclick="hide_modal('div_actions');"> 
 			<label>Cancel</label> 
 		</button>
 	</div>
