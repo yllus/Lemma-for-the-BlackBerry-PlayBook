@@ -2,80 +2,64 @@ var readabilityVersion = "0.4";
 var emailSrc = 'http://davehauenstein.com/readability/email.php';
 var iframeLoads = 0;
 
-function readability( url ) {
-	var xhr = new XMLHttpRequest();
-	
-	xhr.open("GET", url, true);
-	xhr.onreadystatechange = function() {
-		if ( xhr.readyState == 4 ) {
-			if ( xhr.status == 200 ) {
-				// If the reponse text only contains a redirect, continue by following it.
-				// Else parse the response for Readability.
-				var re = new RegExp(".*;URL=(.+)\">", "i");
-				var str_response = xhr.responseText;
-				var arr_match = str_response.match(re);
-				if ( arr_match !== null ) {
-					readability(arr_match[1]);
-				}
-				else {
-					var element = document.implementation.createHTMLDocument('Readability');
-			    
-				    element.open();
-				    element.write(xhr.responseText);
-				    element.close();
-				    
-				    document.getElementById("div_reader_text").innerHTML = start_parser(element);
-				}
-	    	} 
-	    	else {
-	    		document.getElementById("div_reader_text").innerHTML = 'Failed to load.';
-	    	}
-	  	}
-	};
-	xhr.send();
-}
-
-function start_parser( element ) {
-	var objOverlay = element.createElement("div");
-	var objinnerDiv = element.createElement("div");
+(function(){
+	var objOverlay = document.createElement("div");
+	var objinnerDiv = document.createElement("div");
+	var articleTools = document.createElement("DIV");
 	
 	objOverlay.id = "readOverlay";
 	objinnerDiv.id = "readInner";
 	
-	objinnerDiv.appendChild(grabArticle(element));		// Get the article and place it inside the inner Div
+	// Apply user-selected styling:
+	document.body.className = readStyle;
+	objOverlay.className = readStyle;
+	objinnerDiv.className = readMargin + " " + readSize;
+	
+	// Set up tools widget 
+	
+	// NOTE THE IMAGE URL'S HERE !!!!!!!!!!!!!!!!!
+	// NOTE THE IMAGE URL'S HERE !!!!!!!!!!!!!!!!!
+	// NOTE THE IMAGE URL'S HERE !!!!!!!!!!!!!!!!!
+	articleTools.id = "readTools";
+	articleTools.innerHTML = "\
+		<a href='#' onclick='return window.location.reload()' title='Reload original page' id='reload-page'>Reload Original Page</a>\
+		<a href='#' onclick='javascript:window.print();' title='Print page' id='print-page'>Print Page</a>\
+		<a href='#' onclick='emailBox(); return false;' title='Email page' id='email-page'>Email Page</a>\
+	";
+
+	objinnerDiv.appendChild(grabArticle());		// Get the article and place it inside the inner Div
+	objOverlay.appendChild(articleTools);
 	objOverlay.appendChild(objinnerDiv);		// Insert the inner div into the overlay
 
 	// For totally hosed HTML, add body node that can't be found because of bad HTML or something.
-	if(element.body == null)
+	if(document.body == null)
 	{
-		body = element.createElement("body");
-		element.body = body;
+		body = document.createElement("body");
+		document.body = body;
 	}
 
-	element.body.innerHTML = "";
+	document.body.innerHTML = "";
 	
 	// Inserts the new content :
-	element.body.insertBefore(objOverlay, element.body.firstChild);
-	
-	return element.body.innerHTML;
-}
+	document.body.insertBefore(objOverlay, document.body.firstChild);
+})()
 
-function grabArticle( element ) {
-	var allParagraphs = element.getElementsByTagName("p");
+function grabArticle() {
+	var allParagraphs = document.getElementsByTagName("p");
 	var topDivCount = 0;
 	var topDiv = null;
 	var topDivParas;
 	
-	var articleContent = element.createElement("DIV");
-	var articleTitle = element.createElement("H3");
-	var articleFooter = element.createElement("DIV");
+	var articleContent = document.createElement("DIV");
+	var articleTitle = document.createElement("H1");
+	var articleFooter = document.createElement("DIV");
 	
 	// Replace all doubled-up <BR> tags with <P> tags, and remove fonts.
 	var pattern =  new RegExp ("<br/?>[ \r\n\s]*<br/?>", "g");
-	element.body.innerHTML = element.body.innerHTML.replace(pattern, "</p><p>").replace(/<\/?font[^>]*>/g, '');
+	document.body.innerHTML = document.body.innerHTML.replace(pattern, "</p><p>").replace(/<\/?font[^>]*>/g, '');
 	
 	// Grab the title from the <title> tag and inject it as the title.
-	articleTitle.innerHTML = element.title;
+	articleTitle.innerHTML = document.title;
 	articleContent.appendChild(articleTitle);
 	
 	// Study all the paragraphs and find the chunk that has the best score.
@@ -110,25 +94,25 @@ function grabArticle( element ) {
 	}
 
 	// Assignment from index for performance. See http://www.peachpit.com/articles/article.aspx?p=31567&seqNum=5 
-	for(nodeIndex = 0; (node = element.getElementsByTagName('*')[nodeIndex]); nodeIndex++)
+	for(nodeIndex = 0; (node = document.getElementsByTagName('*')[nodeIndex]); nodeIndex++)
 		if(typeof node.readability != 'undefined' && (topDiv == null || node.readability.contentScore > topDiv.readability.contentScore))
 			topDiv = node;
 
 	if(topDiv == null)
 	{
-	  topDiv = element.createElement('div');
-	  topDiv.innerHTML = '<p>Sorry, readability was unable to parse this page for content. If you feel like it should have been able to, please <a href="http://code.google.com/p/arc90labs-readability/issues/entry">let us know by submitting an issue.</a></p>';
+	  topDiv = document.createElement('div');
+	  topDiv.innerHTML = 'Sorry, readability was unable to parse this page for content. If you feel like it should have been able to, please <a href="http://code.google.com/p/arc90labs-readability/issues/entry">let us know by submitting an issue.</a>';
 	}
 	
 	// REMOVES ALL STYLESHEETS ...
-	for (var k=0;k < element.styleSheets.length; k++) {
-		if (element.styleSheets[k].href != null && element.styleSheets[k].href.lastIndexOf("readability") == -1) {
-			element.styleSheets[k].disabled = true;
+	for (var k=0;k < document.styleSheets.length; k++) {
+		if (document.styleSheets[k].href != null && document.styleSheets[k].href.lastIndexOf("readability") == -1) {
+			document.styleSheets[k].disabled = true;
 		}
 	}
 
 	// Remove all style tags in head (not doing this on IE) :
-	var styleTags = element.getElementsByTagName("style");
+	var styleTags = document.getElementsByTagName("style");
 	for (var j=0;j < styleTags.length; j++)
 		if (navigator.appName != "Microsoft Internet Explorer")
 			styleTags[j].textContent = "";
@@ -145,9 +129,15 @@ function grabArticle( element ) {
 	topDiv = clean(topDiv, "h2");
 	topDiv = clean(topDiv, "iframe");
 	
+
 	// Add the footer and contents:
 	articleFooter.id = "readFooter";
-	articleFooter.innerHTML = "<button class=\"qnx-cancel\" onclick=\"hide_modal('div_reader');\"><label>Done</label></button>";
+	articleFooter.innerHTML = "\
+		<a href='http://www.arc90.com'><img src='http://lab.arc90.com/experiments/readability/images/footer.png'></a>\
+                <div class='footer-right' >\
+                        <span class='version'>Readability version " + readabilityVersion + "</span>\
+		</div>\
+	";
 
 	articleContent.appendChild(topDiv);
 	articleContent.appendChild(articleFooter);
@@ -236,17 +226,17 @@ function clean(e, tags, minWords) {
 }
 
 function emailBox() {
-    var emailContainer = element.getElementById('email-container');
+    var emailContainer = document.getElementById('email-container');
     if(null != emailContainer)
     {
         return;
     }
 
-    var emailContainer = element.createElement('div');
+    var emailContainer = document.createElement('div');
     emailContainer.setAttribute('id', 'email-container');
-    emailContainer.innerHTML = '<iframe src="'+emailSrc + '?pageUrl='+escape(window.location)+'&pageTitle='+escape(element.title)+'" scrolling="no" onload="removeFrame()" style="width:500px; height: 490px; border: 0;"></iframe>';
+    emailContainer.innerHTML = '<iframe src="'+emailSrc + '?pageUrl='+escape(window.location)+'&pageTitle='+escape(document.title)+'" scrolling="no" onload="removeFrame()" style="width:500px; height: 490px; border: 0;"></iframe>';
 
-    element.body.appendChild(emailContainer);
+    document.body.appendChild(emailContainer);
 }
 
 function removeFrame()
@@ -254,7 +244,7 @@ function removeFrame()
     ++iframeLoads;
     if(iframeLoads >= 6)
     {
-        var emailContainer = element.getElementById('email-container');
+        var emailContainer = document.getElementById('email-container');
         if(null != emailContainer) {
             emailContainer.parentNode.removeChild(emailContainer);
         }

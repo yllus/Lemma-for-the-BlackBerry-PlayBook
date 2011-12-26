@@ -289,6 +289,7 @@ div#div_reader
 	top: 0px; 
 	z-index: 100;
 	overflow: scroll;
+	line-height: 26px;
 	color: #ffffff; 
 	border: solid 1px #999; 
 	-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.25); 
@@ -296,7 +297,6 @@ div#div_reader
 	-webkit-border-bottom-left-radius: 6px; 
 	-webkit-border-bottom-right-radius: 6px; 
 	background: #282828;
-	opacity: 0.99; 
 	-webkit-transition: -webkit-transform 0.25s ease-out; 
 	-webkit-transform: translateY(-670px); 
 }
