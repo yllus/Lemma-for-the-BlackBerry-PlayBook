@@ -24,11 +24,11 @@ function readability( url ) {
 				    element.write(xhr.responseText);
 				    element.close();
 				    
-				    document.getElementById("div_reader_text").innerHTML = start_parser(element);
+				    document.getElementById("div_misc").innerHTML = start_parser(element);
 				}
 	    	} 
 	    	else {
-	    		document.getElementById("div_reader_text").innerHTML = 'Failed to load.';
+	    		document.getElementById("div_misc").innerHTML = 'Failed to load.';
 	    	}
 	  	}
 	};
@@ -146,11 +146,11 @@ function grabArticle( element ) {
 	topDiv = clean(topDiv, "iframe");
 	
 	// Add the footer and contents:
-	articleFooter.id = "readFooter";
-	articleFooter.innerHTML = "<button class=\"qnx-cancel\" onclick=\"hide_modal('div_reader');\"><label>Done</label></button>";
+	//articleFooter.id = "readFooter";
+	//articleFooter.innerHTML = "<button class=\"qnx-cancel\" onclick=\"hide_modal('div_reader');\"><label>Done</label></button>";
 
 	articleContent.appendChild(topDiv);
-	articleContent.appendChild(articleFooter);
+	//articleContent.appendChild(articleFooter);
 	
 	return articleContent;
 }

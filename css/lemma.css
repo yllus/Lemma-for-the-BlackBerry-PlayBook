@@ -312,6 +312,11 @@ div#div_reader.show
 
 /* End: Modal dialogs. */
 
+div#readInner {
+	line-height: 32px;
+	margin: 10px 10px 10px 10px;
+}
+
 .date {
 	float: right;
 	font-size: 12px;

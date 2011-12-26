@@ -324,7 +324,7 @@ function show_actions( str_id, str_user, num_tweet ) {
 	var str_url_first = reply_tweet_raw.find_first_html_link();
 	if ( str_url_first !== null ) {
 		document.getElementById("action_viewreader_button").setAttribute ("onclick", "show_reader('" + str_url_first + "');");
-		document.getElementById("action_viewreader_label").innerHTML = 'View ' + str_url_first[0] + ' Using In-App Browser';
+		document.getElementById("action_viewreader_label").innerHTML = 'View In App: ' + str_url_first[0];
 		document.getElementById("action_viewreader_button").style.display = 'block';
 	}
 	
@@ -341,6 +341,15 @@ function show_message( str_message ) {
 }
 
 function show_reader( url ) {
+	hide_modal('div_actions');
+	
+	str_misc = '<h3 style="padding-left: 10px;">Please wait, loading...</h3>';
+	bb.pushScreen('screens/reader.html', 'misc');
+				
+	readability(url);
+}
+
+function show_reader_old( url ) {
 	hide_modal('div_actions');
 	
 	document.getElementById("div_reader_text").innerHTML = 'Please wait, loading...';
