@@ -9,13 +9,23 @@ function readability( url ) {
 	xhr.onreadystatechange = function() {
 		if ( xhr.readyState == 4 ) {
 			if ( xhr.status == 200 ) {
-				var element = document.implementation.createHTMLDocument('Readability');
+				// If the reponse text only contains a redirect, continue by following it.
+				// Else parse the response for Readability.
+				var re = new RegExp(".*;URL=(.+)\">", "i");
+				var str_response = xhr.responseText;
+				var arr_match = str_response.match(re);
+				if ( arr_match !== null ) {
+					readability(arr_match[1]);
+				}
+				else {
+					var element = document.implementation.createHTMLDocument('Readability');
 			    
-			    element.open();
-			    element.write(xhr.responseText);
-			    element.close();
-			    
-			    document.getElementById("div_reader_text").innerHTML = start_parser(element);
+				    element.open();
+				    element.write(xhr.responseText);
+				    element.close();
+				    
+				    document.getElementById("div_reader_text").innerHTML = start_parser(element);
+				}
 	    	} 
 	    	else {
 	    		document.getElementById("div_reader_text").innerHTML = 'Failed to load.';
