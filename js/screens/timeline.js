@@ -267,8 +267,6 @@ function followLink( address ) {
 	encodedAddress = encodedAddress.replace(/&/g, "\&");
 
 	if (typeof blackberry !== 'undefined') {
-		// show_reader(encodedAddress);
-		
 		try {
 			// If I am a BlackBerry device, invoke native browser.
 			var args = new blackberry.invoke.BrowserArguments(encodedAddress);
@@ -278,8 +276,7 @@ function followLink( address ) {
  		}
 	} else {
 		// If I am not a BlackBerry device, open link in current browser.
-		//window.open(encodedAddress);
-		show_reader(encodedAddress); 
+		window.open(encodedAddress);
 	}
 }
 
