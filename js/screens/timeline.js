@@ -354,7 +354,7 @@ function show_reader( url ) {
 	document.getElementById("div_reader").className = '';
 	document.getElementById("div_reader").className += "show";
 				
-	readability(url);
+	readability.init(url);
 }
 
 function hide_modal( div_name ) {
