@@ -1,4 +1,5 @@
 // Account variables.
+var tutorialWasSeen = null;
 var accountIsSet = null;
 var accountScreenName = null;
 var accountID = null;
@@ -8,6 +9,7 @@ var status_count = 50;
 var status_autorefresh = 0;
 var just_launched = 1;
 if (typeof localStorage !== 'undefined') {
+	tutorialWasSeen = localStorage.getItem("tutorialWasSeen");
 	accountIsSet = localStorage.getItem("accountIsSet");
 	accountScreenName = localStorage.getItem("accountScreenName");
 	accountID = localStorage.getItem("accountID");
@@ -119,14 +121,24 @@ bb.onscreenready = function(element, id) {
 }
 
 function do_just_launched() {
-	// If a user account has not been set up, redirect to that page.
-	// Else load the home timeline.
-	if ( accountIsSet == null ) {
-		bb.pushScreen('screens/user.html', 'options_user_unauthorized');
+	// If Lemma has never before been run, launch the tutorial.
+	// Else consider the other options.
+	if ( tutorialWasSeen == null ) {
+		tutorialWasSeen = 1;
+		localStorage.setItem('tutorialWasSeen', tutorialWasSeen);
+		
+		bb.pushScreen('screens/tutorial_1.html', 'tutorial_1');
 	}
 	else {
-		// Push the home screen, which will trigger bb.onscreenready() and do_screen_timeline_home().
-		bb.pushScreen('screens/timeline.html', 'timeline_home');
+		// If a user account has not been set up, redirect to that page.
+		// Else load the home timeline.
+		if ( accountIsSet == null ) {
+			bb.pushScreen('screens/user.html', 'options_user_unauthorized');
+		}
+		else {
+			// Push the home screen, which will trigger bb.onscreenready() and do_screen_timeline_home().
+			bb.pushScreen('screens/timeline.html', 'timeline_home');
+		}
 	}
 }
 
