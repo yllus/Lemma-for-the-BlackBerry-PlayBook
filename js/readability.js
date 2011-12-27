@@ -11,7 +11,7 @@ function readability( url ) {
 			if ( xhr.status == 200 ) {
 				// If the reponse text only contains a redirect, continue by following it.
 				// Else parse the response for Readability.
-				var re = new RegExp(".*;URL=(.+)\">", "i");
+				var re = new RegExp("<noscript><META.+;URL=(.+)\">", "i"); // <noscript><META http-equiv="refresh" content="0;URL=http://bit.ly/sPLxwU"></noscript><script>location.replace("http:\/\/bit.ly\/sPLxwU")</script>
 				var str_response = xhr.responseText;
 				var arr_match = str_response.match(re);
 				if ( arr_match !== null ) {
