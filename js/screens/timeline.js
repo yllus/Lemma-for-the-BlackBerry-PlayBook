@@ -283,6 +283,7 @@ function followLink( address ) {
 // Navigate to a list of a user's tweets.
 function viewUser( screen_name ) {
 	display_action_message(CONST_ACTION_LOADING);
+	set_last_action("viewUser('" + screen_name + "');");
 	
 	var url = 'https://api.twitter.com/1/statuses/user_timeline.json?include_rts=1&screen_name=' + screen_name + '&count=' + status_count;
 	var element = document.getElementById(str_timeline_name);
@@ -299,6 +300,7 @@ function viewUser( screen_name ) {
 // Run a search for a hash tag.
 function viewHashTag( hash_tag ) {
 	display_action_message(CONST_ACTION_LOADING);
+	set_last_action("viewHashTag('" + hash_tag + "');");
 	
 	var str_data = data_retrieve('http://search.twitter.com/search.json?rpp=' + status_count + '&q=' + encodeURIComponent(hash_tag));
 	var json_data_all = JSON.parse(str_data);

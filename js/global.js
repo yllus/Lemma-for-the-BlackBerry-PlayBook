@@ -39,6 +39,9 @@ var str_misc = '';
 // A variable tracking the ID of the timeline DIV element.
 var str_timeline_name = 'timeline_home';
 
+// A variable tracking the last action taken.
+var last_view_action = 'button_home();';
+
 // List variables.
 var lists = null;
 var list_name = '';
@@ -155,6 +158,7 @@ function button_options() {
 
 function button_home() {
 	display_action_message(CONST_ACTION_LOADING);
+	set_last_action('button_home();');
 	
 	do_screen_timeline_home(document.getElementById(str_timeline_name));
 }
@@ -191,6 +195,16 @@ function button_list_display_all() {
 
 function view_list( id_str, name, go_back ) {
 	lists.view_list(id_str, name, go_back);
+}
+
+function set_last_action( str_action ) {
+	last_view_action = str_action;
+}
+
+function do_last_action() {
+	display_action_message(CONST_ACTION_LOADING);
+	
+	eval(last_view_action);
 }
 
 function display_action_message( num_action, element ) {

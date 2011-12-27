@@ -96,11 +96,15 @@ function List( u, s ) {
 				lists.set_position(id_str);
 				
 				if ( go_back == 1 ) {
+					set_last_action("lists.view_list('" + id_str + "', '" + name + "', 1);");
+					
 					list_name = name;
 					list_data = json_data;
 					bb.pushScreen('screens/timeline.html', 'timeline_list');
 				}
 				else {
+					set_last_action("lists.view_list('" + id_str + "', '" + name + "', 0);");
+					
 					do_timeline(document.getElementById(str_timeline_name), json_data, CONST_LIST, name);
 				}
 			}
