@@ -146,11 +146,11 @@ function grabArticle( element ) {
 	topDiv = clean(topDiv, "iframe");
 	
 	// Add the footer and contents:
-	//articleFooter.id = "readFooter";
-	//articleFooter.innerHTML = "<button class=\"qnx-cancel\" onclick=\"hide_modal('div_reader');\"><label>Done</label></button>";
+	articleFooter.id = "readFooter";
+	articleFooter.innerHTML = "<button class=\"qnx-cancel\" onclick=\"hide_modal('div_reader');\"><label>Done</label></button>";
 
 	articleContent.appendChild(topDiv);
-	//articleContent.appendChild(articleFooter);
+	articleContent.appendChild(articleFooter);
 	
 	return articleContent;
 }
