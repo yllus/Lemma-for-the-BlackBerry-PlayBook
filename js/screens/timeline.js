@@ -347,6 +347,9 @@ function show_reader_newscreen( url ) {
 }
 
 function show_reader( url ) {
+	//read_url = url;
+	read_url = url = 'http://www.foreignpolicy.com/articles/2011/12/27/next_years_wars';
+	
 	hide_modal('div_actions');
 	
 	document.getElementById("div_reader_text").innerHTML = '<h3 style="padding-left: 10px;">Please wait, loading...</h3>';

@@ -54,6 +54,9 @@ var reply_tweet_raw = '';
 // Search variables.
 var search_term = '';
 
+// Readability variables.
+var read_url = '';
+
 // Constants.
 var CONST_HOME = 0;
 var CONST_LOADING = 1;

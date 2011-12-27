@@ -83,6 +83,19 @@ var readability = {
 					    element.write(xhr.responseText);
 					    element.close();
 					    
+					    /* Start of modified Readability init() function. */
+					    if(element.body && !readability.bodyCache) {
+				            readability.bodyCache = element.body.innerHTML;
+				
+				        }
+				        /* Make sure this document is added to the list of parsed pages first, so we don't double up on the first page */
+				        readability.parsedPages[url] = true;
+				
+				        /* Pull out any possible next page link first */
+				        var nextPageLink = readability.findNextPageLink(element.body);
+				        
+				        readability.prepDocument(element);
+					    
 					    /* Build readability's DOM tree */
 				        var overlay        = document.createElement("DIV");
 				        var innerDiv       = document.createElement("DIV");
@@ -103,6 +116,14 @@ var readability = {
 				
 				        /* Insert the new content. */				        
 				        document.getElementById("div_reader_text").innerHTML = overlay.innerHTML;
+				        
+				         if (nextPageLink) {
+				            /** 
+				             * Append any additional pages after a small timeout so that people
+				             * can start reading without having to wait for this to finish processing.
+				            **/
+				            window.setTimeout(function() { readability.appendNextPage(nextPageLink); }, 500);
+				        }
 					}
 		    	} 
 		    	else {
@@ -440,26 +461,26 @@ var readability = {
      * 
      * @return void
      **/
-    prepDocument: function () {
+    prepDocument: function ( element ) {
         /**
          * In some cases a body element can't be found (if the HTML is totally hosed for example)
          * so we create a new body node and append it to the document.
          */
-        if(document.body === null)
+        if(element.body === null)
         {
-            var body = document.createElement("body");
+            var body = element.createElement("body");
             try {
-                document.body = body;       
+                element.body = body;       
             }
             catch(e) {
-                document.documentElement.appendChild(body);
+                element.documentElement.appendChild(body);
                 dbg(e);
             }
         }
 
-        document.body.id = "readabilityBody";
+        element.body.id = "readabilityBody";
 
-        var frames = document.getElementsByTagName('frame');
+        var frames = element.getElementsByTagName('frame');
         if(frames.length > 0)
         {
             var bestFrame = null;
@@ -470,7 +491,7 @@ var readability = {
                 var frameSize = frames[frameIndex].offsetWidth + frames[frameIndex].offsetHeight;
                 var canAccessFrame = false;
                 try {
-                    var frameBody = frames[frameIndex].contentWindow.document.body;
+                    var frameBody = frames[frameIndex].contentWindow.element.body;
                     canAccessFrame = true;
                 }
                 catch(eFrames) {
@@ -493,33 +514,35 @@ var readability = {
 
             if(bestFrame)
             {
-                var newBody = document.createElement('body');
-                newBody.innerHTML = bestFrame.contentWindow.document.body.innerHTML;
+                var newBody = element.createElement('body');
+                newBody.innerHTML = bestFrame.contentWindow.element.body.innerHTML;
                 newBody.style.overflow = 'scroll';
-                document.body = newBody;
+                element.body = newBody;
                 
-                var frameset = document.getElementsByTagName('frameset')[0];
+                var frameset = element.getElementsByTagName('frameset')[0];
                 if(frameset) {
                     frameset.parentNode.removeChild(frameset); }
             }
         }
 
         /* Remove all stylesheets */
-        for (var k=0;k < document.styleSheets.length; k+=1) {
-            if (document.styleSheets[k].href !== null && document.styleSheets[k].href.lastIndexOf("readability") === -1) {
-                document.styleSheets[k].disabled = true;
+        for (var k=0;k < element.styleSheets.length; k+=1) {
+            if (element.styleSheets[k].href !== null && element.styleSheets[k].href.lastIndexOf("readability") === -1) {
+                element.styleSheets[k].disabled = true;
             }
         }
 
         /* Remove all style tags in head (not doing this on IE) - TODO: Why not? */
-        var styleTags = document.getElementsByTagName("style");
+        var styleTags = element.getElementsByTagName("style");
         for (var st=0;st < styleTags.length; st+=1) {
             styleTags[st].textContent = "";
         }
 
         /* Turn all double br's into p's */
         /* Note, this is pretty costly as far as processing goes. Maybe optimize later. */
-        document.body.innerHTML = document.body.innerHTML.replace(readability.regexps.replaceBrs, '</p><p>').replace(readability.regexps.replaceFonts, '<$1span>');
+        element.body.innerHTML = element.body.innerHTML.replace(readability.regexps.replaceBrs, '</p><p>').replace(readability.regexps.replaceFonts, '<$1span>');
+        
+        return element;
     },
 
     /**
@@ -1161,63 +1184,12 @@ var readability = {
      * @return string the base url
     **/
     findBaseUrl: function () {
-        var noUrlParams     = window.location.pathname.split("?")[0],
+        var noUrlParams     = read_url.split("?")[0],
             urlSlashes      = noUrlParams.split("/").reverse(),
             cleanedSegments = [],
             possibleType    = "";
-
-        for (var i = 0, slashLen = urlSlashes.length; i < slashLen; i+=1) {
-            var segment = urlSlashes[i];
-
-            // Split off and save anything that looks like a file type.
-            if (segment.indexOf(".") !== -1) {
-                possibleType = segment.split(".")[1];
-
-                /* If the type isn't alpha-only, it's probably not actually a file extension. */
-                if(!possibleType.match(/[^a-zA-Z]/)) {
-                    segment = segment.split(".")[0];                    
-                }
-            }
             
-            /**
-             * EW-CMS specific segment replacement. Ugly.
-             * Example: http://www.ew.com/ew/article/0,,20313460_20369436,00.html
-            **/
-            if(segment.indexOf(',00') !== -1) {
-                segment = segment.replace(',00', '');
-            }
-
-            // If our first or second segment has anything looking like a page number, remove it.
-            if (segment.match(/((_|-)?p[a-z]*|(_|-))[0-9]{1,2}$/i) && ((i === 1) || (i === 0))) {
-                segment = segment.replace(/((_|-)?p[a-z]*|(_|-))[0-9]{1,2}$/i, "");
-            }
-
-
-            var del = false;
-
-            /* If this is purely a number, and it's the first or second segment, it's probably a page number. Remove it. */
-            if (i < 2 && segment.match(/^\d{1,2}$/)) {
-                del = true;
-            }
-            
-            /* If this is the first segment and it's just "index", remove it. */
-            if(i === 0 && segment.toLowerCase() === "index") {
-                del = true;
-            }
-
-            /* If our first or second segment is smaller than 3 characters, and the first segment was purely alphas, remove it. */
-            if(i < 2 && segment.length < 3 && !urlSlashes[0].match(/[a-z]/i)) {
-                del = true;
-            }
-
-            /* If it's not marked for deletion, push it to cleanedSegments. */
-            if (!del) {
-                cleanedSegments.push(segment);
-            }
-        }
-
-        // This is our final, cleaned, base article URL.
-        return window.location.protocol + "//" + window.location.host + cleanedSegments.reverse().join("/");
+        return noUrlParams;
     },
 
     /**
@@ -1363,7 +1335,7 @@ var readability = {
                 }
             }
         }
-
+         
         /**
          * Loop thrugh all of our possible pages from above and find our top candidate for the next page URL.
          * Require at least a score of 50, which is a relatively high confidence that this page is the next link.
@@ -1378,6 +1350,13 @@ var readability = {
         }
 
         if(topPage) {
+        	// Replace the occurrence of localhost with the correct host.
+        	var page_host_real = read_url.split(/\/+/g)[1];
+            var arr_page = topPage.href.split(/\/+/g);
+            arr_page[0] = arr_page[0] + '/';
+            arr_page[1] = page_host_real;
+            topPage.href = arr_page.join('/');
+            
             var nextHref = topPage.href.replace(/\/$/,'');
 
             dbg('NEXT PAGE IS ' + nextHref);
