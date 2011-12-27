@@ -24,11 +24,11 @@ function readability( url ) {
 				    element.write(xhr.responseText);
 				    element.close();
 				    
-				    document.getElementById("div_misc").innerHTML = start_parser(element);
+				    document.getElementById("div_reader_text").innerHTML = start_parser(element);
 				}
 	    	} 
 	    	else {
-	    		document.getElementById("div_misc").innerHTML = 'Failed to load.';
+	    		document.getElementById("div_reader_text").innerHTML = '<h3 style="padding-left: 10px;">Failed to load.</h3>';
 	    	}
 	  	}
 	};

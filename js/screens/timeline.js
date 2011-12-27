@@ -337,7 +337,7 @@ function show_message( str_message ) {
 	document.getElementById("div_message").className += "show";
 }
 
-function show_reader( url ) {
+function show_reader_newscreen( url ) {
 	hide_modal('div_actions');
 	
 	str_misc = '<h3 style="padding-left: 10px;">Please wait, loading...</h3>';
@@ -346,10 +346,10 @@ function show_reader( url ) {
 	readability(url);
 }
 
-function show_reader_old( url ) {
+function show_reader( url ) {
 	hide_modal('div_actions');
 	
-	document.getElementById("div_reader_text").innerHTML = 'Please wait, loading...';
+	document.getElementById("div_reader_text").innerHTML = '<h3 style="padding-left: 10px;">Please wait, loading...</h3>';
 	
 	document.getElementById("div_reader").className = '';
 	document.getElementById("div_reader").className += "show";
