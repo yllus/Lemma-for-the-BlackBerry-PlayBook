@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<div data-bb-type="screen"  data-bb-title="Misc" data-bb-effect="fade">
+	<script type="text/javascript" src="js/screens/tutorial.js"></script>
+	<div class="titlebar">
+		Tutorial (2 / 3)
+	</div>
+	<div style="top: 33px; height: 503px; width: 1024px; position: absolute; overflow: auto;">
+		<div style="margin: 10px; line-height: 32px;">
+			<h3>Toolbar</h3>
+			At the bottom of this screen are the buttons that will appear in Lemma's main toolbar. Touch them 
+			to see an explanation of their purpose.
+			<br /><br />
+			When you're finished, touch the Next Page button to continue to the third step in the tutorial.
+			<br /> 
+			<button class="qnx" style="width: 200px; margin-top: 20px;" onclick="button_tutorial_3();"> 
+				<label>Next Page</label> 
+			</button>
+		</div>
+		<div id="div_explain" style="position: relative; width: 1004px; height: 100px; margin: 115px 10px 10px 10px;">
+			<div id="div_explain_text" style="position: absolute; bottom: 0; left: 0;">
+		</div>
+	</div>
+	<div class="toolbar">
+		<div style="float: left;">
+			<img src="images/compose.png" onclick="button_compose_explain();" />
+			<img src="images/inbox.png" onclick="button_inbox_explain();" /> 
+			<img src="images/options.png" onclick="button_options_explain();" />
+		</div>
+		<div style="float: right;">
+			<img src="images/previous.png" onclick="button_list_prev_explain();" /> 
+			<img src="images/home.png" onclick="button_home_explain();" />
+			<img src="images/lists.png" onclick="button_list_display_all_explain();" />  
+			<img src="images/next.png" onclick="button_list_next_explain();" />
+		</div>
+	</div>
+</div>

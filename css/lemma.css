@@ -1,144 +1,139 @@
-html, body {
+/* START: Overrides for bbUI.css specifically for Lemma. */
+body, html {
 	font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
+	background-color: white;
 }
 
-*[ui-background-style=slanted-right] {
-	background-color: #909090;
+.bb-hires-screen {
+	font-size: 20px;
+	width: 1024px;
 }
 
-tablecell[ui-usage=image] > img {
-	float: left !important;
-    height: 73px;
-    width: 73px;
+.bb-hires-image-list .details
+{
+	position: relative;
+	margin-left: 0;
+	margin-bottom: 0;
+	width: 1019px; 
+	height: 77px;
 }
 
-tableview[ui-tablecell-order=stacked] > tablecell[ui-usage=image] > cellsubtitle {
-    display: inline-block;
-    margin-top: 0;
-    margin-left: 0;
-}
-
-view tableview[ui-tablecell-order="stacked"] > tablecell.ui-no-hover:hover > cellsubtitle {
-	color: #000000 !important;
-}
-
-tableview[ui-tablecell-order=stacked] > tablecell > cellsubtitle {
-	color: #000000 !important;
-}
-
-tablecell > cellsubtitle {
-    color: #000000;
-    position: absolute;
-    right: 10px;
-    margin-top: 4px;
-    white-space: normal;
-    display: inline-block;
-    font-size: 18px;
-    line-height: 24px;
-}
-
-tablecell > celldetail.ui-custom-tint {
-    color: #000000 !important;
-    font-size: 18px;
-    line-height: 24px;
-}
-
-tableview > tablecell.ui-no-hover:hover > celldetail.ui-custom-tint,
-tableview > tablecell.ui-no-hover.touched > celldetail.ui-custom-tint {
-    color: #000000 !important;
-    font-size: 18px;
-    line-height: 24px;
-}
-
-tableview > tablecell.ui-no-hover > *, tableview.ui-no-hover > tablecell > * {
-    color: #000000 !important;
-}
-
-subview > scrollpanel {
-	height: auto;
-	min-height: 100%;
+.bb-hires-image-list-item .title
+{
+	font-size: 15px;
+	font-weight: bold;
+	color: black;
 	overflow: hidden;
-	padding-bottom: 0;
 }
 
-subview[ui-associations=withBottomToolBar] {
-	top: 0px;
-	bottom: 60px;
+.bb-hires-image-list-item-click .title
+{
+	font-size: 15px;
+	font-weight: bold;
+	color: white;
+	overflow: hidden;
 }
 
-navbar, toolbar {
+.bb-hires-image-list .description
+{
+	color: black;
+	overflow: hidden;
+	white-space: normal;
+	font-size: 17px;	
+	line-height: 24px;
+	margin-bottom: 0px;
+	margin-right: 10px;
+}
+
+.bb-hires-image-list-item-click .description
+{
+	color: white;
+	overflow: hidden;
+	white-space: normal;
+	font-size: 17px;	
+	line-height: 24px;
+	margin-bottom: 0px;
+	margin-right: 10px;
+}
+
+.bb-hires-image-list-item-click .spanlinks
+{
+	color: white;
+}
+
+.bb-hires-image-list-item-click .date
+{
+	color: white;
+}
+
+.bb-hires-image-list-item
+{
+	border-bottom: solid 1px #D9DCDE;
+	padding-top: 0;	
+	padding-left: 5px;
+	padding-bottom: 0px;
+	overflow:hidden;
+	height: 86px;
+}
+
+.bb-hires-image-list-item-click
+{
+	background-color: #2175F7;
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#0dacff), to(#0f75ff));
+	border-bottom: solid 1px #D9DCDE;
+	padding-top: 10px;	
+	padding-left: 5px;
+	padding-bottom: 0px;
+	overflow:hidden;
+	height: 76px;
+}
+
+.bb-hires-image-list img
+{
+	position:relative;
+	left: 0;	
+	float: left;
+	height: 73px;
+	width: 73px;
+	top: -3px;
+	margin-right: 10px;
+}
+
+.bb-text-arrow-list-item
+{
+	vertical-align: middle;
 	height: 60px;
-	background-image: 
-    -webkit-gradient(linear, left top, left bottom, 
-        from(rgba(74,74,74,0.7)), 
-        color-stop(0.5, rgba(20,20,20,0.7)), 
-        color-stop(0.5, rgba(2,2,2,0.7)), 
-        to(rgba(14,14,14,0.7)));
+	width: 100%;
 }
 
-toolbar > segmentedcontrol > uibutton.ui-custom-tint, navbar > uibutton.ui-custom-tint {
-    background-color: #282828;
-    font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
-	font-size: 16px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: normal;
-	height: 45px;
+.bb-text-arrow-list-item-value
+{
+	line-height: 60px;
+	padding-left: 7px;	
+	display: inline;
+	
 }
 
-uibutton.ui-custom-tint {
-    background-color: #282828;
-    font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
-	font-size: 16px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: normal;
-	height: 45px;
+.bb-arrow-list-arrow
+{
+	position:relative;
+	float:right;
+	display:inline;
+	margin-right: 5px;
+	top: 25px;
+	width: 20px;
+	height: 20px;
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAALCAYAAACzkJeoAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oFGxUUItGqPS0AAABBSURBVBjTdcxBDgAhCATBlo87vnz2siYICidSHTBGkk3f4J+lZcpEPmoQtc5BwxxccQdPnJojXnB9u6FhhgMrAHy5yiKIJPT0DgAAAABJRU5ErkJggg==");	
+	background-repeat: no-repeat;
+	background-position: top right;
 }
+/* END: Overrides for bbUI.css specifically for Lemma. */
 
-tableview[ui-tablecell-order=stacked] > tablecell[ui-usage=image] > img ~ cellsubtitle {
-    width: 850px !important;
-}
-
-tablecell > cellsubtitle a {
-	color: #00E;
-}
-
-.fullbuttonheight {
-	margin: 0;
-	width: 65px !important;
-	height: 73px !important;
-	border-left: 1px solid #D9D9D9 !important;
-}
-
-.fullprofileimgheight {
-	width: 73px; 
-	height: 73px; 
-	border-right: 1px solid #D9D9D9;
-}
-
-tableview#timeline > tablecell.ui-no-hover:hover,
-tableview#timeline > tablecell.ui-no-hover.touched {
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(47%,rgba(248,248,248,1)), color-stop(100%,rgba(242,242,242,1))) !important; /* Chrome,Safari4+ */
-}
-
-tableview#timeline > tablecell.ui-no-hover {
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(47%,rgba(248,248,248,1)), color-stop(100%,rgba(242,242,242,1))); /* Chrome,Safari4+ */
-}
-
-popup { 
-	width: 900px;
-	background-color: #000; 
-}
-
-popup > panel {
-    background-image: none;
-}
-
-uibutton[ui-kind="action"]:hover, 
-uibutton[ui-kind="action"].touched, 
-uibutton[ui-kind=action][ui-implements=cancel]:hover, 
-uibutton[ui-kind=action][ui-implements=cancel].touched {
+/* START: Style buttons in the QNX style. */
+button.qnx:hover, 
+button.qnx-cancel:hover,  
+button.qnx.touched, 
+button.qnx-cancel.touched {
     background-image: -webkit-gradient(
 	    linear,
 	    left bottom,
@@ -146,27 +141,18 @@ uibutton[ui-kind=action][ui-implements=cancel].touched {
 	    color-stop(1, rgb(6,168,233)),
 	    color-stop(0, rgb(0,113,199))
 	);
+	border: 1px #2ccfff solid;
+	color: #ffffff;
 }
 
-uibutton[ui-kind="action"], uibutton[ui-kind="action"].disabled:hover, uibutton[ui-kind="action"].disabled.touched {
+button.qnx { 
 	background-color: #F0F0F0;
 	background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#D1D2D4), to(#FCFCFC));
-	border-bottom-color: rgba(255, 255, 255, 0.496094);
+	border: 1px solid #B0B0B0;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
-	border-bottom-style: solid;
-	border-bottom-width: 1px;
-	border-left-color: rgba(255, 255, 255, 0.496094);
-	border-left-style: solid;
-	border-left-width: 1px;
-	border-right-color: rgba(255, 255, 255, 0.496094);
-	border-right-style: solid;
-	border-right-width: 1px;
-	border-top-color: rgba(255, 255, 255, 0.496094);
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
-	border-top-style: solid;
-	border-top-width: 1px;
 	color: black;
 	font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
 	font-size: 20px;
@@ -174,167 +160,46 @@ uibutton[ui-kind="action"], uibutton[ui-kind="action"].disabled:hover, uibutton[
 	font-variant: normal;
 	font-weight: normal;
 	height: 45px;
+	padding-left: 25px;
+	padding-right: 25px;
 }
 
-label.qnx {
-	font-family: "DejaVu Sans" Helvetica, Arial, sans-serif;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: normal;
-	line-height: 45px;
-	height: 45px;
-	display: inline-block;
-	color: #000000;
-}
-
-input.qnx {
-	-webkit-border-radius: 5px;
-	border: 1px rgba(0,0,0,0.5) solid;
-	display: inline-block;
-	outline-bottom: 1px #fff solid;
-	-webkit-box-shadow: 1px 1px 0px rgba(255,255,255,1);	
-	height: 35px;
-	font-family: "DejaVu Sans" Helvetica, Arial, sans-serif;
+button.qnx-cancel {
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(74,74,74,0.7)), color-stop(0.5, rgba(20,20,20,0.7)), color-stop(0.5, rgba(2,2,2,0.7)), to(rgba(14,14,14,0.7)));
+	color: #fff;
+	text-shadow: 0 1px 1px #000; 
+	border: 1px solid #B0B0B0;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
 	font-size: 20px;
 	font-style: normal;
 	font-variant: normal;
 	font-weight: normal;
-	padding: 5px 10px 5px 10px;
+	height: 45px;
+	padding-left: 25px;
+	padding-right: 25px;
 }
 
 textarea.qnx {
-	-webkit-border-radius: 5px;
-	border: 1px rgba(0,0,0,0.5) solid;
-	display: inline-block;
-	outline-bottom: 1px #fff solid;
-	-webkit-box-shadow: 1px 1px 0px rgba(255,255,255,1);	
-	height: 35px;
-	font-family: "DejaVu Sans" Helvetica, Arial, sans-serif;
+	-webkit-box-shadow: inset 1px 1px 2px 1px rgba(0,0,0,0.2);
+	background: transparent;
+	outline: none;
+	border: 0;
+	margin: 0;
+	padding: 0 10px;
 	font-size: 20px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: normal;
-	padding: 5px 10px 5px 10px;
+	height: 32px;
+	line-height: 32px;
 }
 
-uibutton.qnx:hover, 
-uibutton.qnx.touched {
-    background-image: -webkit-gradient(
-	    linear,
-	    left bottom,
-	    left top,
-	    color-stop(1, rgb(6,168,233)),
-	    color-stop(0, rgb(0,113,199))
-	);
-	border: 1px #2ccfff solid;
-	color: #ffffff;
-}
-
-uibutton.qnx { 
-	background-color: #F0F0F0;
-	background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#D1D2D4), to(#FCFCFC));
-	border-bottom-color: rgba(255, 255, 255, 0.496094);
-	border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
-	border-bottom-style: solid;
-	border-bottom-width: 1px;
-	border-left-color: rgba(255, 255, 255, 0.496094);
-	border-left-style: solid;
-	border-left-width: 1px;
-	border-right-color: rgba(255, 255, 255, 0.496094);
-	border-right-style: solid;
-	border-right-width: 1px;
-	border-top-color: rgba(255, 255, 255, 0.496094);
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-	border-top-style: solid;
-	border-top-width: 1px;
-	color: black;
-	font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
-	font-size: 20px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: normal;
-	height: 45px;
-}
-
-.spanlinks {
-	color: #2489CE;
-	font-weight: normal;
-	text-decoration: underline;
-}
-
-/* Start: Styling to make list selection items wider and more QNX-styled. */
-.listoption {
-	height: 52px;
-	padding-top: 13px;
-	font-family: 'DejaVu Sans', Helvetica, Arial, sans-serif;
-	font-size: 20px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: normal;
-}
-
-.listoption:hover, .listoption.touched {
-    background-image: -webkit-gradient(
-	    linear,
-	    left bottom,
-	    left top,
-	    color-stop(1, rgb(6,168,233)),
-	    color-stop(0, rgb(0,113,199))
-	);
-	border: 1px #2ccfff solid;
-	color: #ffffff;
-}
-
-.listoption[ui-implements=detail-disclosure]:after {
-    content: "›";
-    font: normal 28px/28px Verdana;
-    color: #808080;
-    display: block;
-    height: 48px;
-    float: right;
-    margin-top: -4px;
-    margin-bottom: -20px;
-    margin-left: -10px;
-    background-color: transparent;
-    background-image: none;
-    border: 0;
-    -webkit-box-shadow: none;
-    top: 13px !important;
-}
-/* End: Styling to make list selection items wider and more QNX-styled. */
-
-/* Start: Styling to make select lists more QNX-styled. */
-tableview > tablecell:hover, tableview > tablecell.touched {
-	background-image: -webkit-gradient(
-	    linear,
-	    left bottom,
-	    left top,
-	    color-stop(1, rgb(6,168,233)),
-	    color-stop(0, rgb(0,113,199))
-	);
-	color: #fff;
-}
-/* End: Styling to make select lists more QNX-styled. */
-
-.actiontweet {
-    color: #fff;
-    margin-left: 10px;
-    white-space: normal;
-    display: inline-block;
-    font-size: 18px;
-    line-height: 24px;
-}
-
-.actiontweet {
-    color: #fff;
-    margin-left: 10px;
-    white-space: normal;
-    display: inline-block;
-    font-size: 18px;
-    line-height: 24px;
-}
+textarea.qnx.focused {
+	-webkit-box-shadow: 0 0 6px #0096ff;
+	border: 1px #366889 solid;
+} 
+/* END: Style buttons in the QNX style. */
 
 /* Start: Custom WebKit scrollbars used along with the built-in kinetic DIV scrolling in WebWorks.
  * See http://css-tricks.com/9130-custom-scrollbars-in-webkit/ for more info. 
@@ -345,12 +210,153 @@ tableview > tablecell:hover, tableview > tablecell.touched {
 
 ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: #00ACC6;
-    border-radius: 10px;
+	background-color: #C8C8C8;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 /* End: Custom WebKit scrollbars used along with the built-in kinetic DIV scrolling in WebWorks. */
+
+/* Start: Modal dialogs. */
+div#div_actions 
+{ 
+	display: block; 
+	width: 960px; 
+	height: 500px;
+	left: 10px; 
+	position: absolute; 
+	top: 0px; 
+	z-index: 100;
+	overflow: scroll; 
+	border: solid 1px #999; 
+	-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.25); 
+	padding: 90px 20px 20px 20px; 
+	-webkit-border-bottom-left-radius: 6px; 
+	-webkit-border-bottom-right-radius: 6px; 
+	background: #282828;
+	-webkit-transition: -webkit-transform 0.25s ease-out; 
+	-webkit-transform: translateY(-670px); 
+}
+div#div_actions h3, div#div_actions p 
+{ 
+	color: #ffffff; 
+}		
+div#div_actions.show 
+{ 
+	-webkit-transform: translateY(-80px); 
+	-moz-transform: translatey(-80px); 
+}
+
+div#div_message 
+{ 
+	display: block; 
+	width: 960px; 
+	height: 40px;
+	left: 10px; 
+	position: absolute; 
+	top: 0px; 
+	z-index: 100;
+	overflow: scroll; 
+	border: solid 1px #999; 
+	-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.25); 
+	padding: 90px 20px 20px 20px; 
+	-webkit-border-bottom-left-radius: 6px; 
+	-webkit-border-bottom-right-radius: 6px; 
+	background: #282828;
+	opacity: 0.9; 
+	-webkit-transition: -webkit-transform 0.25s ease-out; 
+	-webkit-transform: translateY(-670px); 
+}
+div#div_message h3, div#div_message p 
+{ 
+	color: #ffffff; 
+}		
+div#div_message.show 
+{ 
+	-webkit-transform: translateY(-80px); 
+	-moz-transform: translatey(-80px); 
+}
+
+div#div_reader 
+{ 
+	display: block; 
+	width: 960px; 
+	height: 500px;
+	left: 10px; 
+	position: absolute; 
+	top: 0px; 
+	z-index: 100;
+	overflow: scroll;
+	line-height: 36px;
+	color: #ffffff; 
+	border: solid 1px #999; 
+	-webkit-box-shadow: 0px 3px 6px rgba(0,0,0,0.25); 
+	padding: 90px 20px 20px 20px; 
+	-webkit-border-bottom-left-radius: 6px; 
+	-webkit-border-bottom-right-radius: 6px; 
+	background: #282828;
+	-webkit-transition: -webkit-transform 0.25s ease-out; 
+	-webkit-transform: translateY(-670px); 
+}
+div#div_reader a
+{ 
+	color: #2489CE; 
+}		
+div#div_reader.show 
+{ 
+	-webkit-transform: translateY(-80px); 
+	-moz-transform: translatey(-80px); 
+}
+
+/* End: Modal dialogs. */
+
+div#readInner {
+	line-height: 32px;
+	margin: 10px 10px 10px 10px;
+}
+
+.date {
+	float: right;
+	font-size: 12px;
+	color: #888888;
+	padding-right: 10px;
+}
+
+.spanlinks {
+	color: #2489CE;
+	font-weight: normal;
+	text-decoration: underline;
+}
+
+.retweet {
+	width: 16px; 
+	height: 10px; 
+	top: 0; 
+}
+
+.titlebar {
+	z-index: 100; 
+	position: fixed; 
+	top: 0; 
+	width: 1024px; 
+	height: 25px; 
+	background-color: black; 
+	color: white; 
+	padding: 4px 4px 4px 4px;
+}
+
+.toolbar {
+	z-index: 100; 
+	position: fixed; 
+	bottom: 0; 
+	width: 1024px; 
+	height: 64px; 
+	background-color: black; 
+	color: white; 
+	padding: 0;
+}
+
+.toolbar div img {
+	margin: 0 10px 0 10px; 
+}

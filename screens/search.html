@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<div data-bb-type="screen" data-bb-title="Search" data-bb-effect="fade">
+	<script type="text/javascript" src="js/screens/search.js"></script>
+	<div class="titlebar">
+		<div id="div_titlename" style="float: left;">Search</div>
+	</div>
+	<div style="top: 33px; margin: 10px 10px 0 10px; position: absolute;">
+		<div style="height: 225px; width: 750px; float: left;">
+			<textarea id="tweet_textarea" class="qnx" style="width: 700px; height: 200px;" onclick="countTweetChars();" onkeyup="countTweetChars();"></textarea>
+		</div>
+		<div style="height: 225px; width: 200px; float: left;">
+			<div style="width: 200px; height: 70px;">
+				<button id="button_search" class="qnx" style="width: 200px;" onclick="postSearch();"> 
+					<label>Search</label> 
+				</button>
+			</div>
+			<div id="tweet_result" style="width: 200px; height: 100px; margin-left: 5px;"></div>
+			<div style="width: 200px; height: 30px; margin-left: 5px;">
+				<span id="tweet_chars">30</span> chars left.
+			</div>
+			<div id="in_reply_to_status_id" style="display: none;"></div>
+		</div>
+	</div>
+	<div class="toolbar" style="padding: 0; height: 64px;">
+		<div style="float: left;">
+			<img src="images/back.png" onclick="button_back();" />
+		</div>
+	</div>
+</div>
+	
