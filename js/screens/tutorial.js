@@ -31,5 +31,5 @@ function button_list_display_all_explain() {
 }
 
 function button_list_next_explain() {
-	document.getElementById('div_explain_text').innerHTML = 'The <b>Previous List</b> (<img src="images/next.png" style="vertical-align: middle;" />) button loads and displays tweets from a list.';
+	document.getElementById('div_explain_text').innerHTML = 'The <b>Next List</b> (<img src="images/next.png" style="vertical-align: middle;" />) button loads and displays tweets from a list.';
 }
