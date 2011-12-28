@@ -20,6 +20,12 @@ OAuth functionality is care of Rob Griffiths' jsOAuth library, used under the MI
 
 https://github.com/bytespider/jsOAuth
 
+### Readability ###
+
+The in-app reader functionality is built on arc90 laboratory's Readability v0.4.4 algorithm:
+
+http://code.google.com/p/arc90labs-readability/
+
 ### Icons ###
 
 Icons are from Super Mono Stickers by Double-J designs ( http://www.doublejdesign.co.uk/ ) under the Creative Commons (Attribution 3.0 
