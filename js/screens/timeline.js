@@ -202,7 +202,7 @@ function action_button_reply() {
 // Retweet a tweet.
 function action_button_retweet() {
 	// Hide the action pane before starting the call.
-	hide_actions();
+	hide_modal('div_actions');
 	
 	var url = 'https://api.twitter.com/1/statuses/retweet/' + reply_id + '.json';
 	
@@ -236,7 +236,7 @@ function action_button_direct_message() {
 // Favourite a tweet.
 function action_button_favourite() {
 	// Hide the action pane before starting the call.
-	hide_actions();
+	hide_modal('div_actions');
 	
 	var url = 'https://api.twitter.com/1/favorites/create/' + reply_id + '.json';
 	
