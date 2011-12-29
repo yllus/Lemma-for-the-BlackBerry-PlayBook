@@ -363,6 +363,14 @@ function hide_modal( div_name ) {
 	document.getElementById(div_name).className = document.getElementById(div_name).className.replace( /(?:^|\s)show(?!\S)/ , '' );
 }
 
+function start_touch( id, src ) {
+	document.getElementById(id).src = src;
+}
+
+function end_touch( id, src ) {
+	window.setTimeout("document.getElementById('" + id + "').src = '" + src + "';", 250);
+}
+
 String.prototype.replace_url_with_html_links = function() {
 	var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 	

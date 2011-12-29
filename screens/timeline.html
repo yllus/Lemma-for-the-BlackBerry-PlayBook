@@ -48,15 +48,15 @@
 	</div>
 	<div class="toolbar">
 		<div style="float: left;">
-			<img src="images/compose.png" onclick="button_compose();" />
-			<img src="images/inbox.png" onclick="button_inbox();" /> 
-			<img src="images/options.png" onclick="button_options();" />
+			<img id="toolbar_compose" src="images/compose.png" onclick="button_compose();" ontouchstart="start_touch(this.id, 'images/compose-active.png');" ontouchend="end_touch(this.id, 'images/compose.png');" />
+			<img id="toolbar_inbox" src="images/inbox.png" onclick="button_inbox();" ontouchstart="start_touch(this.id, 'images/inbox-active.png');" ontouchend="end_touch(this.id, 'images/inbox.png');" /> 
+			<img id="toolbar_options" src="images/options.png" onclick="button_options();" ontouchstart="start_touch(this.id, 'images/options-active.png');" ontouchend="end_touch(this.id, 'images/options.png');" />
 		</div>
 		<div style="float: right;">
-			<img src="images/previous.png" onclick="button_list_prev();" /> 
-			<img src="images/home.png" onclick="button_home();" />
-			<img src="images/lists.png" onclick="button_list_display_all();" />  
-			<img src="images/next.png" onclick="button_list_next();" />
+			<img id="toolbar_previous" src="images/previous.png" onclick="button_list_prev();" ontouchstart="start_touch(this.id, 'images/previous-active.png');" ontouchend="end_touch(this.id, 'images/previous.png');" /> 
+			<img id="toolbar_home" src="images/home.png" onclick="button_home();" ontouchstart="start_touch(this.id, 'images/home-active.png');" ontouchend="end_touch(this.id, 'images/home.png');" />
+			<img id="toolbar_lists" src="images/lists.png" onclick="button_list_display_all();" ontouchstart="start_touch(this.id, 'images/lists-active.png');" ontouchend="end_touch(this.id, 'images/lists.png');" />  
+			<img id="toolbar_next" src="images/next.png" onclick="button_list_next();" ontouchstart="start_touch(this.id, 'images/next-active.png');" ontouchend="end_touch(this.id, 'images/next.png');" />
 		</div>
 	</div>
 </div>
