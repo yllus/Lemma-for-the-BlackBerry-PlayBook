@@ -81,8 +81,8 @@ function doAuthStepTwo( oauth_verifier ) {
 			}
 			
 			// Show the success screen.
-			var str_text = data_retrieve('data/user.html');
-			str_text = str_text.replace('${screen_name}', accountScreenName);
+			var str_text = '<p>You are currently authorized as <b>' + accountScreenName + '</b>.<br /><button class="qnx" style="margin-top: 20px;" onclick="doAuthRemove();"><label>Remove Account</label></button></p>';
+			//str_text = str_text.replace('${screen_name}', accountScreenName);
 			document.getElementById('div_user').innerHTML = str_text;
 		},
 
@@ -128,11 +128,10 @@ function doAutoAuthCheck() {
 	var str_currlocation = browser.getLocation();
 	if ( str_currlocation.indexOf(options['callbackUrl'], 0) >= 0 ) {
 		var oauth_verifier = getQueryVariable(str_currlocation, 'oauth_verifier');
-		
 		doAuthStepTwo(oauth_verifier);
 	}
 	else {
-		timer_autorefresh = setTimeout('doAutoAuthCheck();', 100);
+		timer_oauth = setTimeout('doAutoAuthCheck();', 100);
 	}
 }
 
