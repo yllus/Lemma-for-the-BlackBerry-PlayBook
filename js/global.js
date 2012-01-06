@@ -35,6 +35,9 @@ if ( accountIsSet != null ) {
 	oauth.setAccessToken([accessToken, accessTokenSecret]);
 }
 
+// A timer variable for checking to see if authorization has occurred yet.
+var timer_oauth;
+
 // A message variable for when the miscellaneous screen is called.
 var str_misc = '';
 
