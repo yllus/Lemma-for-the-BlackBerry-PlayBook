@@ -116,16 +116,21 @@ body, html {
 
 .bb-arrow-list-arrow
 {
-	position:relative;
-	float:right;
-	display:inline;
-	margin-right: 5px;
+	position: relative;
+	float: right;
+	display: inline;
+	margin-right: 10px;
 	top: 25px;
 	width: 20px;
 	height: 20px;
-	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAALCAYAAACzkJeoAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oFGxUUItGqPS0AAABBSURBVBjTdcxBDgAhCATBlo87vnz2siYICidSHTBGkk3f4J+lZcpEPmoQtc5BwxxccQdPnJojXnB9u6FhhgMrAHy5yiKIJPT0DgAAAABJRU5ErkJggg==");	
+	background-image: url('/images/arrow-list-arrow.png');
 	background-repeat: no-repeat;
 	background-position: top right;
+}
+
+.bb-text-arrow-list-item-hover .bb-arrow-list-arrow 
+{
+	background-image: url('/images/arrow-list-arrow-white.png');
 }
 /* END: Overrides for bbUI.css specifically for Lemma. */
 
