@@ -29,8 +29,8 @@ bb.tweetList = {
 									'	   <div id="tweet_message_' + j + '" class="description">' + description + '</div>\n'+
 									'	   <div id="tweet_raw_message_' + j + '" style="display: none;">' + raw_text + '</div>\n'+
 									'	</div>\n'+
-									'	<div style="width: 74px; height: 86px; float: right; border-left: 1px solid rgb(217, 220, 222);">\n'+
-									'	   <img src="images/actions.png" onclick="show_actions(\'' + innerChildNode.getAttribute('data-bb-id') + '\', \'' + innerChildNode.getAttribute('data-bb-screennameraw') + '\', \'' + j + '\');" style="width: 30px; height: 30px; padding-left: 18px; padding-top: 30px;" />\n'+
+									'	<div style="width: 72px; height: 86px; float: right; border-left: 1px solid rgb(217, 220, 222);">\n'+
+									'	   <img id="actions_' + j + '" src="images/actions.png" onclick="show_actions(\'' + innerChildNode.getAttribute('data-bb-id') + '\', \'' + innerChildNode.getAttribute('data-bb-screennameraw') + '\', \'' + j + '\');" ontouchstart="start_touch(this.id, \'images/actions-active.png\');" ontouchend="end_touch(this.id, \'images/actions.png\');" style="width: 30px; height: 30px; padding-left: 18px; padding-top: 30px;" />\n'+
 									'	</div>\n'+
 									'</div>\n';
 					innerChildNode.removeAttribute('data-bb-img');
