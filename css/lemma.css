@@ -218,7 +218,7 @@ textarea.qnx.focused {
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: #C8C8C8;
+	background-color: #00CCFF;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 /* End: Custom WebKit scrollbars used along with the built-in kinetic DIV scrolling in WebWorks. */
