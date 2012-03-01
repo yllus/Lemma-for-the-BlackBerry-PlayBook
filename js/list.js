@@ -89,11 +89,15 @@ function List( u, s ) {
 	
 	// View a specific list's timeline.
 	this.view_list = function( id_str, name, go_back ) {
+		display_action_message(CONST_ACTION_LOADING);
+		
 		oauth.get('https://api.twitter.com/1/lists/statuses.json?include_rts=true&per_page=' + status_count + '&list_id=' + id_str,
 			function(data) {
 				var json_data = JSON.parse(data.text);
 
 				lists.set_position(id_str);
+				
+				display_action_message(CONST_ACTION_LOADING);
 				
 				if ( go_back == 1 ) {
 					set_last_action("lists.view_list('" + id_str + "', '" + name + "', 1);");

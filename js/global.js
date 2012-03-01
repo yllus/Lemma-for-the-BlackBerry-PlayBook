@@ -73,6 +73,7 @@ var CONST_MENTIONS = 6;
 var CONST_DIRECTMESSAGES = 7;
 var CONST_ACTION_READY = 0;
 var CONST_ACTION_LOADING = 1;
+var CONST_ACTION_BLANK = 2;
 
 // The "traffic cop" function controlling what JS gets executed when a screen has loaded (but is not yet 
 // displayed), so refer to element.
@@ -235,6 +236,9 @@ function display_action_message( num_action, element ) {
 			break;
 		case CONST_ACTION_READY:
 			str_action = 'Touch to refresh';
+			break;
+		case CONST_ACTION_BLANK:
+			str_action = '';
 			break;
 	}
 	
