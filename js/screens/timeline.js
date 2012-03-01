@@ -374,7 +374,10 @@ function get_userinfo( user ) {
 	str_userinfo = str_userinfo.replace('${followers_count}', user.followers_count);
 	
 	// Shorten the URL if it's greater than 70 characters in length.
-	var user_url = user.url;
+	var user_url = '';
+	if ( user.url != null ) {
+		user_url = user.url;
+	}
 	var user_url_full = user_url;
 	if ( user_url.length > 70 ) {
 		user_url = user_url.substring(0, 70) + ' ...';
