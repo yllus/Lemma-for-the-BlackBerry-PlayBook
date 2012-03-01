@@ -4,12 +4,12 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 	var str_title = '';
 	var str_template = data_retrieve('data/tweet.html');
 	
-	// Add some white space to the top of the list so no tweets are blocked by the toolbar.
-	/*
-	var currentTime = new Date();
-	var currUnixTime = currentTime.getTime();
-	str_timeline = str_timeline + '<div style="width: 855px; height: 34px;">Last updated: ' + currUnixTime + '</div>';
-	*/
+	//console.debug(json_data);
+	
+	// If displaying a user, show a small information bar about the user at the top of the timeline.
+	if ( data_type == CONST_USER && json_data.length > 0 ) {
+		str_timeline = str_timeline + get_userinfo(json_data[0].user);
+	}
 	
 	for ( var i = 0; i < json_data.length; i++ ) {
 		var str_instance = str_template;
@@ -361,6 +361,27 @@ function show_reader( url ) {
 
 function hide_modal( div_name ) {
 	document.getElementById(div_name).className = document.getElementById(div_name).className.replace( /(?:^|\s)show(?!\S)/ , '' );
+}
+
+// Swap in user informatio when a user's timeline is displayed.
+function get_userinfo( user ) {
+	var str_userinfo = data_retrieve('data/timeline_userinfo.html');
+	
+	str_userinfo = str_userinfo.replace('${name}', user.name);
+	str_userinfo = str_userinfo.replace('${location}', user.location);
+	str_userinfo = str_userinfo.replace('${statuses_count}', user.statuses_count);
+	str_userinfo = str_userinfo.replace('${friends_count}', user.friends_count);
+	str_userinfo = str_userinfo.replace('${followers_count}', user.followers_count);
+	
+	// Shorten the URL if it's greater than 70 characters in length.
+	var user_url = user.url;
+	var user_url_full = user_url;
+	if ( user_url.length > 70 ) {
+		user_url = user_url.substring(0, 70) + ' ...';
+	} 
+	str_userinfo = str_userinfo.replace('${url}', '<span onclick="followLink(\'' + user_url_full + '\');" class=\"spanlinks\">' + user_url + '</a>');
+	
+	return str_userinfo;
 }
 
 function start_touch( id, src ) {
