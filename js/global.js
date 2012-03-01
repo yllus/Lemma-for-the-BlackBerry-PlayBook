@@ -141,6 +141,10 @@ function do_just_launched() {
 		else {
 			// Push the home screen, which will trigger bb.onscreenready() and do_screen_timeline_home().
 			bb.pushScreen('screens/timeline.html', 'timeline_home');
+			
+			// Retrieve the user's lists so they'll be ready when asked to be paged to.
+			lists = new List(accountID, accountScreenName);
+			lists.get_lists();
 		}
 	}
 }
