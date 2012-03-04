@@ -106,7 +106,7 @@ function List( u, s ) {
 				
 				display_action_message(CONST_ACTION_LOADING);
 				
-				if ( go_back == 1 ) {
+				if ( go_back == 1 && timeline_load_more == 0 ) {
 					set_last_action("lists.view_list('" + id_str + "', '" + name + "', 1);");
 					
 					list_name = name;

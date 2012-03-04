@@ -243,6 +243,8 @@ function do_last_action( load_more ) {
 	
 	display_action_message(CONST_ACTION_LOADING);
 	
+	//console.debug('Last action = ' + last_view_action);
+	
 	eval(last_view_action);
 }
 
