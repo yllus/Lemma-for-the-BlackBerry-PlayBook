@@ -146,6 +146,7 @@ function do_just_launched() {
 			// Retrieve the user's lists so they'll be ready when asked to be paged to.
 			lists = new List(accountID, accountScreenName);
 			lists.get_lists();
+			lists.list_position = -1;
 		}
 	}
 }
