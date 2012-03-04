@@ -2,16 +2,25 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 	var str_timeline = '';
 	var str_lastprofileimageurl = ''; // Saves the last profile image URL for when the search API fails to send a new one in the user object.
 	var str_title = '';
-	var str_template = data_retrieve('data/tweet.html');
+	var str_template = '';
+
+	// Grab the template for new tweets or an addition to the timeline.	
+	if ( timeline_load_more == 0 ) {
+		str_template = data_retrieve('data/tweet.html');
+	}
+	else {
+		str_template = data_retrieve('data/tweet_more.html');
+	}
 	
 	//console.debug(json_data);
 	
 	// If displaying a user, show a small information bar about the user at the top of the timeline.
-	if ( data_type == CONST_USER && json_data.length > 0 ) {
+	if ( data_type == CONST_USER && json_data.length > 0 && timeline_load_more == 0 ) {
 		str_timeline = str_timeline + get_userinfo(json_data[0].user);
 	}
 	
 	for ( var i = 0; i < json_data.length; i++ ) {
+		var str_id = json_data[i].id_str;
 		var str_instance = str_template;
 		var str_text = json_data[i].text;
 		var str_raw_text = str_text;
@@ -19,7 +28,6 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 		var str_profileimageurl = '';
 		var str_screenname = '';
 		var str_raw_screenname = '';
-		var str_id = json_data[i].id_str;
 		
 		// If the data is from the Twitter search API, get the profile image URL and screen name from the main object.
 		// Else retrieve it from the REST API's embedded user structure.
@@ -45,7 +53,12 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 					str_text = json_data[i].retweeted_status.text;
 					str_raw_text = str_text;
 					str_profileimageurl = json_data[i].retweeted_status.user.profile_image_url;
-					str_screenname = json_data[i].retweeted_status.user.screen_name + ' &lt;img src=&quot;images/retweet.gif&quot; style=&quot;width: 16px; height: 10px; top: 0; margin: 2.5px 5px 0 0;&quot; /&gt; &lt;span style=&quot;font-weight: normal;&quot;&gt;by&lt;/span&gt; ' + json_data[i].user.screen_name;
+					if ( timeline_load_more == 0 ) {
+						str_screenname = json_data[i].retweeted_status.user.screen_name + ' &lt;img src=&quot;images/retweet.gif&quot; style=&quot;width: 16px; height: 10px; top: 0; margin: 2.5px 5px 0 0;&quot; /&gt; &lt;span style=&quot;font-weight: normal;&quot;&gt;by&lt;/span&gt; ' + json_data[i].user.screen_name;
+					}
+					else {
+						str_screenname = json_data[i].retweeted_status.user.screen_name + ' <img src="images/retweet.gif" style="width: 16px; height: 10px; top: 0; margin: 2.5px 5px 0 0;" /> <span style="font-weight: normal;">by</span> ' + json_data[i].user.screen_name;
+					}
 					str_raw_screenname = json_data[i].retweeted_status.user.screen_name;
 				}
 		}
@@ -75,15 +88,12 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 		str_instance = str_instance.replace(/\$\{screen_name\}/g, str_screenname);
 		str_instance = str_instance.replace('${text}', str_text);
 		str_instance = str_instance.replace('${raw_text}', str_raw_text);
-		str_instance = str_instance.replace('${screen_name_raw}', str_raw_screenname);
-		str_instance = str_instance.replace('${created_at}', str_date);
+		str_instance = str_instance.replace(/\$\{screen_name_raw\}/g, str_raw_screenname);
+		str_instance = str_instance.replace(/\$\{created_at\}/g, str_date);
 		
 		// Add to the overall timeline string.
 		str_timeline = str_timeline + str_instance;
 	}
-	
-	// Add some white space to the bottom of the list so no tweets are blocked by the toolbar.
-	//str_timeline = str_timeline + '<div style="width: 855px; height: 65px;">&nbsp;</div>';
 	
 	// Set the title for the page.
 	switch( data_type ) {
@@ -98,27 +108,54 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 			break;
 		case CONST_LIST:
 			str_title = title_timeline + ' (List)';
+			str_timeline = str_timeline + get_moretweets();
 			break;
 		case CONST_USER:
 			str_title = title_timeline + ' (User)';
+			str_timeline = str_timeline + get_moretweets();
 			break;
 		default:
 			str_title = 'Home Timeline';
+			str_timeline = str_timeline + get_moretweets();
 	}
-	if ( element.getElementsByClassName('bb-hires-screen-title').length > 0 ) {
-		element.getElementsByClassName('bb-hires-screen-title')[0].innerHTML = str_title;
+	
+	// If loading a fresh timeline, load the new timeline into the not yet displayed element.
+	// Else just append to the timeline DIV (and delete the old load more message).
+	if ( timeline_load_more == 0 ) {
+		// Set the title of the screen.
+		if ( element.getElementsByClassName('bb-hires-screen-title').length > 0 ) {
+			element.getElementsByClassName('bb-hires-screen-title')[0].innerHTML = str_title;
+		}
+		if ( element.getElementById('div_titlename') !== null ) {
+			element.getElementById('div_titlename').innerHTML = str_title;
+		}
+
+		// Make all of the tweets visible.
+		element.getElementById('div_timeline').innerHTML = str_timeline; 
+		bb.tweetList.apply(element.querySelectorAll('[data-bb-type=tweet-list]'));
+		element.getElementById('div_timeline').style.display = 'block';
+		
+		// Set the current number of tweets.
+		current_status_count = json_data.length;
+		
+		// Scroll to the top of the window.
+		element.getElementById('div_timeline').scrollTop = 0;
 	}
-	if ( element.getElementById('div_titlename') !== null ) {
-		element.getElementById('div_titlename').innerHTML = str_title;
+	else {
+		// Set the current number of tweets.
+		current_status_count = current_status_count + json_data.length;
+		
+		// Append the new tweets on the existing timeline.
+		element.getElementById('div_timeline').removeChild(element.getElementById('div_moretweets'));
+		element.getElementById('div_timeline').innerHTML = element.getElementById('div_timeline').innerHTML + str_timeline;
 	}
+	
+	// Mark the current action is complete.
 	display_action_message(CONST_ACTION_READY, element);
+
 	
-	element.getElementById('div_timeline').innerHTML = str_timeline; 
-	bb.tweetList.apply(element.querySelectorAll('[data-bb-type=tweet-list]'));
-	element.getElementById('div_timeline').style.display = 'block';
-	
-	// Scroll to the top of the window.
-	element.getElementById('div_timeline').scrollTop = 0;
+	// Reset the flag to load more tweets / load a new timeline.
+	timeline_load_more = 0;
 }
 
 function do_screen_timeline_home( element ) {
@@ -126,6 +163,11 @@ function do_screen_timeline_home( element ) {
 	
 	// Add the number of tweets to the URL as a parameter.
 	url = url + '?count=' + status_count;
+	
+	// If we're retrieving older tweets, add that to the URL as a parameter as well.
+	if ( timeline_load_more == 1 ) {
+		url = url + '&max_id=' + last_tweet_id;
+	}
 	
 	oauth.get(url,
 		function(data) {
@@ -141,6 +183,11 @@ function do_screen_timeline_direct_messages( element ) {
 	
 	var url = 'https://api.twitter.com/1/direct_messages.json?include_entities=0&count=' + status_count;
 	
+	// If we're retrieving older tweets, add that to the URL as a parameter as well.
+	if ( timeline_load_more == 1 ) {
+		url = url + '&max_id=' + last_tweet_id;
+	}
+	
 	oauth.get(url,
 		function(data) {
 			var json_data = JSON.parse(data.text);
@@ -154,6 +201,11 @@ function do_screen_timeline_mentions( element ) {
 	display_action_message(CONST_ACTION_LOADING);
 	
 	var url = 'https://api.twitter.com/1/statuses/mentions.json?include_rts=1&count=' + status_count;
+	
+	// If we're retrieving older tweets, add that to the URL as a parameter as well.
+	if ( timeline_load_more == 1 ) {
+		url = url + '&max_id=' + last_tweet_id;
+	}
 	
 	oauth.get(url,
 		function(data) {
@@ -182,6 +234,11 @@ function do_screen_timeline_user_search( element ) {
 	display_action_message(CONST_ACTION_LOADING);
 	
 	var url = 'https://api.twitter.com/1/statuses/user_timeline.json?include_rts=1&screen_name=' + search_term + '&count=' + status_count;
+	
+	// If we're retrieving older tweets, add that to the URL as a parameter as well.
+	if ( timeline_load_more == 1 ) {
+		url = url + '&max_id=' + last_tweet_id;
+	}
 
 	oauth.get(url,
 		function(data) {
@@ -285,8 +342,13 @@ function viewUser( screen_name ) {
 	display_action_message(CONST_ACTION_LOADING);
 	set_last_action("viewUser('" + screen_name + "');");
 	
-	var url = 'https://api.twitter.com/1/statuses/user_timeline.json?include_rts=1&screen_name=' + screen_name + '&count=' + status_count;
 	var element = document.getElementById(str_timeline_name);
+	var url = 'https://api.twitter.com/1/statuses/user_timeline.json?include_rts=1&screen_name=' + screen_name + '&count=' + status_count;
+	
+	// If we're retrieving older tweets, add that to the URL as a parameter as well.
+	if ( timeline_load_more == 1 ) {
+		url = url + '&max_id=' + last_tweet_id;
+	}
 
 	oauth.get(url,
 		function(data) {
@@ -361,6 +423,17 @@ function show_reader( url ) {
 
 function hide_modal( div_name ) {
 	document.getElementById(div_name).className = document.getElementById(div_name).className.replace( /(?:^|\s)show(?!\S)/ , '' );
+}
+
+// Display the option to view more tweets for a timeline.
+function get_moretweets() {
+	var str_moretweets = '';
+	
+	if ( current_status_count < CONST_MAX_NUM_TWEETS ) {
+		str_moretweets = data_retrieve('data/timeline_moretweets.html');
+	}	
+	
+	return str_moretweets;
 }
 
 // Swap in user informatio when a user's timeline is displayed.

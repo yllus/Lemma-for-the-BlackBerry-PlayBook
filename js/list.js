@@ -91,7 +91,14 @@ function List( u, s ) {
 	this.view_list = function( id_str, name, go_back ) {
 		display_action_message(CONST_ACTION_LOADING);
 		
-		oauth.get('https://api.twitter.com/1/lists/statuses.json?include_rts=true&per_page=' + status_count + '&list_id=' + id_str,
+		var url = 'https://api.twitter.com/1/lists/statuses.json?include_rts=true&per_page=' + status_count + '&list_id=' + id_str;
+		
+		// If we're retrieving older tweets, add that to the URL as a parameter as well.
+		if ( timeline_load_more == 1 ) {
+			url = url + '&max_id=' + last_tweet_id;
+		}
+		
+		oauth.get(url,
 			function(data) {
 				var json_data = JSON.parse(data.text);
 

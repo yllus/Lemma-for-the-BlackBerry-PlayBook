@@ -62,6 +62,11 @@ var reply_tweet_raw = '';
 // Search variables.
 var search_term = '';
 
+// Track the last tweet ID shown on the timeline.
+var last_tweet_id = '';
+var timeline_load_more = 0;
+var current_status_count = 0;
+
 // Constants.
 var CONST_HOME = 0;
 var CONST_LOADING = 1;
@@ -74,6 +79,7 @@ var CONST_DIRECTMESSAGES = 7;
 var CONST_ACTION_READY = 0;
 var CONST_ACTION_LOADING = 1;
 var CONST_ACTION_BLANK = 2;
+var CONST_MAX_NUM_TWEETS = 800;
 
 // The "traffic cop" function controlling what JS gets executed when a screen has loaded (but is not yet 
 // displayed), so refer to element.
@@ -222,7 +228,19 @@ function set_last_action( str_action ) {
 	last_view_action = str_action;
 }
 
-function do_last_action() {
+function do_last_action( load_more ) {
+	if ( load_more != null ) {
+		timeline_load_more = 1;
+		
+		// Change the message on the load more tweets DIV.
+		document.getElementById('div_moretweets').innerHTML = 'Loading, please wait...';
+		
+		// Subtract 1 from last_tweet_id so we don't duplicate the last tweet (uses BigNumber due to the size of the integer).
+		var big_tweet_id = new BigNumber(last_tweet_id);
+		big_tweet_id = big_tweet_id.subtract(1);
+		last_tweet_id = String(big_tweet_id);
+	}
+	
 	display_action_message(CONST_ACTION_LOADING);
 	
 	eval(last_view_action);
