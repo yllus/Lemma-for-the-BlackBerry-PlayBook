@@ -7,7 +7,7 @@
 		   <div id="tweet_raw_message_${id}" style="display: none;">${raw_text}</div>
 		</div>
 		<div style="width: 72px; height: 86px; float: right; border-left: 1px solid rgb(217, 220, 222);">
-		   <img id="actions_${id}" src="images/actions.png" onclick="show_actions('${id}', '${screen_name_raw}', '${id}');" ontouchstart="start_touch(this.id, 'images/actions-active.png');" ontouchend="end_touch(this.id, 'images/actions.png');" style="width: 30px; height: 30px; padding-left: 18px; padding-top: 30px;">
+		   <img id="actions_${id}" src="images/actions.png" ontouchstart="start_touch(this.id, 'images/actions-active.png'); show_actions('${id}', '${screen_name_raw}', '${id}');" ontouchend="end_touch(this.id, 'images/actions.png');" style="width: 30px; height: 30px; padding-left: 18px; padding-top: 30px;">
 		</div>
 	</div>
 </div>
