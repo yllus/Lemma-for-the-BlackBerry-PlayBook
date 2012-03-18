@@ -48,15 +48,26 @@
 	</div>
 	<div class="toolbar">
 		<div style="float: left;">
+			<button class="bar_button" style="background-image: url(/images/compose.png);" ontouchstart="button_compose();"></button>
+			<button class="bar_button" style="background-image: url(/images/inbox.png);" ontouchstart="button_inbox();"></button>
+			<button class="bar_button" style="background-image: url(/images/options.png);" ontouchstart="button_options();"></button>
+			<!--
 			<img id="toolbar_compose" src="images/compose.png" ontouchstart="start_touch(this.id, 'images/compose-active.png'); button_compose();" ontouchend="end_touch(this.id, 'images/compose.png');" />
 			<img id="toolbar_inbox" src="images/inbox.png" ontouchstart="start_touch(this.id, 'images/inbox-active.png'); button_inbox();" ontouchend="end_touch(this.id, 'images/inbox.png');" /> 
 			<img id="toolbar_options" src="images/options.png" ontouchstart="start_touch(this.id, 'images/options-active.png'); button_options(); " ontouchend="end_touch(this.id, 'images/options.png');" />
+			-->
 		</div>
 		<div style="float: right;">
+			<button class="bar_button" style="background-image: url(/images/previous.png);" ontouchstart="button_list_prev();"></button>
+			<button class="bar_button" style="background-image: url(/images/home.png);" ontouchstart="button_home();"></button>
+			<button class="bar_button" style="background-image: url(/images/lists.png);" ontouchstart="button_list_display_all();"></button>
+			<button class="bar_button" style="background-image: url(/images/next.png);" ontouchstart="button_list_next();"></button>
+			<!--
 			<img id="toolbar_previous" src="images/previous.png" onclick="" ontouchstart="start_touch(this.id, 'images/previous-active.png'); button_list_prev();" ontouchend="end_touch(this.id, 'images/previous.png');" /> 
 			<img id="toolbar_home" src="images/home.png" ontouchstart="start_touch(this.id, 'images/home-active.png'); button_home();" ontouchend="end_touch(this.id, 'images/home.png');" />
 			<img id="toolbar_lists" src="images/lists.png" ontouchstart="start_touch(this.id, 'images/lists-active.png'); button_list_display_all();" ontouchend="end_touch(this.id, 'images/lists.png');" />  
 			<img id="toolbar_next" src="images/next.png" ontouchstart="start_touch(this.id, 'images/next-active.png'); button_list_next();" ontouchend="end_touch(this.id, 'images/next.png');" />
+			-->
 		</div>
 	</div>
 </div>

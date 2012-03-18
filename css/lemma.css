@@ -365,3 +365,18 @@ div#readInner {
 .toolbar div img {
 	margin: 0 10px 0 10px; 
 }
+
+.bar_button {
+	background-color: #000000;
+	margin: 0 10px 0 10px;
+	padding: 0; 
+	width: 64px; 
+	height: 64px; 
+	border: 0; 
+	text-align: center; 
+	vertical-align: middle;
+}
+
+.bar_button:active {
+	border: 1px solid #edf1f3;
+}
