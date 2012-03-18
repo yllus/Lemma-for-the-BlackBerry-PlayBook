@@ -70,7 +70,11 @@ function List( u, s ) {
 	
 	// Change to the previous view.
 	this.view_prev = function() {
-		if ( lists.list_position == 0 ) {
+		// Add a special case for when the user hits Previous List while the position is at -1.
+		if ( lists.list_position == -1 ) {
+			lists.view_list(lists.all_lists[lists.all_lists.length - 1].id_str, lists.all_lists[lists.all_lists.length - 1].name);
+		}
+		else if ( lists.list_position == 0 ) {
 			lists.view_list(lists.all_lists[(lists.all_lists.length - 1)].id_str, lists.all_lists[(lists.all_lists.length - 1)].name); 
 		}
 		else {
