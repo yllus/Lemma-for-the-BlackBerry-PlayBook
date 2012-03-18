@@ -346,9 +346,11 @@ div#readInner {
 	top: 0; 
 	width: 1024px; 
 	height: 25px; 
-	background-color: black; 
+	background-color: black;
+	background-image: url(/images/carbonfibre.png); 
 	color: white; 
 	padding: 4px 4px 4px 4px;
+	-webkit-box-shadow: 1px 1px 2px 0 #888;
 }
 
 .toolbar {
@@ -357,9 +359,11 @@ div#readInner {
 	bottom: 0; 
 	width: 1024px; 
 	height: 64px; 
-	background-color: black; 
+	background-color: black;
+	background-image: url(/images/carbonfibre.png);
 	color: white; 
 	padding: 0;
+	-webkit-box-shadow: -1px -1px 2px 0 #888;
 }
 
 .toolbar div img {
@@ -367,7 +371,7 @@ div#readInner {
 }
 
 .bar_button {
-	background-color: #000000;
+	background-color: transparent;
 	margin: 0 10px 0 10px;
 	padding: 0; 
 	width: 64px; 
