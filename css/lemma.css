@@ -382,5 +382,6 @@ div#readInner {
 }
 
 .bar_button:active {
-	border: 1px solid #edf1f3;
+	border: 1px solid #484848;
+	-webkit-box-shadow: inset 2px 2px 5px #484848;
 }
