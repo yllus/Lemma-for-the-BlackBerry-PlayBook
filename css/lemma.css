@@ -68,7 +68,7 @@ body, html {
 
 .bb-hires-image-list-item
 {
-	border-bottom: double 3px #707070;
+	border-bottom: solid 2px rgb(217, 220, 222);
 	padding-top: 0;	
 	padding-left: 5px;
 	padding-bottom: 0px;
@@ -382,6 +382,6 @@ div#readInner {
 }
 
 .bar_button:active {
-	border: 1px solid #484848;
-	-webkit-box-shadow: inset 2px 2px 5px #484848;
+	border: 1px solid #989898;
+	-webkit-box-shadow: inset 2px 2px 5px #989898;
 }
