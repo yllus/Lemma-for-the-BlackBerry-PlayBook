@@ -1,11 +1,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
-<div data-bb-type="screen" data-bb-title="Home Timeline">
+<div data-bb-type="screen" data-bb-title="Home Timeline" data-bb-scroll-effect="off">
 	<script type="text/javascript" src="js/screens/timeline.js"></script>
 	<div id="div_titlebar" class="titlebar" onclick="do_last_action();">
 		<div id="div_titlename" style="float: left;"></div>
 		<div id="div_titleaction" style="padding-right: 10px; float: right;"><img src="images/ajax-loader.gif" /> <span style="color: #00CCFF;">Loading, please wait...</span></div>
 	</div>
-	<div id="div_timeline" data-bb-type="tweet-list" style="top: 33px; height: 503px; width: 1024px; position: absolute; overflow: auto; display: none;"></div>
+	<div id="div_timeline_wrapper" style="top: 33px; height: 503px; width: 1024px; position: absolute; overflow: auto;">
+		<div id="div_timeline" data-bb-type="tweet-list"></div>
+	</div>
 	<div id="div_actions">
 		<p><span id="div_action_username"></span> <span id="div_action_tweet"></span></p>
 		<button id="action_viewreader_button" class="qnx" style="width: 100%; margin-top: 15px; display: none;"> 

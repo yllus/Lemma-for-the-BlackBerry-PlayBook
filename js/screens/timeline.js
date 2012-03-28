@@ -1,3 +1,5 @@
+var scroller_timeline;
+
 function do_timeline( element, json_data, data_type, title_timeline ) {
 	var str_timeline = '';
 	var str_lastprofileimageurl = ''; // Saves the last profile image URL for when the search API fails to send a new one in the user object.
@@ -140,6 +142,8 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 		
 		// Scroll to the top of the window.
 		element.getElementById('div_timeline').scrollTop = 0;
+		
+		scroller_timeline = new iScroll(element.getElementById('div_timeline_wrapper'), {hideScrollbar:true,fadeScrollbar:true});
 	}
 	else {
 		// Set the current number of tweets.
