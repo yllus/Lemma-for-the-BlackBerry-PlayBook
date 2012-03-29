@@ -1371,7 +1371,7 @@ bb.textInput = {
     }
 };
 
-bb.assignBackHandler(bb.popScreen);
+//bb.assignBackHandler(bb.popScreen);
 
 /*!
  * iScroll v4.1.9 ~ Copyright (c) 2011 Matteo Spinelli, http://cubiq.org

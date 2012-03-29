@@ -1,4 +1,5 @@
 var scroller_timeline;
+var _timer;
 
 function do_timeline( element, json_data, data_type, title_timeline ) {
 	var str_timeline = '';
@@ -143,7 +144,11 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 		// Scroll to the top of the window.
 		element.getElementById('div_timeline').scrollTop = 0;
 		
-		scroller_timeline = new iScroll(element.getElementById('div_timeline_wrapper'), {hideScrollbar:true,fadeScrollbar:true});
+		var _timer=setInterval(function(){
+		  if(/loaded|complete/.test(document.readyState)){
+		    clearInterval(_timer);
+		    initialize_iscroll();
+		}}, 10);
 	}
 	else {
 		// Set the current number of tweets.
@@ -152,14 +157,19 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 		// Append the new tweets on the existing timeline.
 		element.getElementById('div_timeline').removeChild(element.getElementById('div_moretweets'));
 		element.getElementById('div_timeline').innerHTML = element.getElementById('div_timeline').innerHTML + str_timeline;
+		
+		scroller_timeline.refresh();
 	}
 	
 	// Mark the current action is complete.
 	display_action_message(CONST_ACTION_READY, element);
-
 	
 	// Reset the flag to load more tweets / load a new timeline.
 	timeline_load_more = 0;
+}
+
+function initialize_iscroll() {
+	scroller_timeline = new iScroll(document.getElementById('div_timeline_wrapper'), {hideScrollbar:true,fadeScrollbar:true});
 }
 
 function do_screen_timeline_home( element ) {
