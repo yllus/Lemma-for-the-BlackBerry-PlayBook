@@ -28,7 +28,7 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 		var str_profileimageurl = '';
 		var str_screenname = '';
 		var str_raw_screenname = '';
-		var str_entities = '';
+		var str_entities = json_data[i]['entities'] || [];
 		
 		// If the data is from the Twitter search API, get the profile image URL and screen name from the main object.
 		// Else retrieve it from the REST API's embedded user structure.
@@ -48,9 +48,6 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 				str_profileimageurl = json_data[i].user.profile_image_url;
 				str_screenname = json_data[i].user.screen_name;
 				str_raw_screenname = str_screenname;
-				
-				// Get entities if present in returned JSON
-				str_entities = json_data[i]['entities'] || [];
 				
 				// If this is a retweet, use the original tweet, plus the original tweeter's profile image and screen name.
 				if ( json_data[i].retweeted_status != null ) {
