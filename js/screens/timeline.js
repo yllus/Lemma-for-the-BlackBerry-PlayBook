@@ -66,10 +66,13 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 		// Update last_tweet_id with this tweet's ID.
 		last_tweet_id = str_id;
 		
+		// Get entities if present in returned JSON
+		var entities = json_data[i]['entities'] || [];
+		
 		// Change URLs into links and make hashtags and usernames clickable.
 		str_text = str_text.replace_smart_quotes();
 		str_text = str_text.linkify_tweet();
-		str_text = str_text.replace_url_with_html_links();
+		str_text = str_text.replace_url_with_html_links(entities.urls);
 		
 		// Use the bigger size profile images.
 		if ( str_profileimageurl == null  ) {
@@ -168,6 +171,9 @@ function do_screen_timeline_home( element ) {
 	if ( timeline_load_more == 1 ) {
 		url = url + '&max_id=' + last_tweet_id;
 	}
+	
+	// Load "entities" with tweets, returns expanded t.co urls
+	url = url + '&include_entities=true';
 	
 	oauth.get(url,
 		function(data) {
@@ -468,10 +474,28 @@ function end_touch( id, src ) {
 	window.setTimeout("document.getElementById('" + id + "').src = '" + src + "';", 250);
 }
 
-String.prototype.replace_url_with_html_links = function() {
-	var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+String.prototype.replace_url_with_html_links = function(preparsed_urls) {
+	// Original string state
+	var text = this;
 	
-	return this.replace(exp, "<span onclick=\"followLink(\'$1\');\" class=\"spanlinks\">$1</span>");
+	// Replace links with click handler span
+	var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+	text = text.replace(exp, "<span onclick=\"followLink(\'$1\');\" class=\"spanlinks\">$1</span>");
+	
+	// Add preparsed twitter urls to twit text
+	if (preparsed_urls !== undefined && preparsed_urls.length > 0) {
+		for (var url in preparsed_urls) {
+			if (preparsed_urls.hasOwnProperty(url)) {
+				var url_object = preparsed_urls[url];
+				var matcher = new RegExp('<span .* class=\"spanlinks\">' + url_object.url + '<\/span>', 'g');
+				// The returned display_url in Twitters preparsed url object is too short, cut the location at 100 char instead
+				var display_url = (url_object.expanded_url.length > 100) ? url_object.expanded_url.substring(0, 100) + '...' : url_object.expanded_url;
+				text = text.replace(matcher, '<span onclick=\"followLink(\'' + url_object.expanded_url + '\');\" class=\"spanlinks\">' + display_url+ '</span>');
+			}
+		}
+	}
+	// Return parsed string
+	return text;
 };
 
 String.prototype.linkify_tweet = function() {
