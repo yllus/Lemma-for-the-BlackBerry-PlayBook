@@ -28,6 +28,7 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 		var str_profileimageurl = '';
 		var str_screenname = '';
 		var str_raw_screenname = '';
+		var str_entities = '';
 		
 		// If the data is from the Twitter search API, get the profile image URL and screen name from the main object.
 		// Else retrieve it from the REST API's embedded user structure.
@@ -48,11 +49,15 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 				str_screenname = json_data[i].user.screen_name;
 				str_raw_screenname = str_screenname;
 				
+				// Get entities if present in returned JSON
+				str_entities = json_data[i]['entities'] || [];
+				
 				// If this is a retweet, use the original tweet, plus the original tweeter's profile image and screen name.
 				if ( json_data[i].retweeted_status != null ) {
 					str_text = json_data[i].retweeted_status.text;
 					str_raw_text = str_text;
 					str_profileimageurl = json_data[i].retweeted_status.user.profile_image_url;
+					str_entities = json_data[i].retweeted_status['entities'] || [];
 					if ( timeline_load_more == 0 ) {
 						str_screenname = json_data[i].retweeted_status.user.screen_name + ' &lt;img src=&quot;images/retweet.gif&quot; style=&quot;width: 16px; height: 10px; top: 0; margin: 2.5px 5px 0 0;&quot; /&gt; &lt;span style=&quot;font-weight: normal;&quot;&gt;by&lt;/span&gt; ' + json_data[i].user.screen_name;
 					}
@@ -66,13 +71,10 @@ function do_timeline( element, json_data, data_type, title_timeline ) {
 		// Update last_tweet_id with this tweet's ID.
 		last_tweet_id = str_id;
 		
-		// Get entities if present in returned JSON
-		var entities = json_data[i]['entities'] || [];
-		
 		// Change URLs into links and make hashtags and usernames clickable.
 		str_text = str_text.replace_smart_quotes();
 		str_text = str_text.linkify_tweet();
-		str_text = str_text.replace_url_with_html_links(entities.urls);
+		str_text = str_text.replace_url_with_html_links(str_entities.urls);
 		
 		// Use the bigger size profile images.
 		if ( str_profileimageurl == null  ) {
